@@ -6,8 +6,9 @@
   "features": [
     "browser",
     "groth16-proof-verification",
-    "tamper-controls",
-    "execution-trace",
+    "published-artifact-inspection",
+    "proof-to-transaction-binding-map",
+    "machine-graded-tamper-controls",
     "offline",
     "zero-install"
   ],
@@ -24,7 +25,7 @@
     {
       "source": "published",
       "path": "browser-verifier/proofnote-browser-verifier.html",
-      "sha256": "d8e2a8a65c000f1cc3041bcfe7c8b6b21eb80864f59f254db35f94e2efbdf2ed"
+      "sha256": "691e824b9c9960d585eefa56462e5adf175d822dff282fcb2e37683b3e691263"
     }
   ],
   "normalization": [],
@@ -44,13 +45,13 @@
   "establishes": [
     "the generated browser artifact has the reviewed immutable identity",
     "measured Chromium acceptance executes the complete published proof check and all declared tamper controls offline",
-    "each case identifies its public source, exact field or byte location, original and run value, verification operation, and transient mutation scope"
+    "the page displays the complete published JSON and distinguishes verified proof bindings from BCH construction targets"
   ],
   "doesNotEstablish": [
     "correct guest semantics, authenticated CashVM execution, BCH validation or inclusion, APNT or wallet acceptance, custody, spendability, privacy, successive transfer, or unmeasured browser support"
   ],
   "authority": {
-    "evidenceIdentity": "browser artifact sha256:d8e2a8a65c000f1cc3041bcfe7c8b6b21eb80864f59f254db35f94e2efbdf2ed",
+    "evidenceIdentity": "browser artifact sha256:691e824b9c9960d585eefa56462e5adf175d822dff282fcb2e37683b3e691263",
     "executionEnvironment": "Chromium under file:// with BigInt and Web Crypto; zero resource requests",
     "trustAssumptions": [
       "the pinned wrapper key is the intended SP1 v6.1.0 key",

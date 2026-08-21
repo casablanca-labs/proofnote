@@ -3,29 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YpqN6gYeX/m2f/w+GsiN4EY+iDUDp8TMQJhOt9KLel8='; style-src 'sha256-HGhITyK3TNTc5dpPN8oRgldz3SgSmrVGYwoSLSEV1zE='; connect-src 'none'; img-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-u8dcsY5rGPvheyZngEgKDR3rbeEyH57HALwy5oc6WnE='; style-src 'sha256-3XhaxuDMNZIHHqRxNFyBhKGWzdZAdVcXGe1VE0QYmo4='; connect-src 'none'; img-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="color-scheme" content="light">
   <title>Proofnote browser verification bench</title>
   <style>
-:root{color-scheme:light;--ink:#111923;--muted:#607080;--paper:#f4f8fb;--surface:#fff;--line:#cfdae3;--wire:#2864dc;--pass:#08776a;--fail:#b8442f;--warn:#9a6510;--shadow:0 18px 55px rgba(23,45,67,.12);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#edf4f8 0,#f8fbfd 48%,#eaf1f6 100%);color:var(--ink);min-height:100vh}.bench{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:32px 0 48px}.mast{display:grid;grid-template-columns:1.3fr .7fr;gap:32px;align-items:end;margin-bottom:24px}.eyebrow,.label{font:700 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--wire)}h1{font-size:clamp(38px,7vw,76px);line-height:.93;letter-spacing:-.065em;margin:12px 0 14px;max-width:780px}p{line-height:1.55}.lede{font-size:17px;color:#43576a;max-width:700px}.identity{border-left:1px solid var(--line);padding-left:22px;font:12px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;color:#44586a;overflow-wrap:anywhere}.identity strong{display:block;color:var(--ink);font-size:13px}.panel{background:rgba(255,255,255,.93);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:18px;overflow:hidden}.rail{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line);background:#eaf1f6}.rail-node{position:relative;padding:17px 18px 15px;border-right:1px solid var(--line);font:700 12px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace}.rail-node:last-child{border:0}.rail-node::before{content:"";display:inline-block;width:9px;height:9px;border:2px solid #8fa2b2;border-radius:50%;margin-right:9px;vertical-align:-1px}.rail-node[data-state=working]::before{border-color:var(--wire);background:var(--wire)}.rail-node[data-state=pass]::before{border-color:var(--pass);background:var(--pass)}.rail-node[data-state=broken]::before{border-color:var(--fail);background:var(--fail)}.workspace{display:grid;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr)}.controls{padding:26px;border-right:1px solid var(--line);background:#fbfdfe}.case-list{display:grid;gap:9px;margin:16px 0 24px}.case{appearance:none;width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);padding:12px 14px;text-align:left;cursor:pointer;font:650 14px/1.3 inherit;transition:border-color .15s,transform .15s,box-shadow .15s}.case small{display:block;margin-top:4px;color:var(--muted);font:11px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace}.case:hover{transform:translateY(-1px);box-shadow:0 5px 15px rgba(35,62,83,.08)}.case[aria-pressed=true]{border-color:var(--wire);box-shadow:0 0 0 2px rgba(40,100,220,.15)}button:focus-visible,a:focus-visible{outline:3px solid #f1b64a;outline-offset:3px}.run{width:100%;border:0;border-radius:10px;background:var(--ink);color:#fff;padding:14px 17px;font:750 14px/1 inherit;cursor:pointer}.run:disabled{opacity:.66;cursor:wait}.result{min-height:500px;padding:32px;display:flex;flex-direction:column;background:var(--surface)}.verdict{display:inline-flex;align-items:center;align-self:flex-start;gap:9px;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font:800 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}.verdict::before{content:"";width:8px;height:8px;border-radius:50%;background:#8fa2b2}.result[data-status=running] .verdict::before{background:var(--wire)}.result[data-status=pass] .verdict{color:var(--pass);border-color:#9bc9c2}.result[data-status=pass] .verdict::before{background:var(--pass)}.result[data-status=fail] .verdict{color:var(--fail);border-color:#e0b0a7}.result[data-status=fail] .verdict::before{background:var(--fail)}.result h2{font-size:clamp(30px,5vw,54px);letter-spacing:-.045em;line-height:1;margin:34px 0 12px}.detail{font-size:16px;color:#43576a;max-width:670px}.result-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0}.datum{border-top:1px solid var(--line);padding-top:12px}.datum span{display:block;color:var(--muted);font:11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.08em}.datum strong{display:block;margin-top:6px;font:650 13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}.limits{margin-top:auto;border-top:1px solid var(--line);padding-top:20px;color:#506273;font-size:13px}.limits strong{color:var(--ink)}.noscript{margin:20px auto;padding:18px;width:min(900px,calc(100% - 32px));background:#fff4d9;border:1px solid #d9a642;color:#593d08}.footer-note{text-align:center;color:#607080;font-size:12px;margin-top:18px}@media(max-width:780px){.mast,.workspace{grid-template-columns:1fr}.identity{border-left:0;border-top:1px solid var(--line);padding:16px 0 0}.controls{border-right:0;border-bottom:1px solid var(--line)}.rail{grid-template-columns:1fr 1fr}.rail-node:nth-child(2){border-right:0}.rail-node:nth-child(-n+2){border-bottom:1px solid var(--line)}.result{min-height:440px;padding:26px}.result-meta{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-
-.result{min-height:760px}
-.trace{border:1px solid var(--line);border-radius:14px;background:#f7fafc;margin:4px 0 26px;overflow:hidden}
-.trace-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);background:#eaf1f6}
-.trace-badge{font:750 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--wire)}
-.trace-scope{font:11px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;color:#53687a;text-align:right}
-.trace-origin{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--line)}
-.trace-origin>div{padding:12px 14px;min-width:0}
-.trace-origin>div+div{border-left:1px solid var(--line)}
-.trace-origin span,.trace-values span,.trace-operation span{display:block;color:var(--muted);font:700 10px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
-.trace-origin code,.trace-values code{display:block;font:600 11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#233648;overflow-wrap:anywhere;white-space:pre-wrap}
-.trace-values{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;border-bottom:1px solid var(--line)}
-.trace-value{padding:13px 14px;min-width:0}
-.trace-arrow{display:flex;align-items:center;padding:0 4px;color:var(--wire);font-weight:800}
-.trace-delta{margin:0;padding:10px 14px;background:#fff6df;color:#64470c;font:600 11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere;border-bottom:1px solid #ecd7a5}
-.trace-operation{padding:13px 14px}
-.trace-operation p{margin:0;color:#40566a;font-size:13px;line-height:1.5}
-@media(max-width:780px){.result{min-height:0}.trace-head{align-items:flex-start;flex-direction:column}.trace-scope{text-align:left}.trace-origin,.trace-values{grid-template-columns:1fr}.trace-origin>div+div{border-left:0;border-top:1px solid var(--line)}.trace-arrow{padding:2px 14px;transform:rotate(90deg);transform-origin:center}}
+:root{color-scheme:light;--ink:#111923;--muted:#607080;--surface:#fff;--line:#ccd8e1;--wire:#265fd2;--pass:#08776a;--amber:#a36900;--code:#0f1720;--code-ink:#dce9f3;--shadow:0 22px 64px rgba(23,45,67,.13);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 12% 3%,#fff 0,#f5f9fb 30%,#e9f1f5 100%);color:var(--ink);min-height:100vh}.bench{width:min(1240px,calc(100% - 32px));margin:0 auto;padding:32px 0 56px}.eyebrow,.label,.kicker{font:750 10px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.13em;text-transform:uppercase;color:var(--wire)}h1{font-size:clamp(44px,7vw,82px);line-height:.92;letter-spacing:-.067em;margin:12px 0 18px;max-width:880px}h2{letter-spacing:-.04em}.mast{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:end;margin-bottom:28px}.lede{font-size:18px;line-height:1.55;color:#415669;max-width:770px}.identity{border-left:1px solid var(--line);padding-left:22px;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:#44586a;overflow-wrap:anywhere}.identity strong{display:block;color:var(--ink);font-size:13px;margin:5px 0}.panel{background:rgba(255,255,255,.95);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:18px;overflow:hidden}.rail{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line);background:#e8f0f5}.rail-node{padding:17px 18px 15px;border-right:1px solid var(--line);font:700 12px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace}.rail-node:last-child{border:0}.rail-node::before{content:"";display:inline-block;width:9px;height:9px;border:2px solid #8fa2b2;border-radius:50%;margin-right:9px;vertical-align:-1px}.rail-node[data-state=working]::before{border-color:var(--wire);background:var(--wire)}.rail-node[data-state=pass]::before{border-color:var(--pass);background:var(--pass)}.workspace{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr)}.artifact{background:var(--code);color:var(--code-ink);min-width:0;border-right:1px solid #253544}.artifact-head{display:flex;align-items:flex-start;justify-content:space-between;gap:22px;padding:20px 22px;border-bottom:1px solid #2a3a47}.artifact-head strong{display:block;font-size:15px}.artifact-head span{display:block;margin-top:5px;color:#8fa7b9;font:11px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace}.source-link{flex:0 0 auto;color:#98bdff;text-decoration:none;font:750 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;border-bottom:1px solid #4772bf;padding-bottom:3px}.source-link:hover{color:#fff}.artifact pre{margin:0;padding:22px;max-height:760px;overflow:auto;font:11px/1.58 ui-monospace,SFMono-Regular,Menlo,monospace;tab-size:2;white-space:pre;overscroll-behavior:contain}.result{min-height:760px;padding:30px;display:flex;flex-direction:column;background:var(--surface)}.verdict{display:inline-flex;align-items:center;align-self:flex-start;gap:9px;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font:800 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}.verdict::before{content:"";width:8px;height:8px;border-radius:50%;background:#8fa2b2}.result[data-status=running] .verdict::before{background:var(--wire)}.result[data-status=pass] .verdict{color:var(--pass);border-color:#9bc9c2}.result[data-status=pass] .verdict::before{background:var(--pass)}.result h2{font-size:clamp(32px,4vw,54px);line-height:1;margin:30px 0 12px}.detail{font-size:16px;line-height:1.55;color:#43576a}.run{width:100%;border:0;border-radius:10px;background:var(--ink);color:#fff;padding:15px 17px;font:750 14px/1 inherit;cursor:pointer;margin:16px 0 6px}.run:hover{background:#26384a}.run:disabled{opacity:.66;cursor:wait}.result-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}.datum{border-top:1px solid var(--line);padding-top:12px}.datum span{display:block;color:var(--muted);font:11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.08em}.datum strong{display:block;margin-top:6px;font:650 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}.trace{border:1px solid var(--line);border-radius:13px;background:#f7fafc;margin:2px 0 22px;overflow:hidden}.trace-head{padding:12px 14px;border-bottom:1px solid var(--line);background:#eaf1f6}.trace-badge{font:750 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--wire)}.trace-origin>div,.trace-operation{padding:12px 14px;border-bottom:1px solid var(--line)}.trace-origin span,.trace-operation span{display:block;color:var(--muted);font:700 10px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}.trace-origin code{display:block;font:600 11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#233648;overflow-wrap:anywhere}.trace-operation{border-bottom:0}.trace-operation p{margin:0;color:#40566a;font-size:13px;line-height:1.5}.limits{margin-top:auto;border-top:1px solid var(--line);padding-top:18px;color:#506273;font-size:13px;line-height:1.55}.limits strong{color:var(--ink)}.binding-section{margin-top:34px}.section-head{display:grid;grid-template-columns:1fr .9fr;gap:40px;align-items:end;margin-bottom:18px}.section-head h2{font-size:clamp(34px,5vw,58px);line-height:.98;margin:8px 0 0}.section-head p{color:#4d6173;line-height:1.6;margin:0}.binding-map{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);border-radius:17px;overflow:hidden;background:#fff;box-shadow:0 12px 40px rgba(23,45,67,.08)}.binding-step{padding:20px;min-height:245px;border-right:1px solid var(--line);position:relative}.binding-step:last-child{border:0}.binding-step:not(:last-child)::after{content:"→";position:absolute;right:-11px;top:26px;z-index:2;width:21px;height:21px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff;font-weight:800}.step-number{font:800 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--wire);letter-spacing:.12em}.binding-step h3{font-size:17px;line-height:1.15;margin:14px 0 10px}.binding-step p{font-size:13px;line-height:1.5;color:#536678}.binding-step code{display:block;margin-top:12px;font:600 10.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#24394b;overflow-wrap:anywhere}.status{display:inline-block;margin-top:10px;padding:5px 7px;border-radius:5px;background:#e7f3ef;color:#0b665c;font:750 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.07em}.status.target{background:#fff1cf;color:#805300}.truth-line{margin-top:14px;padding:15px 18px;border-left:4px solid var(--amber);background:#fff8e7;color:#5c4a24;font-size:13px;line-height:1.55}.kernel{margin-top:20px;display:grid;grid-template-columns:1.08fr .92fr;background:#111923;color:#dce8f2;border-radius:17px;overflow:hidden}.kernel-copy{padding:28px}.kernel h2{font-size:clamp(29px,4vw,46px);line-height:1;margin:10px 0 14px;color:#fff}.kernel p{color:#aebfcd;line-height:1.6}.kernel-grid{display:grid;grid-template-columns:1fr 1fr;border-left:1px solid #2e3d49}.kernel-item{padding:22px;border-bottom:1px solid #2e3d49}.kernel-item:nth-child(odd){border-right:1px solid #2e3d49}.kernel-item:nth-last-child(-n+2){border-bottom:0}.kernel-item strong{display:block;color:#fff;font-size:13px;margin-bottom:8px}.kernel-item span{font-size:12px;line-height:1.5;color:#9fb1c0}.noscript{margin:20px auto;padding:18px;width:min(900px,calc(100% - 32px));background:#fff4d9;border:1px solid #d9a642;color:#593d08}.footer-note{text-align:center;color:#607080;font-size:12px;margin-top:20px}button:focus-visible,a:focus-visible{outline:3px solid #f1b64a;outline-offset:3px}@media(max-width:980px){.mast,.section-head{grid-template-columns:1fr}.identity{border-left:0;border-top:1px solid var(--line);padding:16px 0 0}.workspace,.kernel{grid-template-columns:1fr}.artifact{border-right:0;border-bottom:1px solid #253544}.artifact pre{max-height:540px}.binding-map{grid-template-columns:1fr 1fr}.binding-step{border-bottom:1px solid var(--line)}.binding-step:nth-child(2n){border-right:0}.binding-step::after{display:none}.kernel-grid{border-left:0;border-top:1px solid #2e3d49}}@media(max-width:620px){.bench{width:min(100% - 20px,1240px);padding-top:18px}.rail{grid-template-columns:1fr 1fr}.rail-node:nth-child(2){border-right:0}.rail-node:nth-child(-n+2){border-bottom:1px solid var(--line)}.workspace,.binding-map,.kernel-grid{grid-template-columns:1fr}.artifact-head{flex-direction:column}.artifact pre{max-height:430px;font-size:10px}.result{min-height:0;padding:22px}.result-meta{grid-template-columns:1fr}.binding-step,.kernel-item{border-right:0!important;border-bottom:1px solid var(--line)}.kernel-item{border-bottom-color:#2e3d49}.kernel-item:last-child{border-bottom:0}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
@@ -34,14 +17,14 @@
     <header class="mast">
       <div>
         <div class="eyebrow">Proofnote · offline verification bench</div>
-        <h1>Break the binding. Watch it fail.</h1>
-        <p class="lede">Run the complete BN254 Groth16 check in this page. Then alter one reviewed input while the others stay fixed. Everything needed is embedded here.</p>
+        <h1>Inspect one proof. Follow every binding.</h1>
+        <p class="lede">Read the exact released artifact, run its complete BN254 Groth16 verification, then see what must connect that result to a Bitcoin Cash UTXO. No clone, server, or hidden request.</p>
       </div>
       <div class="identity" aria-label="Pinned artifact identity">
         <span class="label">Pinned released artifact</span>
         <strong>APNT import-created-note relation V4</strong>
-        proof tools/apnt-import-created-note-sp1/fixtures/<br>
-        &nbsp;&nbsp;canonical-groth16-proof-v4.json · proof.proofBytes<br>
+        source commit fcb8a55ffd9f425bf95bb936473d5bb325c62ff2<br>
+        fixture canonical-groth16-proof-v4.json<br>
         fixture c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a<br>
         key examples/01-verify-a-proof/verification-key.json<br>
         key digest 4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696<br>
@@ -56,44 +39,161 @@
         <div class="rail-node" data-stage="pairing" data-state="idle">4 · BN254 pairing</div>
       </div>
       <div class="workspace">
-        <div class="controls">
-          <div class="label">Choose a case · keys 1–5</div>
-          <div class="case-list">
-            <button class="case" data-case="known-good" aria-pressed="true">Published proof<small>Expected: complete pairing PASS</small></button>
-            <button class="case" data-case="tamper-public-values" aria-pressed="false">Change public values<small>Expected: PAIRING_REJECTED</small></button>
-            <button class="case" data-case="tamper-proof-bytes" aria-pressed="false">Change proof bytes<small>Expected: PROOF_BYTES_REJECTED</small></button>
-            <button class="case" data-case="tamper-key-bytes" aria-pressed="false">Change pinned key<small>Expected: KEY_BYTES_REJECTED</small></button>
-            <button class="case" data-case="tamper-selector" aria-pressed="false">Change selector-bound bytes<small>Expected: SELECTOR_REJECTED</small></button>
+        <section class="artifact" aria-label="Published proof artifact">
+          <div class="artifact-head">
+            <div>
+              <strong>canonical-groth16-proof-v4.json</strong>
+              <span>Exact released bytes · SHA-256 c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a</span>
+            </div>
+            <a class="source-link" href="https://github.com/casablanca-labs/proofnote/blob/fcb8a55ffd9f425bf95bb936473d5bb325c62ff2/tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json" target="_blank" rel="noopener noreferrer">Open immutable source ↗</a>
           </div>
-          <button class="run" id="run-check">Verify published proof</button>
-        </div>
+          <pre tabindex="0" aria-label="Full JSON contents">{
+  &quot;preflight&quot;: {
+    &quot;version&quot;: 4,
+    &quot;classification&quot;: &quot;public-safe canonical frozen V4 local Groth16 proving preflight&quot;,
+    &quot;caseId&quot;: &quot;accepted&quot;,
+    &quot;relationIdentity&quot;: &quot;apnt-import-created-note-relation-v4&quot;,
+    &quot;relationDomain&quot;: &quot;bch-cloak-apnt-v0:import-created-note-relation-v4&quot;,
+    &quot;semanticContractCommitment&quot;: &quot;5745166c8ec24a8bd07ca47629271092a17304be38e2dc54d8986dc684e3f234&quot;,
+    &quot;statementCommitment&quot;: &quot;6ecb7d4927be447eb8534377fd176ff26a03c45e6f2c1ec63bd24e437bfcb747&quot;,
+    &quot;settlementProjectionCommitment&quot;: &quot;808d03efd14c65e2779068b4db6cf388b4fa142a00a7f30f64ce4ef11bb05c3a&quot;,
+    &quot;proofSystem&quot;: &quot;sp1&quot;,
+    &quot;proofProfile&quot;: &quot;sp1-v6.1.0-groth16-bn254-v4&quot;,
+    &quot;proofMode&quot;: &quot;groth16&quot;,
+    &quot;prover&quot;: &quot;local-cpu&quot;,
+    &quot;networkProvingConfigured&quot;: false,
+    &quot;networkCredentialsRequired&quot;: false,
+    &quot;sp1CrateVersion&quot;: &quot;6.3.1&quot;,
+    &quot;sp1CircuitVersion&quot;: &quot;v6.1.0&quot;,
+    &quot;programVkeyHash&quot;: &quot;007de2035d65f1dd58a3cf0c930fde5c7c7c99443b26fc30c2cd7f26014a74b1&quot;,
+    &quot;guestElfSha256&quot;: &quot;97d6ada8066ba09ef2ef8a50653ac38340a143da0c70cb508c04a7362b2fa355&quot;,
+    &quot;guestElfBytes&quot;: 1099664,
+    &quot;canonicalInputCodec&quot;: &quot;APNTPIV4&quot;,
+    &quot;canonicalInputSha256&quot;: &quot;d6589e3c5dc638f6412d0dd234b07544e3674eb264b408dff144c8bf4da1cbe3&quot;,
+    &quot;canonicalInputBytes&quot;: 23531,
+    &quot;publicValuesCodec&quot;: &quot;APNTIRV4&quot;,
+    &quot;publicValuesLayout&quot;: &quot;raw-APNTIRV4-235-bytes&quot;,
+    &quot;publicValuesSha256&quot;: &quot;817a73ecb25d27f62d804a8b463b49cdfa366112869e191a7a66d0a73e737f6f&quot;,
+    &quot;publicValuesLength&quot;: 235,
+    &quot;cashVmVerifierAvailable&quot;: false,
+    &quot;privateProvingInputPersisted&quot;: false
+  },
+  &quot;proof&quot;: {
+    &quot;version&quot;: 4,
+    &quot;classification&quot;: &quot;public-safe canonical V4 SP1 Groth16 proof artifact&quot;,
+    &quot;caseId&quot;: &quot;accepted&quot;,
+    &quot;relationIdentity&quot;: &quot;apnt-import-created-note-relation-v4&quot;,
+    &quot;relationDomain&quot;: &quot;bch-cloak-apnt-v0:import-created-note-relation-v4&quot;,
+    &quot;semanticContractCommitment&quot;: &quot;5745166c8ec24a8bd07ca47629271092a17304be38e2dc54d8986dc684e3f234&quot;,
+    &quot;statementCommitment&quot;: &quot;6ecb7d4927be447eb8534377fd176ff26a03c45e6f2c1ec63bd24e437bfcb747&quot;,
+    &quot;settlementProjectionCommitment&quot;: &quot;808d03efd14c65e2779068b4db6cf388b4fa142a00a7f30f64ce4ef11bb05c3a&quot;,
+    &quot;proofSystem&quot;: &quot;sp1&quot;,
+    &quot;proofProfile&quot;: &quot;sp1-v6.1.0-groth16-bn254-v4&quot;,
+    &quot;proofMode&quot;: &quot;groth16&quot;,
+    &quot;prover&quot;: &quot;local-cpu&quot;,
+    &quot;sp1CrateVersion&quot;: &quot;6.3.1&quot;,
+    &quot;sp1CircuitVersion&quot;: &quot;v6.1.0&quot;,
+    &quot;programVkeyHash&quot;: &quot;007de2035d65f1dd58a3cf0c930fde5c7c7c99443b26fc30c2cd7f26014a74b1&quot;,
+    &quot;guestElfSha256&quot;: &quot;97d6ada8066ba09ef2ef8a50653ac38340a143da0c70cb508c04a7362b2fa355&quot;,
+    &quot;guestElfBytes&quot;: 1099664,
+    &quot;groth16VerificationKeySha256&quot;: &quot;4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696&quot;,
+    &quot;groth16VerificationKeyBytes&quot;: 492,
+    &quot;groth16PublicInputLabels&quot;: [
+      &quot;program-vkey&quot;,
+      &quot;masked-sha256-public-values&quot;,
+      &quot;exit-code&quot;,
+      &quot;recursion-vkey-root&quot;,
+      &quot;proof-nonce&quot;
+    ],
+    &quot;groth16PublicInputsDecimal&quot;: [
+      &quot;222415768487493486795564065136532017683584458128510723541774616628839478449&quot;,
+      &quot;668668272647433752796367916061335396573248914621718748862383398065173397359&quot;,
+      &quot;0&quot;,
+      &quot;83960146348496814183195590144795274058764451818716359375255161226434597714&quot;,
+      &quot;0&quot;
+    ],
+    &quot;groth16PublicInputsBigEndian32&quot;: [
+      &quot;007de2035d65f1dd58a3cf0c930fde5c7c7c99443b26fc30c2cd7f26014a74b1&quot;,
+      &quot;017a73ecb25d27f62d804a8b463b49cdfa366112869e191a7a66d0a73e737f6f&quot;,
+      &quot;0000000000000000000000000000000000000000000000000000000000000000&quot;,
+      &quot;002f850ee998974d6cc00e50cd0814b098c05bfade466d28573240d057f25352&quot;,
+      &quot;0000000000000000000000000000000000000000000000000000000000000000&quot;
+    ],
+    &quot;publicValuesCodec&quot;: &quot;APNTIRV4&quot;,
+    &quot;publicValuesLayout&quot;: &quot;raw-APNTIRV4-235-bytes&quot;,
+    &quot;publicValuesBytes&quot;: &quot;41504e54495256340431006263682d636c6f616b2d61706e742d76303a696d706f72742d637265617465642d6e6f74652d72656c6174696f6e2d7634240061706e742d696d706f72742d637265617465642d6e6f74652d72656c6174696f6e2d76345745166c8ec24a8bd07ca47629271092a17304be38e2dc54d8986dc684e3f234016ecb7d4927be447eb8534377fd176ff26a03c45e6f2c1ec63bd24e437bfcb747808d03efd14c65e2779068b4db6cf388b4fa142a00a7f30f64ce4ef11bb05c3a0d470200000004000000020000000200000001010101010101010101010101000000000000000001&quot;,
+    &quot;publicValuesSha256&quot;: &quot;817a73ecb25d27f62d804a8b463b49cdfa366112869e191a7a66d0a73e737f6f&quot;,
+    &quot;publicValuesLength&quot;: 235,
+    &quot;proofBytes&quot;: &quot;4388a21c0000000000000000000000000000000000000000000000000000000000000000002f850ee998974d6cc00e50cd0814b098c05bfade466d28573240d057f25352000000000000000000000000000000000000000000000000000000000000000028466c02f2df2cda719135a48b3deb3a0eefdebc053b7b6351053897e13b0191244f967b12dda24d4b3c20c32e376b0cc1f68ce2770a9b6bec6745d7fa0efd892a93b2837e9dd3e41fbc124ae42c0c23546b6bc9b2d97215c2c4620f28cbc1091d4d7005cf020fbc7039b389e6e3ef2e39515cebc2853af4efcaf9ce27ffee32178178c0c868c6aebf84342f8b325e15f97e5b50f9b59b339842c1262fb371e1125c118f1604206dce8651e86f75cecd97f53b84313f7bdbc1b9e1ba87ac14ca1953753b39d4d1e8c131abd7fb1ce4103fa39457f227601efab8951b4253d69325509366a36265bef4aa4f88da2b1f835c56ac532b9fce5aa8a9077d30d6bca4&quot;,
+    &quot;proofSha256&quot;: &quot;92ebd58fe4b8e39dc5655b442e2dcf6968d08c612c88b1223f338c30d44391cd&quot;,
+    &quot;proofBytesLength&quot;: 356,
+    &quot;encodedProofBytesLength&quot;: 352,
+    &quot;rawProofBytesLength&quot;: 324,
+    &quot;proofNonce&quot;: &quot;00000000&quot;,
+    &quot;nativeVerificationSucceeded&quot;: true,
+    &quot;cashVmVerifierAvailable&quot;: false,
+    &quot;chainValidated&quot;: false,
+    &quot;privateMaterialPublished&quot;: false,
+    &quot;privateProvingInputPersisted&quot;: false
+  },
+  &quot;measurement&quot;: {
+    &quot;version&quot;: 4,
+    &quot;proofProfile&quot;: &quot;sp1-v6.1.0-groth16-bn254-v4&quot;,
+    &quot;endToEndProofGenerationDurationMs&quot;: 480133,
+    &quot;nativeVerificationDurationMicros&quot;: 147601,
+    &quot;groth16WrappingIsIncluded&quot;: true,
+    &quot;isolatedGroth16WrappingDurationAvailable&quot;: false,
+    &quot;deterministicProofNonce&quot;: true,
+    &quot;deterministicProofBytesClaimed&quot;: false
+  }
+}
+</pre>
+        </section>
         <div class="result" id="result" data-status="ready" aria-live="polite">
           <div class="verdict" id="result-class">READY</div>
-          <h2 id="result-title">Published proof</h2>
-          <p class="detail" id="result-detail">Ready to execute the full pairing.</p>
+          <h2 id="result-title">Verify these bytes</h2>
+          <p class="detail" id="result-detail">The verifier checks the artifact, proof, public values, program key, verification key, selector, curve points, and complete pairing equation.</p>
+          <button class="run" id="run-check">Verify published proof</button>
           <div class="result-meta">
             <div class="datum"><span>Measured here</span><strong id="result-time">not run</strong></div>
             <div class="datum"><span>Delivery</span><strong>one file · zero requests</strong></div>
           </div>
           <section class="trace" aria-label="Execution trace">
             <div class="trace-head">
-              <span class="trace-badge">Execution trace · inspect before running</span>
-              <span class="trace-scope" id="trace-scope">Loading the released source identity…</span>
+              <span class="trace-badge">What runs in this browser</span>
             </div>
             <div class="trace-origin">
               <div><span>Source file</span><code id="trace-source">loading</code></div>
-              <div><span>Field and byte location</span><code id="trace-location">loading</code></div>
+              <div><span>Verified field</span><code id="trace-location">loading</code></div>
             </div>
-            <div class="trace-values">
-              <div class="trace-value"><span>Original</span><code id="trace-before">loading</code></div>
-              <div class="trace-arrow" aria-hidden="true">→</div>
-              <div class="trace-value"><span>Used for this run</span><code id="trace-after">loading</code></div>
-            </div>
-            <p class="trace-delta" id="trace-delta">Loading the exact byte delta…</p>
-            <div class="trace-operation"><span>What the verifier does next</span><p id="trace-operation">Loading the verification path…</p></div>
+            <div class="trace-operation"><span>Verification path</span><p id="trace-operation">Loading the verification path…</p></div>
+            <span hidden id="trace-scope"></span><span hidden id="trace-before"></span><span hidden id="trace-after"></span><span hidden id="trace-delta"></span>
           </section>
           <div class="limits"><strong>A PASS establishes:</strong> this published proof verifies under this pinned key and these public values. <strong>It does not establish:</strong> guest semantic correctness, authenticated CashVM execution, BCH validation or inclusion, APNT or wallet acceptance, custody, spendability, privacy, or successive transfer.</div>
         </div>
+      </div>
+    </section>
+    <section class="binding-section" aria-labelledby="binding-title">
+      <div class="section-head">
+        <div><div class="kicker">Proof → transaction → note</div><h2 id="binding-title">What a proof-bound BCH spend must connect</h2></div>
+        <p>The first two links below are exercised by this page. The remaining links describe the minimum on-chain construction boundary. They are not a claim that this V4 proof was consumed by a BCH transaction.</p>
+      </div>
+      <div class="binding-map">
+        <article class="binding-step"><span class="step-number">01 / RELATION</span><h3>Program identity</h3><p>The proof names the exact SP1 guest whose execution is being attested.</p><code>programVkeyHash<br>007de2035d65f1dd58a3cf0c930fde5c7c7c99443b26fc30c2cd7f26014a74b1</code><span class="status">VERIFIED HERE</span></article>
+        <article class="binding-step"><span class="step-number">02 / STATEMENT</span><h3>Public commitment</h3><p>The Groth16 public inputs bind the proof to the released settlement projection.</p><code>settlementProjectionCommitment<br>808d03efd14c65e2779068b4db6cf388b4fa142a00a7f30f64ce4ef11bb05c3a</code><span class="status">VERIFIED HERE</span></article>
+        <article class="binding-step"><span class="step-number">03 / TRANSACTION</span><h3>Canonical projection</h3><p>A builder derives one commitment from the exact BCH inputs, source outputs, values, and created outputs being authorized.</p><code>canonical tx fields<br>→ SHA-256<br>→ projection32</code><span class="status target">BUILDER TARGET</span></article>
+        <article class="binding-step"><span class="step-number">04 / VERDICT</span><h3>Authenticated result</h3><p>The spend must consume verifier-authenticated state for the same key and projection; a caller-supplied “true” is not proof evidence.</p><code>verifier identity<br>+ projection32<br>→ verdict input</code><span class="status target">ON-CHAIN BOUNDARY</span></article>
+        <article class="binding-step"><span class="step-number">05 / UTXO SEAL</span><h3>Private-note backing</h3><p>The covenant checks the verdict input and transaction projection while the created UTXO seal commits the note’s exit authority without exposing its private opening.</p><code>verdict input<br>+ created seal<br>+ note commitment</code><span class="status target">PROTOCOL BOUNDARY</span></article>
+      </div>
+      <div class="truth-line"><strong>Honesty boundary:</strong> this V4 artifact proves its released public statement under its pinned key. Its own record says <code>cashVmVerifierAvailable: false</code> and <code>chainValidated: false</code>. A proof-to-transaction equivalence claim needs separate authenticated CashVM and chain evidence for the same proof instance.</div>
+    </section>
+    <section class="kernel" aria-labelledby="kernel-title">
+      <div class="kernel-copy"><div class="kicker">Safe public teaching boundary</div><h2 id="kernel-title">A toy kernel, not the APNT recipe</h2><p>The useful community example is a tiny relation that proves knowledge of a committed secret and binds that authorization to one synthetic BCH transaction projection. It can teach the complete handoff without publishing Proofnote’s note assignment, Recovery, fee, batching, or aggregation design.</p></div>
+      <div class="kernel-grid">
+        <div class="kernel-item"><strong>Publish</strong><span>Statement schema, verifier key, one positive vector, deterministic tamper vectors, and a local CashVM transaction.</span></div>
+        <div class="kernel-item"><strong>Prove</strong><span>Knowledge of a commitment opening plus equality to one public transaction-projection digest.</span></div>
+        <div class="kernel-item"><strong>Demonstrate</strong><span>Proof acceptance, authenticated verdict binding, covenant acceptance, then rejection when the transaction changes.</span></div>
+        <div class="kernel-item"><strong>Keep private</strong><span>APNT relation internals, note-to-cell assignment, Recovery, change/fee policy, wallet state, prover orchestration, and aggregator machinery.</span></div>
       </div>
     </section>
     <p class="footer-note">Measured in Chromium under file:// · no cross-browser claim · no server verifier</p>
@@ -706,8 +806,10 @@ async function selectMode(mode) {
   for (const control of controls) control.setAttribute("aria-pressed", String(control.dataset.case === mode));
   runButton.textContent = mode === "known-good" ? "Verify published proof" : "Run tamper check";
   result.dataset.status = "ready";
-  resultTitle.textContent = MODES[mode].title;
-  resultDetail.textContent = mode === "known-good" ? "Ready to execute the full pairing." : "Ready to alter one reviewed binding and check the refusal.";
+  resultTitle.textContent = mode === "known-good" ? "Verify these bytes" : MODES[mode].title;
+  resultDetail.textContent = mode === "known-good"
+    ? "The verifier checks the artifact, proof, public values, program key, verification key, selector, curve points, and complete pairing equation."
+    : "Ready to alter one reviewed binding and check the refusal.";
   resultClass.textContent = "READY";
   resultTime.textContent = "not run";
   for (const node of rail) node.dataset.state = "idle";
@@ -752,8 +854,6 @@ for (const control of controls) control.addEventListener("click", () => void sel
 runButton.addEventListener("click", runSelected);
 document.addEventListener("keydown", (event) => {
   if (event.altKey || event.ctrlKey || event.metaKey) return;
-  const index = Number(event.key) - 1;
-  if (index >= 0 && index < controls.length) { controls[index].focus(); controls[index].click(); }
   if (event.key === "Enter" && document.activeElement === runButton) runSelected();
 });
 
@@ -770,7 +870,7 @@ async function runAcceptance() {
     reports: reports.map(({ mode, status, classification, pairingExecuted }) => ({ mode, status, classification, pairingExecuted })),
     expectedMatched: reports.every((report, index) => report.classification === expected[index]),
     resourceRequests: performance.getEntriesByType("resource").map((entry) => entry.name),
-    nativeButtons: controls.length === 5 && controls.every((node) => node.tagName === "BUTTON") && runButton.tagName === "BUTTON",
+    nativeButtons: runButton.tagName === "BUTTON",
     traceComplete: reports.every((report) => report.trace?.source && report.trace?.location && report.trace?.before && report.trace?.after && report.trace?.operation),
     transientMutationDisclosed: reports.filter((report) => report.mode !== "known-good").every((report) => report.trace?.mutationScope.includes("in-memory copy only")),
     reducedMotion: matchMedia("(prefers-reduced-motion: reduce)").matches,
