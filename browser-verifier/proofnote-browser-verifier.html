@@ -3,11 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YeuFuib0z0SeG1W8WQG+bH0jkLSYPNzh+pRuA2S6XbY='; style-src 'sha256-CDnLtDpL3PeNzBvxODGbtzOi4LEWN3q9urwM57aT3Eo='; connect-src 'none'; img-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YpqN6gYeX/m2f/w+GsiN4EY+iDUDp8TMQJhOt9KLel8='; style-src 'sha256-HGhITyK3TNTc5dpPN8oRgldz3SgSmrVGYwoSLSEV1zE='; connect-src 'none'; img-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="color-scheme" content="light">
   <title>Proofnote browser verification bench</title>
   <style>
 :root{color-scheme:light;--ink:#111923;--muted:#607080;--paper:#f4f8fb;--surface:#fff;--line:#cfdae3;--wire:#2864dc;--pass:#08776a;--fail:#b8442f;--warn:#9a6510;--shadow:0 18px 55px rgba(23,45,67,.12);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#edf4f8 0,#f8fbfd 48%,#eaf1f6 100%);color:var(--ink);min-height:100vh}.bench{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:32px 0 48px}.mast{display:grid;grid-template-columns:1.3fr .7fr;gap:32px;align-items:end;margin-bottom:24px}.eyebrow,.label{font:700 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--wire)}h1{font-size:clamp(38px,7vw,76px);line-height:.93;letter-spacing:-.065em;margin:12px 0 14px;max-width:780px}p{line-height:1.55}.lede{font-size:17px;color:#43576a;max-width:700px}.identity{border-left:1px solid var(--line);padding-left:22px;font:12px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;color:#44586a;overflow-wrap:anywhere}.identity strong{display:block;color:var(--ink);font-size:13px}.panel{background:rgba(255,255,255,.93);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:18px;overflow:hidden}.rail{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line);background:#eaf1f6}.rail-node{position:relative;padding:17px 18px 15px;border-right:1px solid var(--line);font:700 12px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace}.rail-node:last-child{border:0}.rail-node::before{content:"";display:inline-block;width:9px;height:9px;border:2px solid #8fa2b2;border-radius:50%;margin-right:9px;vertical-align:-1px}.rail-node[data-state=working]::before{border-color:var(--wire);background:var(--wire)}.rail-node[data-state=pass]::before{border-color:var(--pass);background:var(--pass)}.rail-node[data-state=broken]::before{border-color:var(--fail);background:var(--fail)}.workspace{display:grid;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr)}.controls{padding:26px;border-right:1px solid var(--line);background:#fbfdfe}.case-list{display:grid;gap:9px;margin:16px 0 24px}.case{appearance:none;width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);padding:12px 14px;text-align:left;cursor:pointer;font:650 14px/1.3 inherit;transition:border-color .15s,transform .15s,box-shadow .15s}.case small{display:block;margin-top:4px;color:var(--muted);font:11px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace}.case:hover{transform:translateY(-1px);box-shadow:0 5px 15px rgba(35,62,83,.08)}.case[aria-pressed=true]{border-color:var(--wire);box-shadow:0 0 0 2px rgba(40,100,220,.15)}button:focus-visible,a:focus-visible{outline:3px solid #f1b64a;outline-offset:3px}.run{width:100%;border:0;border-radius:10px;background:var(--ink);color:#fff;padding:14px 17px;font:750 14px/1 inherit;cursor:pointer}.run:disabled{opacity:.66;cursor:wait}.result{min-height:500px;padding:32px;display:flex;flex-direction:column;background:var(--surface)}.verdict{display:inline-flex;align-items:center;align-self:flex-start;gap:9px;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font:800 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}.verdict::before{content:"";width:8px;height:8px;border-radius:50%;background:#8fa2b2}.result[data-status=running] .verdict::before{background:var(--wire)}.result[data-status=pass] .verdict{color:var(--pass);border-color:#9bc9c2}.result[data-status=pass] .verdict::before{background:var(--pass)}.result[data-status=fail] .verdict{color:var(--fail);border-color:#e0b0a7}.result[data-status=fail] .verdict::before{background:var(--fail)}.result h2{font-size:clamp(30px,5vw,54px);letter-spacing:-.045em;line-height:1;margin:34px 0 12px}.detail{font-size:16px;color:#43576a;max-width:670px}.result-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0}.datum{border-top:1px solid var(--line);padding-top:12px}.datum span{display:block;color:var(--muted);font:11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.08em}.datum strong{display:block;margin-top:6px;font:650 13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}.limits{margin-top:auto;border-top:1px solid var(--line);padding-top:20px;color:#506273;font-size:13px}.limits strong{color:var(--ink)}.noscript{margin:20px auto;padding:18px;width:min(900px,calc(100% - 32px));background:#fff4d9;border:1px solid #d9a642;color:#593d08}.footer-note{text-align:center;color:#607080;font-size:12px;margin-top:18px}@media(max-width:780px){.mast,.workspace{grid-template-columns:1fr}.identity{border-left:0;border-top:1px solid var(--line);padding:16px 0 0}.controls{border-right:0;border-bottom:1px solid var(--line)}.rail{grid-template-columns:1fr 1fr}.rail-node:nth-child(2){border-right:0}.rail-node:nth-child(-n+2){border-bottom:1px solid var(--line)}.result{min-height:440px;padding:26px}.result-meta{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+.result{min-height:760px}
+.trace{border:1px solid var(--line);border-radius:14px;background:#f7fafc;margin:4px 0 26px;overflow:hidden}
+.trace-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);background:#eaf1f6}
+.trace-badge{font:750 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--wire)}
+.trace-scope{font:11px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;color:#53687a;text-align:right}
+.trace-origin{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--line)}
+.trace-origin>div{padding:12px 14px;min-width:0}
+.trace-origin>div+div{border-left:1px solid var(--line)}
+.trace-origin span,.trace-values span,.trace-operation span{display:block;color:var(--muted);font:700 10px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.trace-origin code,.trace-values code{display:block;font:600 11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#233648;overflow-wrap:anywhere;white-space:pre-wrap}
+.trace-values{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;border-bottom:1px solid var(--line)}
+.trace-value{padding:13px 14px;min-width:0}
+.trace-arrow{display:flex;align-items:center;padding:0 4px;color:var(--wire);font-weight:800}
+.trace-delta{margin:0;padding:10px 14px;background:#fff6df;color:#64470c;font:600 11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere;border-bottom:1px solid #ecd7a5}
+.trace-operation{padding:13px 14px}
+.trace-operation p{margin:0;color:#40566a;font-size:13px;line-height:1.5}
+@media(max-width:780px){.result{min-height:0}.trace-head{align-items:flex-start;flex-direction:column}.trace-scope{text-align:left}.trace-origin,.trace-values{grid-template-columns:1fr}.trace-origin>div+div{border-left:0;border-top:1px solid var(--line)}.trace-arrow{padding:2px 14px;transform:rotate(90deg);transform-origin:center}}
 </style>
 </head>
 <body>
@@ -22,17 +40,20 @@
       <div class="identity" aria-label="Pinned artifact identity">
         <span class="label">Pinned released artifact</span>
         <strong>APNT import-created-note relation V4</strong>
+        proof tools/apnt-import-created-note-sp1/fixtures/<br>
+        &nbsp;&nbsp;canonical-groth16-proof-v4.json · proof.proofBytes<br>
         fixture c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a<br>
-        key 4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696<br>
+        key examples/01-verify-a-proof/verification-key.json<br>
+        key digest 4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696<br>
         selector 4388a21c
       </div>
     </header>
     <section class="panel" aria-label="Interactive verifier">
       <div class="rail" aria-label="Verification binding path">
-        <div class="rail-node" data-stage="proof" data-state="idle">Proof bytes</div>
-        <div class="rail-node" data-stage="selector" data-state="idle">Selector</div>
-        <div class="rail-node" data-stage="key" data-state="idle">Pinned key</div>
-        <div class="rail-node" data-stage="pairing" data-state="idle">Pairing</div>
+        <div class="rail-node" data-stage="identity" data-state="idle">1 · Identity</div>
+        <div class="rail-node" data-stage="decode" data-state="idle">2 · Decode</div>
+        <div class="rail-node" data-stage="binding" data-state="idle">3 · Key binding</div>
+        <div class="rail-node" data-stage="pairing" data-state="idle">4 · BN254 pairing</div>
       </div>
       <div class="workspace">
         <div class="controls">
@@ -54,6 +75,23 @@
             <div class="datum"><span>Measured here</span><strong id="result-time">not run</strong></div>
             <div class="datum"><span>Delivery</span><strong>one file · zero requests</strong></div>
           </div>
+          <section class="trace" aria-label="Execution trace">
+            <div class="trace-head">
+              <span class="trace-badge">Execution trace · inspect before running</span>
+              <span class="trace-scope" id="trace-scope">Loading the released source identity…</span>
+            </div>
+            <div class="trace-origin">
+              <div><span>Source file</span><code id="trace-source">loading</code></div>
+              <div><span>Field and byte location</span><code id="trace-location">loading</code></div>
+            </div>
+            <div class="trace-values">
+              <div class="trace-value"><span>Original</span><code id="trace-before">loading</code></div>
+              <div class="trace-arrow" aria-hidden="true">→</div>
+              <div class="trace-value"><span>Used for this run</span><code id="trace-after">loading</code></div>
+            </div>
+            <p class="trace-delta" id="trace-delta">Loading the exact byte delta…</p>
+            <div class="trace-operation"><span>What the verifier does next</span><p id="trace-operation">Loading the verification path…</p></div>
+          </section>
           <div class="limits"><strong>A PASS establishes:</strong> this published proof verifies under this pinned key and these public values. <strong>It does not establish:</strong> guest semantic correctness, authenticated CashVM execution, BCH validation or inclusion, APNT or wallet acceptance, custody, spendability, privacy, or successive transfer.</div>
         </div>
       </div>
@@ -442,17 +480,105 @@ const INPUTS = Object.freeze({
 const MODES = Object.freeze({
   "known-good": { title: "Published proof", expected: "PASS", stage: "pairing" },
   "tamper-public-values": { title: "Public-value bit flip", expected: "PAIRING_REJECTED", stage: "pairing" },
-  "tamper-proof-bytes": { title: "Proof-byte bit flip", expected: "PROOF_BYTES_REJECTED", stage: "proof" },
-  "tamper-key-bytes": { title: "Pinned-key bit flip", expected: "KEY_BYTES_REJECTED", stage: "key" },
-  "tamper-selector": { title: "Selector-bound padding flip", expected: "SELECTOR_REJECTED", stage: "selector" },
+  "tamper-proof-bytes": { title: "Proof-byte bit flip", expected: "PROOF_BYTES_REJECTED", stage: "decode" },
+  "tamper-key-bytes": { title: "Pinned-key bit flip", expected: "KEY_BYTES_REJECTED", stage: "binding" },
+  "tamper-selector": { title: "Selector-bound padding flip", expected: "SELECTOR_REJECTED", stage: "binding" },
 });
 const ARTIFACT_PATH = "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json";
+const KEY_PATH = "examples/01-verify-a-proof/verification-key.json";
+
+const flipByte = (bytes, offset) => {
+  const changed = Uint8Array.from(bytes);
+  changed[offset] ^= 1;
+  return changed;
+};
+const byteDelta = (before, after, offset) => `byte ${offset}: 0x${before[offset].toString(16).padStart(2, "0")} → 0x${after[offset].toString(16).padStart(2, "0")}`;
+
+async function describeCase(mode) {
+  const fixture = JSON.parse(INPUTS.fixtureText).proof;
+  const proofBytes = fromHex(fixture.proofBytes);
+  const publicValues = fromHex(fixture.publicValuesBytes);
+  const keyBytes = fromHex(INPUTS.keyDocument.verificationKeyHex);
+  const decoded = decodePublicValues(publicValues);
+  const common = {
+    schemaVersion: "proofnote-execution-trace/1",
+    mode,
+    mutationScope: mode === "known-good"
+      ? "No mutation. The released bytes embedded in this page are read and verified in place."
+      : "Transient in-memory copy only. No fixture, key file, browser storage, transaction, or chain state is modified.",
+  };
+  if (mode === "known-good") return {
+    ...common,
+    source: ARTIFACT_PATH,
+    location: `proof.proofBytes · ${proofBytes.length} bytes`,
+    before: `sha256:${await sha256Hex(proofBytes)}`,
+    after: "unchanged",
+    delta: "The released proof bytes are used exactly as published.",
+    operation: "Check fixture, proof, public-value, and key identities; decode Groth16 points and five public scalars; bind the proof selector to the pinned key; execute the complete BN254 pairing equation.",
+  };
+  if (mode === "tamper-public-values") {
+    const offset = decoded.settlementProjectionOffset;
+    const changed = flipByte(publicValues, offset);
+    return {
+      ...common,
+      source: ARTIFACT_PATH,
+      location: `proof.publicValuesBytes · settlementProjection32 · byte ${offset}`,
+      before: toHex(publicValues.subarray(offset, offset + 32)),
+      after: toHex(changed.subarray(offset, offset + 32)),
+      delta: `${byteDelta(publicValues, changed, offset)} · public-values sha256 ${await sha256Hex(publicValues)} → ${await sha256Hex(changed)}`,
+      operation: "Keep the proof points and pinned key unchanged, derive the public scalar from the altered commitment, then execute the same BN254 pairing. The arithmetic must reject.",
+    };
+  }
+  if (mode === "tamper-proof-bytes") {
+    const offset = 100;
+    const changed = flipByte(proofBytes, offset);
+    return {
+      ...common,
+      source: ARTIFACT_PATH,
+      location: `proof.proofBytes · byte ${offset}`,
+      before: `sha256:${await sha256Hex(proofBytes)}`,
+      after: `sha256:${await sha256Hex(changed)}`,
+      delta: byteDelta(proofBytes, changed, offset),
+      operation: "Attempt to decode the altered Groth16 proof points. This mutation is rejected before the pairing equation is reached.",
+    };
+  }
+  if (mode === "tamper-key-bytes") {
+    const offset = 0;
+    const changed = flipByte(keyBytes, offset);
+    return {
+      ...common,
+      source: KEY_PATH,
+      location: `verificationKeyHex · byte ${offset}`,
+      before: `sha256:${await sha256Hex(keyBytes)}`,
+      after: `sha256:${await sha256Hex(changed)}`,
+      delta: byteDelta(keyBytes, changed, offset),
+      operation: "Hash the altered key bytes and compare them with the pinned key digest. Identity rejection occurs before selector binding or pairing.",
+    };
+  }
+  if (mode === "tamper-selector") {
+    const offset = 32;
+    const changed = flipByte(keyBytes, offset);
+    const changedDigest = await sha256Hex(changed);
+    const changedSelector = changedDigest.slice(0, 8);
+    return {
+      ...common,
+      source: KEY_PATH,
+      location: `verificationKeyHex · byte ${offset} → derived selector`,
+      before: `selector ${EXPECTED_SELECTOR} · key sha256 ${await sha256Hex(keyBytes)}`,
+      after: `selector ${changedSelector} · key sha256 ${changedDigest}`,
+      delta: `${byteDelta(keyBytes, changed, offset)} · proof envelope selector remains ${EXPECTED_SELECTOR}`,
+      operation: "Recompute the key digest and selector from the altered key copy, then compare that selector with the unchanged proof envelope. The selector binding must reject before pairing.",
+    };
+  }
+  throw new Error(`UNKNOWN_CASE: ${mode}`);
+}
 
 async function verifyCase(mode = "known-good") {
   if (!Object.hasOwn(MODES, mode)) throw new Error(`UNKNOWN_CASE: ${mode}`);
   const started = performance.now();
   let pairingExecuted = false;
   let keyDocument = structuredClone(INPUTS.keyDocument);
+  const trace = await describeCase(mode);
   try {
     const fixtureBytes = new TextEncoder().encode(INPUTS.fixtureText);
     if (await sha256Hex(fixtureBytes) !== EXPECTED_FIXTURE_SHA256) throw new Error("FIXTURE_IDENTITY_REJECTED");
@@ -486,11 +612,11 @@ async function verifyCase(mode = "known-good") {
     try {
       key = await loadKey(keyDocument, expectedKeyDigest, expectedSelector);
     } catch (error) {
-      if (mode === "tamper-key-bytes") return verdict(mode, "FAIL", "KEY_BYTES_REJECTED", false, started, String(error.message));
+      if (mode === "tamper-key-bytes") return verdict(mode, "FAIL", "KEY_BYTES_REJECTED", false, started, String(error.message), trace);
       throw error;
     }
     if (toHex(proofBytes.subarray(0, 4)) !== keyDocument.selector) {
-      if (mode === "tamper-selector") return verdict(mode, "FAIL", "SELECTOR_REJECTED", false, started, "The proof envelope selector no longer names the supplied key digest.");
+      if (mode === "tamper-selector") return verdict(mode, "FAIL", "SELECTOR_REJECTED", false, started, "The proof envelope selector no longer names the supplied key digest.", trace);
       throw new Error("SELECTOR_REJECTED");
     }
 
@@ -498,7 +624,7 @@ async function verifyCase(mode = "known-good") {
     try {
       points = loadProofPoints(proofBytes);
     } catch (error) {
-      if (mode === "tamper-proof-bytes") return verdict(mode, "FAIL", "PROOF_BYTES_REJECTED", false, started, String(error.message));
+      if (mode === "tamper-proof-bytes") return verdict(mode, "FAIL", "PROOF_BYTES_REJECTED", false, started, String(error.message), trace);
       throw error;
     }
     const effectivePublicValues = Uint8Array.from(publicValues);
@@ -514,17 +640,17 @@ async function verifyCase(mode = "known-good") {
     const pairingVerified = groth16Verifies(key, points, scalars);
     if (mode === "tamper-public-values") {
       return pairingVerified
-        ? verdict(mode, "ERROR", "PAIRING_UNEXPECTED_ACCEPTANCE", true, started, "The mutated commitment unexpectedly verified.")
-        : verdict(mode, "FAIL", "PAIRING_REJECTED", true, started, "The proof points stayed valid; the changed public commitment failed the pairing equation.");
+        ? verdict(mode, "ERROR", "PAIRING_UNEXPECTED_ACCEPTANCE", true, started, "The mutated commitment unexpectedly verified.", trace)
+        : verdict(mode, "FAIL", "PAIRING_REJECTED", true, started, "The proof points stayed valid; the changed public commitment failed the pairing equation.", trace);
     }
-    if (!pairingVerified) return verdict(mode, "ERROR", "PAIRING_UNEXPECTED_REJECTION", true, started, "The published proof did not verify.");
-    return verdict(mode, "PASS", "PROOF_VERIFIED", true, started, "The complete BN254 pairing verified the released proof under the pinned key.");
+    if (!pairingVerified) return verdict(mode, "ERROR", "PAIRING_UNEXPECTED_REJECTION", true, started, "The published proof did not verify.", trace);
+    return verdict(mode, "PASS", "PROOF_VERIFIED", true, started, "The complete BN254 pairing verified the released proof under the pinned key.", trace);
   } catch (error) {
-    return verdict(mode, "ERROR", String(error.message).split(":")[0], pairingExecuted, started, String(error.message));
+    return verdict(mode, "ERROR", String(error.message).split(":")[0], pairingExecuted, started, String(error.message), trace);
   }
 }
 
-function verdict(mode, status, classification, pairingExecuted, started, detail) {
+function verdict(mode, status, classification, pairingExecuted, started, detail, trace) {
   return {
     schemaVersion: "proofnote-browser-verdict/1",
     mode,
@@ -542,6 +668,7 @@ function verdict(mode, status, classification, pairingExecuted, started, detail)
     verificationKeySha256: EXPECTED_KEY_SHA256,
     selector: EXPECTED_SELECTOR,
     relation: EXPECTED_RELATION,
+    trace,
     establishes: ESTABLISHES,
     doesNotEstablish: DOES_NOT_ESTABLISH,
   };
@@ -556,8 +683,25 @@ const resultDetail = document.querySelector("#result-detail");
 const resultClass = document.querySelector("#result-class");
 const resultTime = document.querySelector("#result-time");
 const rail = Array.from(document.querySelectorAll("[data-stage]"));
+const traceSource = document.querySelector("#trace-source");
+const traceLocation = document.querySelector("#trace-location");
+const traceBefore = document.querySelector("#trace-before");
+const traceAfter = document.querySelector("#trace-after");
+const traceDelta = document.querySelector("#trace-delta");
+const traceOperation = document.querySelector("#trace-operation");
+const traceScope = document.querySelector("#trace-scope");
 
-function selectMode(mode) {
+function renderTrace(trace) {
+  traceSource.textContent = trace.source;
+  traceLocation.textContent = trace.location;
+  traceBefore.textContent = trace.before;
+  traceAfter.textContent = trace.after;
+  traceDelta.textContent = trace.delta;
+  traceOperation.textContent = trace.operation;
+  traceScope.textContent = trace.mutationScope;
+}
+
+async function selectMode(mode) {
   state.mode = mode;
   for (const control of controls) control.setAttribute("aria-pressed", String(control.dataset.case === mode));
   runButton.textContent = mode === "known-good" ? "Verify published proof" : "Run tamper check";
@@ -567,6 +711,7 @@ function selectMode(mode) {
   resultClass.textContent = "READY";
   resultTime.textContent = "not run";
   for (const node of rail) node.dataset.state = "idle";
+  renderTrace(await describeCase(mode));
 }
 
 async function runSelected() {
@@ -589,10 +734,12 @@ async function runSelected() {
   resultDetail.textContent = report.detail;
   resultClass.textContent = report.classification;
   resultTime.textContent = `${report.durationMs} ms · pairing ${report.pairingExecuted ? "executed" : "not reached"}`;
+  renderTrace(report.trace);
+  const orderedStages = ["identity", "decode", "binding", "pairing"];
+  const failureIndex = controlledFailure ? orderedStages.indexOf(MODES[state.mode].stage) : -1;
   for (const node of rail) {
-    const stage = node.dataset.stage;
-    const reached = report.pairingExecuted || ["proof", "key", "selector"].includes(stage);
-    node.dataset.state = stage === MODES[state.mode].stage && controlledFailure ? "broken" : reached ? "pass" : "idle";
+    const index = orderedStages.indexOf(node.dataset.stage);
+    node.dataset.state = success ? "pass" : controlledFailure && index < failureIndex ? "pass" : controlledFailure && index === failureIndex ? "broken" : "idle";
   }
   runButton.disabled = false;
   runButton.textContent = state.mode === "known-good" ? "Verify again" : "Run again";
@@ -601,7 +748,7 @@ async function runSelected() {
   return report;
 }
 
-for (const control of controls) control.addEventListener("click", () => selectMode(control.dataset.case));
+for (const control of controls) control.addEventListener("click", () => void selectMode(control.dataset.case));
 runButton.addEventListener("click", runSelected);
 document.addEventListener("keydown", (event) => {
   if (event.altKey || event.ctrlKey || event.metaKey) return;
@@ -610,9 +757,9 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && document.activeElement === runButton) runSelected();
 });
 
-window.proofnoteBrowserVerifier = Object.freeze({ modes: MODES, verifyCase, selectMode, runSelected });
+window.proofnoteBrowserVerifier = Object.freeze({ modes: MODES, describeCase, verifyCase, selectMode, runSelected });
 document.documentElement.dataset.verifierReady = "true";
-selectMode("known-good");
+void selectMode("known-good");
 
 async function runAcceptance() {
   const reports = [];
@@ -624,6 +771,8 @@ async function runAcceptance() {
     expectedMatched: reports.every((report, index) => report.classification === expected[index]),
     resourceRequests: performance.getEntriesByType("resource").map((entry) => entry.name),
     nativeButtons: controls.length === 5 && controls.every((node) => node.tagName === "BUTTON") && runButton.tagName === "BUTTON",
+    traceComplete: reports.every((report) => report.trace?.source && report.trace?.location && report.trace?.before && report.trace?.after && report.trace?.operation),
+    transientMutationDisclosed: reports.filter((report) => report.mode !== "known-good").every((report) => report.trace?.mutationScope.includes("in-memory copy only")),
     reducedMotion: matchMedia("(prefers-reduced-motion: reduce)").matches,
   };
   document.documentElement.dataset.acceptance = btoa(JSON.stringify(payload));

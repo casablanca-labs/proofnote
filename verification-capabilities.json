@@ -2,8 +2,8 @@
   "schemaVersion": "proofnote-verification-capabilities/1",
   "description": "Positive verification capabilities generated only after the matrix alias executes successfully in an isolated full public-tree staging copy with the network guard preloaded. Planned and blocked entries remain only in verification-matrix.json and receive no positive record.",
   "generatedBy": "scripts/public-export/generate-verification-interface.mjs",
-  "generatedAt": "2026-08-21T16:59:05.507Z",
-  "sourceCommit": "163823b6e1318e764829d79d039206f0ed36c98b",
+  "generatedAt": "2026-08-21T17:58:32.859Z",
+  "sourceCommit": "00c73f2379e8e15ac4efce784f3f1e76000b558d",
   "matrixSha256": "41c04c34fbb7b693362fa41a540237d89ac4b0369e5e422e5c4245c1073bfc8d",
   "capabilities": [
     {
@@ -80,7 +80,7 @@
         "exitCode": 0,
         "stdoutSha256": "95a15f5a951d1a42640bff468d86011fb62d0d1d8c8a4257e2ff581a88556d8b",
         "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "runtimeMs": 177
+        "runtimeMs": 156
       },
       "matrixEntrySha256": "38a2b2ae31fd6e1edba0cdbfc333590c4d984d6016eddcb6c441a0f893b32d1f",
       "derivation": "copied from generated capabilities.json record verify:certificate-run-keying only after its unchanged alias executed successfully in this run"
@@ -169,7 +169,7 @@
         "exitCode": 0,
         "stdoutSha256": "2c51aa175de24d0d9404b869590eb9e12a3e0c635f4fef3922683591f597b94e",
         "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "runtimeMs": 122
+        "runtimeMs": 115
       },
       "matrixEntrySha256": "247806e5bc90553d7f26647bc9971d9d66082527906f913904bb5a64785d090b",
       "derivation": "copied from generated capabilities.json record verify:certificate-run-retention only after its unchanged alias executed successfully in this run"
@@ -245,7 +245,7 @@
         "exitCode": 0,
         "stdoutSha256": "5dc379950121cd37a3b59c0bffe32adccbd68bc05e492b4d29c0e80f4480a0b4",
         "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "runtimeMs": 121
+        "runtimeMs": 114
       },
       "matrixEntrySha256": "984f3b9c2436440bf10b41245175767e0c142b4fd97939d41d8da1d36d70d705",
       "derivation": "copied from generated capabilities.json record verify:transition-settlement-projection-independent only after its unchanged alias executed successfully in this run"
@@ -310,7 +310,7 @@
         "exitCode": 0,
         "stdoutSha256": "7ac680e2c801434484cce6fcb3f52446dc771b4a9fbe7b97fb9ee0251d760529",
         "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "runtimeMs": 118
+        "runtimeMs": 115
       },
       "matrixEntrySha256": "c89097e3a3793ef5699e7f6a1b768d73e629ff1478fa963e4e622990dbda0cf8",
       "derivation": "copied from generated capabilities.json record verify:settlement-authorization-covenant-independent only after its unchanged alias executed successfully in this run"
@@ -373,7 +373,7 @@
         "exitCode": 0,
         "stdoutSha256": "465757423d08dbf6f1f200335d2c1af3b092e1968d3af088713425757f639083",
         "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "runtimeMs": 362
+        "runtimeMs": 365
       },
       "matrixEntrySha256": "9000d2ec68ab63fd8537e535190d9846d310bca86f8b48c84b9a6ff04f312adc",
       "derivation": "read from the successful runner's own JSON output in this generation run"
@@ -392,6 +392,8 @@
       "establishes": [
         "the released proof passes the complete browser BN254 pairing under the pinned key",
         "public-value, proof-byte, key-byte, and selector tamper controls reject with their declared failure classes",
+        "every case identifies its public source, exact field or byte location, original and run value, and the verification operation reached",
+        "tamper controls disclose that mutations exist only in a transient in-memory copy",
         "the measured file:// run made zero resource requests and exposed native keyboard-operable buttons plus reduced-motion and no-JavaScript behavior"
       ],
       "doesNotEstablish": [
@@ -399,27 +401,27 @@
       ],
       "evidenceIdentity": {
         "algorithm": "proofnote-evidence-set/1",
-        "sha256": "309cd61523876faa1d852ebb858901346cf108c9d4666d5755ba3acd088c2034",
+        "sha256": "3252ca61ce3b0a844685f6e39ffa6d7a393f12382081acf2c083be5629649123",
         "files": [
           {
             "path": "browser-verifier/artifact.json",
-            "sha256": "7d631e7a7648839caba9002c36da77ad8d1d6e89bbf56c1c49daa56b6657b080",
+            "sha256": "4d9202d1b9ca83133d8ec325cfa9985f7866154abce9ac53eeb7f5ca6b368a17",
             "sizeBytes": 1347
           },
           {
             "path": "browser-verifier/chromium-acceptance.mjs",
-            "sha256": "8289eebfe43ca0bbbf40914fdd83110f60b204a2d1d643658844f62ce46ea8bd",
-            "sizeBytes": 9266
+            "sha256": "0432309cc114c6a7ce407052055435cda53fe9f0d9216ea4e28a68de0093d268",
+            "sizeBytes": 9951
           },
           {
             "path": "browser-verifier/proofnote-browser-verifier.html",
-            "sha256": "22ad37979c666e39f9f0ee6567b00901b315e155918ae46fc5cf059e45b8a95a",
-            "sizeBytes": 43342
+            "sha256": "d8e2a8a65c000f1cc3041bcfe7c8b6b21eb80864f59f254db35f94e2efbdf2ed",
+            "sizeBytes": 52475
           },
           {
             "path": "examples/02-verify-in-browser/example.json",
-            "sha256": "3b2a469959d9bf536ee767bc2c65ce457b1cc96793eec2c6fbe7342ab46dcfaf",
-            "sizeBytes": 1991
+            "sha256": "599e738b46f4267f895c92edf7f5933313878fccf914b7560fa2c0f4da987c0d",
+            "sizeBytes": 2168
           }
         ]
       },
@@ -442,9 +444,9 @@
       "execution": {
         "status": "passed",
         "exitCode": 0,
-        "stdoutSha256": "c535fe8cd58cbb18791bb97b6dc4c0d8a6b724a007d09a641cead91f06c0b600",
+        "stdoutSha256": "aa3c51fc898853f43a91ba9fdd070dbf0b7a562142b79c91a3c07ffed12e3305",
         "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "runtimeMs": 607
+        "runtimeMs": 583
       },
       "matrixEntrySha256": "5fcb73e120d687438fa9874cdaa63d7856b55a06a1ca43070fb2409792c4b898",
       "derivation": "read from the successful runner's own JSON output in this generation run"

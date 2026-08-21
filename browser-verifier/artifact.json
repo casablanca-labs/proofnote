@@ -2,8 +2,8 @@
   "schemaVersion": "proofnote-browser-verifier-artifact/1",
   "generatedBy": "scripts/public-export/browser-verifier/generate.mjs",
   "htmlPath": "browser-verifier/proofnote-browser-verifier.html",
-  "htmlSha256": "22ad37979c666e39f9f0ee6567b00901b315e155918ae46fc5cf059e45b8a95a",
-  "htmlBytes": 43342,
+  "htmlSha256": "d8e2a8a65c000f1cc3041bcfe7c8b6b21eb80864f59f254db35f94e2efbdf2ed",
+  "htmlBytes": 52475,
   "sourceVerifier": "examples/01-verify-a-proof/run.mjs",
   "sourceVerifierSha256": "06b9a2619203e11cce0c0eb1d6dc7fd915ae95eb325f883d0a38f77f200b62d3",
   "inputs": {

@@ -1,6 +1,6 @@
 # Verify a released proof in your browser
 
-This example is the zero-install form of example 01. The verifier, released proof, public values, pinned key, styles, and honesty metadata are all embedded in one generated HTML file.
+This example is the zero-install form of example 01. The verifier, released proof, public values, pinned key, styles, and honesty metadata are all embedded in one generated HTML file. Before every run, the execution trace names the public source file, exact field or byte offset, original value, run value, and next verification operation.
 
 ## Run
 
@@ -14,7 +14,7 @@ Open `browser-verifier/proofnote-browser-verifier.html` in Chromium, or run the 
 
 ## Tamper or negative controls
 
-Use the four browser controls for public values, proof bytes, pinned key bytes, and selector-bound bytes. The machine-graded artifact mutation is:
+Use the four browser controls for public values, proof bytes, pinned key bytes, and selector-bound bytes. Each browser mutation is applied only to a transient in-memory copy; the trace shows the exact before/after value and no file, browser storage, transaction, or chain state is changed. The machine-graded artifact mutation is:
 
 `node examples/02-verify-in-browser/run.mjs --tamper-artifact`
 

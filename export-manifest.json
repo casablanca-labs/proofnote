@@ -37,7 +37,7 @@
       "rationale": "The verification surface: the canonical Groth16 proof artifacts, the quotient/residue certificate runs, the frozen trusted verifier descriptors, the Rust note-commitment verifier crate, and THREE independent Node checkers — one grading certificate-run keying, one re-deriving statementCommitment32 and settlementProjection32 from published statement bytes, one re-deriving the settlement-authorization covenant's bytes and L_verdict. All three run on a bare Node with no install, no network and no build, and the export executes all four configured argument sets inside a filesystem-sandboxed copy of the staged tree before this tree may ship. Their two data inputs are derived, not copied: typescript-golden-vectors-public-v0.json is emitted by derive-public-golden-vectors-v0.mjs, which strips the private witness and refuses to write unless six redaction proofs pass; apnt-settlement-authorization-covenant-bytecode-v0.json is emitted by the landed covenant builders and carries only on-chain script bytes. The verify-apnt skill ships here rather than under repo-metadata: it walks a contributor through checking a proof artifact, a settlement, a note commitment and a trust anchor, so it belongs with the artifacts it teaches a reader to check, not with repo identity that ships before any of them exist."
     }
   ],
-  "determinismDigest": "14a35f0d829f8b93b2163bedf0ae93dd28aa6cd60c34c3a1d9e8187dcb6506b1",
+  "determinismDigest": "4ce37c7caadf2f06f7312fb701b08dcef903cec48ab53f8a156f72e75e2586cc",
   "fileCount": 205,
   "files": [
     {
@@ -204,7 +204,7 @@
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "browser-verifier/artifact.json",
-      "sha256": "7d631e7a7648839caba9002c36da77ad8d1d6e89bbf56c1c49daa56b6657b080",
+      "sha256": "4d9202d1b9ca83133d8ec325cfa9985f7866154abce9ac53eeb7f5ca6b368a17",
       "sizeBytes": 1347,
       "sourcePath": "scripts/public-export/public-tree/browser-verifier/artifact.json"
     },
@@ -212,16 +212,16 @@
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "browser-verifier/chromium-acceptance.mjs",
-      "sha256": "8289eebfe43ca0bbbf40914fdd83110f60b204a2d1d643658844f62ce46ea8bd",
-      "sizeBytes": 9266,
+      "sha256": "0432309cc114c6a7ce407052055435cda53fe9f0d9216ea4e28a68de0093d268",
+      "sizeBytes": 9951,
       "sourcePath": "scripts/public-export/browser-verifier/chromium-acceptance.mjs"
     },
     {
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "browser-verifier/proofnote-browser-verifier.html",
-      "sha256": "22ad37979c666e39f9f0ee6567b00901b315e155918ae46fc5cf059e45b8a95a",
-      "sizeBytes": 43342,
+      "sha256": "d8e2a8a65c000f1cc3041bcfe7c8b6b21eb80864f59f254db35f94e2efbdf2ed",
+      "sizeBytes": 52475,
       "sourcePath": "scripts/public-export/public-tree/browser-verifier/proofnote-browser-verifier.html"
     },
     {
@@ -380,23 +380,23 @@
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "examples/02-verify-in-browser/README.md",
-      "sha256": "9b906573014df2854918ca0f19122447f1d43ba5fbd22a1c02157ccfe0961ab3",
-      "sizeBytes": 1596,
+      "sha256": "657834803f85e4c01664447305a997709b96c410163b7426be7f693d12c76895",
+      "sizeBytes": 1936,
       "sourcePath": "scripts/public-export/public-tree/examples/02-verify-in-browser/README.md"
     },
     {
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "examples/02-verify-in-browser/example.json",
-      "sha256": "3b2a469959d9bf536ee767bc2c65ce457b1cc96793eec2c6fbe7342ab46dcfaf",
-      "sizeBytes": 1991,
+      "sha256": "599e738b46f4267f895c92edf7f5933313878fccf914b7560fa2c0f4da987c0d",
+      "sizeBytes": 2168,
       "sourcePath": "scripts/public-export/public-tree/examples/02-verify-in-browser/example.json"
     },
     {
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "examples/02-verify-in-browser/expected-output.txt",
-      "sha256": "81fb84d6654854d2ca191bae8862b5f70fa09ed1e2d0a6f105893ef461524366",
+      "sha256": "82a4a621a541ea82a7a8a136d26f0de73d9b1bbdaf010c6a01fce491a353e961",
       "sizeBytes": 229,
       "sourcePath": "scripts/public-export/public-tree/examples/02-verify-in-browser/expected-output.txt"
     },
@@ -404,7 +404,7 @@
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "examples/02-verify-in-browser/run.mjs",
-      "sha256": "f678f79cd29a4855fc5dd1e4aad49ee2f0ae9417b5a6129ae95d7242921c4d54",
+      "sha256": "078e4fb14bf33900732250c6a7b1366b1a4eb112b34e6c990c72344de6ddb846",
       "sizeBytes": 1245,
       "sourcePath": "scripts/public-export/public-tree/examples/02-verify-in-browser/run.mjs"
     },
@@ -1620,8 +1620,8 @@
       "category": "canonical-guest-build",
       "expandedFromGlob": null,
       "publicPath": "tools/sp1-canonical-guest-build/CANDIDATES.md",
-      "sha256": "c06a5da722952e2bd3512db32f5b2a57d5df6c02170a03e9e1b12817ef88b50a",
-      "sizeBytes": 6120,
+      "sha256": "4dee620a8d9825209128af459d0f30b00a0d1be9937e1e708d06181acafe9469",
+      "sizeBytes": 8428,
       "sourcePath": "tools/sp1-canonical-guest-build/CANDIDATES.md"
     },
     {
@@ -1660,8 +1660,8 @@
       "category": "repo-metadata",
       "expandedFromGlob": null,
       "publicPath": "verification-capabilities.json",
-      "sha256": "a676062129da3446b3f9c44499f79b8a817dd6fd6798f330dca329eb22d7b3c2",
-      "sizeBytes": 26636,
+      "sha256": "57d255e410b52291a66e0e908d3a1fa0db54959e143013d27f9f58a741899ee0",
+      "sizeBytes": 26873,
       "sourcePath": "scripts/public-export/public-tree/verification-capabilities.json"
     },
     {
@@ -1719,7 +1719,7 @@
             "--fetch-retry-maxtimeout=5000",
             "--store-dir=<isolated-tmp>/pnpm-store"
           ],
-          "durationMs": 2054,
+          "durationMs": 1674,
           "exitCode": 0,
           "name": "install-generate-lockfile",
           "ok": true,
@@ -1736,7 +1736,7 @@
             "--fetch-retry-maxtimeout=5000",
             "--store-dir=<isolated-tmp>/pnpm-store"
           ],
-          "durationMs": 277,
+          "durationMs": 291,
           "exitCode": 0,
           "name": "install-frozen-lockfile",
           "ok": true,
@@ -1749,7 +1749,7 @@
             "-r",
             "build"
           ],
-          "durationMs": 826,
+          "durationMs": 794,
           "exitCode": 0,
           "name": "build",
           "ok": true,
@@ -1762,7 +1762,7 @@
             "-r",
             "typecheck"
           ],
-          "durationMs": 592,
+          "durationMs": 507,
           "exitCode": 0,
           "name": "typecheck",
           "ok": true,
@@ -1776,7 +1776,7 @@
             "-p",
             "packages/protocol-runtime/tsconfig.json"
           ],
-          "durationMs": 635,
+          "durationMs": 514,
           "exitCode": 0,
           "name": "typecheck-protocol-runtime-standalone",
           "ok": true,
@@ -1791,7 +1791,7 @@
             "--",
             "--passWithNoTests"
           ],
-          "durationMs": 1485,
+          "durationMs": 1402,
           "exitCode": 0,
           "name": "test",
           "ok": true,
@@ -1805,7 +1805,7 @@
             "run",
             "verify"
           ],
-          "durationMs": 1198,
+          "durationMs": 1276,
           "exitCode": 0,
           "name": "verify",
           "ok": true,
@@ -1816,12 +1816,12 @@
       "summary": "PASSED: 7 step(s) all exited 0",
       "toolchain": {
         "@types/node": "25.9.5",
-        "node": "v20.19.4",
+        "node": "v26.4.0",
         "typescript": "5.9.3",
         "vitest": "2.1.9"
       }
     },
-    "generatedAt": "2026-08-21T17:14:37.631Z",
+    "generatedAt": "2026-08-21T18:11:21.643Z",
     "generator": "scripts/public-export@1",
     "note": "This block is EXCLUDED from determinismDigest. Pass --now=<iso> to pin generatedAt and make a run byte-reproducible."
   },
@@ -2654,8 +2654,8 @@
       "path": "scripts/public-export/allowlist.json",
       "sha256": "c1e1071be9ea7b13d01551759ff09e958e43dbd33927c8083fb75383a84a988d"
     },
-    "branch": "publish/proofnote-v0-4-6-publication-final",
-    "commit": "8853f0afa2e51b78633cc6383ada07b76a2b3c23",
+    "branch": "main",
+    "commit": "19cda935155c11ed1361d213652a8af1b55d1630",
     "repository": "bch-cloak (private)",
     "workingTreeDirty": false
   },

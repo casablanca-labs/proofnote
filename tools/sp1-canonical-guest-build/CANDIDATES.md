@@ -36,6 +36,38 @@ pin is wrong: the container's `rustc`, its `CARGO_HOME` layout and its
 in-container paths are all different from any local build, so the canonical
 environment necessarily produces a different program.
 
+## Task 2.12 transition-lineage measurement at `d1c6801`
+
+These are candidate measurement rows, not pins by virtue of appearing in this
+file. They were measured from the exact clean canonical `main` checkout at
+`d1c68013168bbd0a1a935300b489a2c7ad50b3a3`, using the immutable image digest
+above, the repository root as `--workspace-directory`, locked dependencies,
+and temporary output directories. `vkey-probe` derived each VKey with
+`setup()` only; no proof was constructed.
+
+For each selector, the first Docker target cache was moved aside and a second
+build recompiled the complete guest graph. The two ELFs then compared
+byte-for-byte and `setup()` reproduced the same VKey.
+
+| status | selector | package | ELF SHA-256 | bytes | program VKey |
+|---|---|---|---|---:|---|
+| canonical candidate; V1 pins unchanged | transition-v1 | `apnt-private-note-transition-v1-sp1-program` | `91e1a6b33708141a05c0f01b25849ff8478d947c9219cba515aa4dde3728e16c` | 1,086,624 | `005237ad234831e43c7d0fde4a6371855ab978253e0338abc105c3528882c1e7` |
+| canonical candidate; V2 corpus K pinned separately | transition-v2 | `apnt-private-note-transition-v2-sp1-program` | `68e662d5991ef94fe6a8e42d7469a048dc4d0374ee04e2c0b641eb372ca590f0` | 1,213,056 | `0063f9299d606362f251d7f5f2febcbe2da90cb7bf86a950df1ca7f1bd193fa8` |
+
+The missing V1 predecessor record is now explicit, including its disagreement
+with the already load-bearing V1 identity:
+
+| V1 disposition | ELF SHA-256 | bytes | program VKey |
+|---|---|---:|---|
+| existing load-bearing record — preserved, not re-pinned | `74c6df17e18c5443ab73bceb325e8ff0e17d4730d7042898231b0743861fef15` | 1,085,576 | `0062b6f04f21046ef56291cc8a61990ec8b267610667852090e7ad98390b5e97` |
+| current canonical candidate — information only | `91e1a6b33708141a05c0f01b25849ff8478d947c9219cba515aa4dde3728e16c` | 1,086,624 | `005237ad234831e43c7d0fde4a6371855ab978253e0338abc105c3528882c1e7` |
+
+That mismatch is a stop on any V1 pin edit, not permission to migrate V1. The
+existing V0 `transition` candidate row above is preserved unchanged. Task 2.12
+separately pins only the measured Relation V2 VKey in the additive APNTPTI2
+fixture/corpus; the V2 ELF digest and length remain candidate build records,
+and no verifier, deployment manifest, proof artifact, or V1 identity is changed.
+
 ## What a re-pin would have to reckon with — read before adopting anything
 
 1. **The verifier-side pins are bound to already-produced Groth16 artifacts.**

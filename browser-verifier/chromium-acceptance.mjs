@@ -127,6 +127,8 @@ export function runChromiumAcceptance({ htmlPath = HTML, chromePath = resolveDed
   if (payload.expectedMatched !== true) throw new Error(`BROWSER_VERDICT_MISMATCH: ${JSON.stringify(payload.reports)}`);
   if (payload.resourceRequests.length !== 0) throw new Error(`BROWSER_EXTERNAL_REQUEST: ${JSON.stringify(payload.resourceRequests)}`);
   if (payload.nativeButtons !== true) throw new Error("BROWSER_KEYBOARD_CONTROL: interactive controls are not native buttons");
+  if (payload.traceComplete !== true) throw new Error("BROWSER_EXECUTION_TRACE: a case omitted its source, location, before/after value, or verification operation");
+  if (payload.transientMutationDisclosed !== true) throw new Error("BROWSER_MUTATION_SCOPE: a tamper case did not disclose its in-memory-only mutation boundary");
   if (payload.reducedMotion !== true) throw new Error("BROWSER_REDUCED_MOTION: Chromium did not observe the forced reduced-motion preference");
   const html = readFileSync(htmlPath, "utf8");
   if (!/<noscript>[\s\S]*JavaScript is off\./u.test(html)) throw new Error("BROWSER_NOSCRIPT_FALLBACK: explanatory fallback is missing");
@@ -138,6 +140,8 @@ export function runChromiumAcceptance({ htmlPath = HTML, chromePath = resolveDed
     cases: payload.reports,
     resourceRequests: payload.resourceRequests,
     nativeButtonControls: payload.nativeButtons,
+    executionTraceComplete: payload.traceComplete,
+    transientMutationDisclosed: payload.transientMutationDisclosed,
     reducedMotionObserved: payload.reducedMotion,
     noJavaScriptFallback: true,
   };
@@ -168,6 +172,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1
       establishes: [
         "the released proof passes the complete browser BN254 pairing under the pinned key",
         "public-value, proof-byte, key-byte, and selector tamper controls reject with their declared failure classes",
+        "every case identifies its public source, exact field or byte location, original and run value, and the verification operation reached",
+        "tamper controls disclose that mutations exist only in a transient in-memory copy",
         "the measured file:// run made zero resource requests and exposed native keyboard-operable buttons plus reduced-motion and no-JavaScript behavior",
       ],
       doesNotEstablish: [
