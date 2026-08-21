@@ -152,6 +152,13 @@ Four limits apply to everything below.
    packages — see "What builds and what does not" below. Where that is the case
    it is stated rather than implied.
 
+For comparisons with another proof system, start with
+[`docs/proof-system-evidence-rubric.md`](./docs/proof-system-evidence-rubric.md).
+It keeps proof bytes, verifier bytes, transaction and lifecycle bytes,
+standardness, script execution, proof-to-transaction binding, and wallet
+acceptance as separate measurements. A smaller number in one column is not a
+system-level result.
+
 ## Current research boundary
 
 The current prototype has authenticated the import-to-private-acceptance half

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "proofnote-groth16-verification-key/1",
+  "classification": "public-safe SP1 v6.1.0 BN254 Groth16 wrapper verification key",
+  "proofProfile": "sp1-v6.1.0-groth16-bn254-v4",
+  "verificationKeyBytes": 492,
+  "verificationKeySha256": "4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696",
+  "selector": "4388a21c",
+  "publicInputLabels": [
+    "program-vkey",
+    "masked-sha256-public-values",
+    "exit-code",
+    "recursion-vkey-root",
+    "proof-nonce"
+  ],
+  "verificationKeyHex": "e1c7d728a5fd961fc179ec5eab938f564deba5b271e1c90c2c29a79648418fc182e78e216b27cb2b30abd22d17fb65b747ad8050d18e543498522d01a2c3fe79dc3c9339849225980c7d3f824f80d19e2a9c2554b6ab2160fa9635528f693fc00d964538da2653f2e62499571e6c78afb8909d3ea8107f306bd6928253680a3a998e9393920d483a7260bfb731fb5d25f1aa493335a9e71297e485b7aef312c21800deef121f1e76426a00665e5c4479674322d4f75edadd46debd5cd992f6edd7e00b2ca4f62668135017ed8a68894e104ac26dfd9bf376634b42af9e5ae50e91b7e9276171bb0efd647fc63e38bbfba3076f20daca8cd52bcc7284d9b1c6eb1723616533dd6ae53502c9c506a81f23f543d68750b5133ebfbe1f4746b3b01100000006acd6bf7f164af0b6b0bbbe0fdcb06ee0c1ba07f8e6eb2f9f3943a90cb1d402908f5460f3b7221705435e745da21e276536379c0113c13c4255e7ae101f1e90bf8b0ae6e491bc04c544da9e8cd4857d201b4cfa0222dbe96aac97f044fdf1c922c97c875a6ebd0999b06e7267ff3d8a6bf859bb9635abae07cb6b3534ba409a839807204ddcd27506ba72e17b55227b0bf310136ecb40c74acd52f3ccfbcba9f7808c7b7c98d78c07a2c4be5f6be7082ba41021611f9a2dfc016f8bbb37d36bee0000000000000000",
+  "authority": {
+    "contentIdentity": "sha256:4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696",
+    "selectionBinding": "the proof envelope begins with the first four bytes of this SHA-256 digest",
+    "trustAssumptions": [
+      "the public repository selected the intended SP1 v6.1.0 wrapper key",
+      "SHA-256 collision resistance binds the full key to the four-byte envelope selector only in combination with this separately pinned full digest"
+    ],
+    "doesNotEstablish": [
+      "that this wrapper key represents the intended APNT guest semantics",
+      "CashVM execution, BCH consensus validation, chain inclusion, wallet acceptance, or spendability"
+    ]
+  }
+}

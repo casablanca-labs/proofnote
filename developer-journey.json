@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "proofnote-developer-journey/1",
+  "generatedBy": "scripts/public-export/devex/foundation.mjs",
+  "sourceAuthority": {
+    "repository": "bch-cloak",
+    "baseCommit": "bf81305047b4697ef8c5d5c0b9618c7194d95732"
+  },
+  "publicTarget": "casablanca-labs/proofnote",
+  "ownership": {
+    "DEVEX": {
+      "owns": [
+        "generated developer metadata",
+        "public examples",
+        "verification dispatcher and matrix",
+        "example and capability conformance"
+      ],
+      "mayNotWiden": "OpenSpec task or path ownership"
+    },
+    "PUB-SURFACE": {
+      "owns": [
+        "Proofnote site files and site consumption"
+      ],
+      "dependsOn": [
+        "reviewed DEVEX outputs"
+      ]
+    },
+    "P0": {
+      "owns": [
+        "successive-owner host semantics",
+        "Rust and SP1 parity",
+        "successive-owner proof, settlement, and recipient-acceptance evidence"
+      ]
+    },
+    "PUB-GATES": {
+      "owns": [
+        "canonical public prepare, promote, commit, and remote publication gates"
+      ],
+      "dependsOn": [
+        "reviewed DEVEX candidate"
+      ]
+    },
+    "CONTROL": {
+      "owns": [
+        "job scheduling, independent validation, integration, and task completion records"
+      ],
+      "mayNotWiden": "OpenSpec requirements, repositories, or leased paths"
+    }
+  },
+  "steps": [
+    {
+      "id": "clone-bootstrap",
+      "status": "partial",
+      "evidenceIdentity": {
+        "kind": "public-package-contract",
+        "value": "package.json at authority base bf81305047b4697ef8c5d5c0b9618c7194d95732"
+      },
+      "executionEnvironment": "Node.js >=20.6.0; dependency installation still requires registry access",
+      "trustAssumptions": [
+        "the exported manifest binds the checkout to the reviewed source commit",
+        "the package registry serves the versions selected by the release lockfile"
+      ],
+      "nonClaims": [
+        "no zero-install bootstrap is established",
+        "cloning and installing do not verify a proof or BCH evidence"
+      ],
+      "nextOwner": "DEVEX"
+    },
+    {
+      "id": "one-command-discovery",
+      "status": "runnable",
+      "evidenceIdentity": {
+        "kind": "verification-matrix-sha256",
+        "value": "e5f79f6f0bbef464cf4b6448c36736faa3c04cd9bbfd3d3ffa08a6e4d6ca1a3d"
+      },
+      "executionEnvironment": "bare Node.js >=20.6.0 for list/explain; pnpm 9 for dispatched compatibility aliases",
+      "trustAssumptions": [
+        "capability claims must be generated from successful checks"
+      ],
+      "nonClaims": [
+        "listing a capability does not execute it",
+        "blocked and planned records establish no positive capability"
+      ],
+      "nextOwner": "PUB-SURFACE may consume the reviewed generated records after publication"
+    },
+    {
+      "id": "successful-real-artifact-verification",
+      "status": "runnable",
+      "evidenceIdentity": {
+        "kind": "fixture+key-sha256",
+        "value": "c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a+4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696"
+      },
+      "executionEnvironment": "bare Node.js >=20.6.0, dependency-free BigInt BN254 arithmetic, network denied",
+      "trustAssumptions": [
+        "the pinned wrapper verification key is the intended SP1 v6.1.0 trust anchor",
+        "the frozen V4 relation identity is the statement being verified"
+      ],
+      "nonClaims": [
+        "proof verification does not establish guest semantic correctness",
+        "proof verification does not establish BCH validation or wallet acceptance"
+      ],
+      "nextOwner": "DEVEX"
+    },
+    {
+      "id": "deterministic-tamper-failure",
+      "status": "runnable-negative",
+      "evidenceIdentity": {
+        "kind": "runner-sha256",
+        "value": "06b9a2619203e11cce0c0eb1d6dc7fd915ae95eb325f883d0a38f77f200b62d3"
+      },
+      "executionEnvironment": "bare Node.js >=20.6.0, network denied; committed public-value bit flips while proof points remain unchanged",
+      "trustAssumptions": [
+        "the mutation changes committed public values without changing proof-point encodings"
+      ],
+      "nonClaims": [
+        "a single mutation class is not a complete adversarial audit"
+      ],
+      "nextOwner": "DEVEX"
+    },
+    {
+      "id": "confirmed-bch-transaction-inspection",
+      "status": "blocked",
+      "evidenceIdentity": {
+        "kind": "chipnet-txid",
+        "value": "8510edd3b26e85aaf401d32873cdd035cd3f0cfe0a233f682597145a1bfea6f4"
+      },
+      "executionEnvironment": "direct Electrum TLS with live Chipnet access; no runner in this slice",
+      "trustAssumptions": [
+        "the configured Chipnet server returns authenticated chain evidence",
+        "transaction bytes are independently rehashed and structurally checked"
+      ],
+      "nonClaims": [
+        "transaction inspection does not prove Groth16 proof-to-transaction equivalence",
+        "network lookup failure is not evidence failure"
+      ],
+      "nextOwner": "DEVEX tasks 5.2-5.3"
+    },
+    {
+      "id": "wallet-acceptance",
+      "status": "blocked",
+      "evidenceIdentity": {
+        "kind": "not-established",
+        "value": "reviewed point-in-time acceptance corpus required by task 5.4"
+      },
+      "executionEnvironment": "offline fixture verification plus configured-node chain evidence; no runner in this slice",
+      "trustAssumptions": [
+        "proof capability and chain capability are authenticated rather than caller-supplied booleans",
+        "current backing state is freshly checked"
+      ],
+      "nonClaims": [
+        "acceptance does not establish recording, persistence, reorg safety, spendability, or successive transfer"
+      ],
+      "nextOwner": "DEVEX task 5.4"
+    },
+    {
+      "id": "recovery",
+      "status": "documentation-only",
+      "evidenceIdentity": {
+        "kind": "sha256",
+        "value": "f7e8147975ddc9885a54a80841f330371695ca0b4f889ac535aec79a331b52fb"
+      },
+      "executionEnvironment": "promoted specification reading only; no Recovery runner in this slice",
+      "trustAssumptions": [
+        "the promoted specification describes the intended Recovery boundary",
+        "a future runner must authenticate chain evidence and decrypt only within wallet authority"
+      ],
+      "nonClaims": [
+        "a specification is not an execution",
+        "Recovery does not establish spendability"
+      ],
+      "nextOwner": "DEVEX task 5.4 and a separately reviewed acceptance corpus"
+    },
+    {
+      "id": "authenticated-cashvm-verifier",
+      "status": "partial",
+      "evidenceIdentity": {
+        "kind": "cashvm-profile-sha256",
+        "value": "0bf091d8e7036ae834cfdf9113ffe4ff240946a0e0167d60cb911924af01354c"
+      },
+      "executionEnvironment": "published V1 descriptor and certificate transcript; no authenticated CashVM execution runner in this slice",
+      "trustAssumptions": [
+        "the pinned V1 profile identity is compared against reviewed descriptor bytes",
+        "reported certificate acceptance is not treated as arithmetic re-execution"
+      ],
+      "nonClaims": [
+        "the certificate mixup detector does not re-execute the CashVM arithmetic transcript",
+        "no V4 authenticated verifier profile identity is claimed"
+      ],
+      "nextOwner": "P0 followed by DEVEX/PUB-GATES"
+    },
+    {
+      "id": "aggregator-boundary",
+      "status": "documentation-only",
+      "evidenceIdentity": {
+        "kind": "sha256",
+        "value": "fdab962156edc32245ce740ec4d0cc9d14ae89f5a5bbb3123b544b4e0f7a729c"
+      },
+      "executionEnvironment": "reviewed architecture document; aggregator implementation is intentionally absent",
+      "trustAssumptions": [
+        "wallets retain authority and BCH establishes settlement truth",
+        "an aggregator coordinates without custody or protocol authority"
+      ],
+      "nonClaims": [
+        "the public repository does not ship the aggregator implementation",
+        "documentation does not demonstrate a live multi-party anonymity set"
+      ],
+      "nextOwner": "P0 for evidence; PUB-SURFACE for later explanation"
+    },
+    {
+      "id": "successive-owner-transfer",
+      "status": "blocked",
+      "evidenceIdentity": {
+        "kind": "not-established",
+        "value": "P0 host, Rust, SP1, proof, authenticated verifier, settlement, chain, and recipient-acceptance evidence all required"
+      },
+      "executionEnvironment": "none; no runner or positive capability is permitted",
+      "trustAssumptions": [
+        "P0 evidence must be independently reviewed before any public-safe artifact selection",
+        "the operator must approve the later public boundary"
+      ],
+      "nonClaims": [
+        "this change does not construct, prove, settle, or publish successive-owner transfer",
+        "blocked status is not runnable capability"
+      ],
+      "nextOwner": "P0, then a new DEVEX acceptance corpus and PUB-GATES approval"
+    }
+  ]
+}

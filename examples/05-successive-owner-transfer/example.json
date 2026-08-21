@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "proofnote-example/1",
+  "id": "05-successive-owner-transfer",
+  "title": "Successive-owner transfer",
+  "status": "blocked",
+  "features": [
+    "successive-owner-transfer-gap-record"
+  ],
+  "offline": true,
+  "readme": "README.md",
+  "runner": null,
+  "runnerArgs": [],
+  "expectedOutput": null,
+  "documentedCommands": [],
+  "inputs": [],
+  "normalization": [],
+  "negativeControls": [],
+  "walkthrough": {
+    "status": "omitted"
+  },
+  "blockers": [
+    "P0 host successive-owner transition evidence",
+    "P0 Rust parity evidence",
+    "P0 SP1 execution parity evidence",
+    "P0 successive-owner proof evidence",
+    "P0 authenticated CashVM verifier evidence",
+    "P0 settlement evidence",
+    "fresh authenticated chain evidence",
+    "reviewed recipient-acceptance evidence"
+  ],
+  "establishes": [
+    "the public developer surface fails closed while any required successive-owner evidence class is missing"
+  ],
+  "doesNotEstablish": [
+    "host transition, Rust parity, SP1 execution, proof verification, authenticated CashVM verification, settlement, chain inclusion, recipient acceptance, wallet custody, spendability, privacy, or successive-owner transfer"
+  ],
+  "authority": {
+    "evidenceIdentity": "not-established: P0 host + Rust + SP1 + proof + authenticated verifier + settlement + chain + recipient acceptance",
+    "executionEnvironment": "none; blocked records have no runner",
+    "trustAssumptions": [
+      "P0 evidence will be independently reviewed before public-safe selection",
+      "an operator will approve the later public boundary"
+    ]
+  }
+}

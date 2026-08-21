@@ -1,0 +1,382 @@
+{
+  "schemaVersion": "proofnote-verification-capabilities/1",
+  "description": "Positive verification capabilities generated only after the matrix alias executes successfully in an isolated full public-tree staging copy with the network guard preloaded. Planned and blocked entries remain only in verification-matrix.json and receive no positive record.",
+  "generatedBy": "scripts/public-export/generate-verification-interface.mjs",
+  "generatedAt": "2026-08-21T04:36:19.207Z",
+  "sourceCommit": "428445699ec98a67c31e05d32f9706b28c51ca72",
+  "matrixSha256": "e5f79f6f0bbef464cf4b6448c36736faa3c04cd9bbfd3d3ffa08a6e4d6ca1a3d",
+  "capabilities": [
+    {
+      "id": "certificate-run-keying",
+      "status": "runnable",
+      "classes": [
+        "certificate"
+      ],
+      "default": true,
+      "command": "pnpm run verify:certificate-run-keying",
+      "script": "verify:certificate-run-keying",
+      "summary": "Confirms a certificate run's baked program VKey, statement digest and public-values digest really belong to the proof instance it is paired with, and that pairing the same run with a different instance is rejected.",
+      "establishes": [
+        "twelve inputs, twelve stage records, every one VM-accepted",
+        "EVERY input's locking is P2SH32 of the redeem script carried in its own unlocking, and each body's length equals the reported `redeemBytes`",
+        "the gate redeem script bakes exactly five 32-byte constants, and numbers two, three and four are the instance's wrapper-key digest, public-values digest and PROGRAM VKEY — read out of the script, not out of the label",
+        "the fifth baked constant is the little-endian masked SHA-256 of the instance's public values (the gate's `statementDigest`)",
+        "input 1's unlocking carries that same scalar at offset 2, which is the binding the gate actually enforces at spend time",
+        "`provenance.instance.programVkeyHash` equals the program VKey found in the script, and equals `--expect-vkey` when one is given",
+        "`provenance.lockingGraphHash` recomputes from the emitted lockings"
+      ],
+      "doesNotEstablish": [
+        "The per-pair checks above are a MIXUP DETECTOR, not a forgery detector. They do not re-execute the CashVM transcript: `stageSummary[].accepted` is a REPORTED field that is read, never re-run. A determined party can therefore take the V1-keyed run, substitute the four keying constants in the gate, re-derive input 0's P2SH32 locking, patch input 1's limb, recompute `lockingGraphHash` and rewrite the identity block, and the per-pair checks will pass — because the eleven ARITHMETIC bodies are never looked at. That forgery was constructed and demonstrated during review of task 9.2.",
+        "The two cross-run checks below are what close that class, and they are the reason a run cannot be a relabelled copy of another: --distinct-bodies all twelve stage bodies must differ between the two runs. A relabelled copy shares them. --distinct-profile-identity the runtime-generic topology deriver, run on both runs under ONE fixed public-values template, must yield different profile identities. That deriver reviews and re-emits every arithmetic body, so its output moves only if the ladder really did. Both fail closed: if the deriver module cannot be loaded, that is a FAILURE and not a skip.",
+        "TASK 9.3 UPDATE — the consumption-time gap this file could not close is now closed inside the derivers themselves. `assertAPNTQuotientResidueCertificateRunIsKeyedToProgramVkeyV1` reads the baked program key out of a run's own gate redeem script and REFUSES to emit a topology for a different deployment. Everything below is unchanged; the `--distinct-profile-identity` fingerprint now opts out of that one check explicitly, because comparing two differently-keyed runs under one deriver is its entire purpose.",
+        "NOTE on `--distinct-profile-identity`: the deriver is the V1 runtime-generic one, and it is used here ONLY as a body-sensitive fingerprint under a fixed template. The value it returns for a V4-keyed run is NOT that run's V4 verifier profile identity — deriving that is task 9.3, and nothing here claims a V4 topology exists."
+      ],
+      "evidenceIdentity": {
+        "algorithm": "proofnote-evidence-set/1",
+        "sha256": "a28ef4798843580aa40a8232d6c32a3680914f253abd6f66edfc9dcbf7e844a7",
+        "files": [
+          {
+            "path": "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v1.json",
+            "sha256": "c3128144f372043f5040e833298829d560e668bb34d58d562b0ad0111898919d",
+            "sizeBytes": 4056
+          },
+          {
+            "path": "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json",
+            "sha256": "c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a",
+            "sizeBytes": 5805
+          },
+          {
+            "path": "tools/apnt-import-created-note-sp1/fixtures/v1-keyed-quotient-residue-certificate-run.json",
+            "sha256": "9e2e9e7dba67bd46914adfa7e64b4b82548bbf2393de5c3da0bc3486c214d806",
+            "sizeBytes": 193534
+          },
+          {
+            "path": "tools/apnt-import-created-note-sp1/fixtures/v4-keyed-quotient-residue-certificate-run.json",
+            "sha256": "f2ea517d29dfc433fae065745d11bf55460ce95195692e417735176f06e8b4ff",
+            "sizeBytes": 195411
+          },
+          {
+            "path": "tools/apnt-import-created-note-sp1/scripts/quotient-residue-regeneration/assert-certificate-run-vkey-binding.mjs",
+            "sha256": "3b8c8be29cd4fc20186bbc0ee2e32846e6ba0462807c3dfff327b23d2c647797",
+            "sizeBytes": 16175
+          }
+        ]
+      },
+      "executionEnvironment": {
+        "required": {
+          "runtime": "Node.js >=20.6.0",
+          "dependencies": "none beyond files in the public checkout",
+          "network": "denied"
+        },
+        "observed": {
+          "runtime": "v26.4.0",
+          "platform": "darwin",
+          "arch": "arm64",
+          "networkGuard": "examples/offline-guard.mjs"
+        }
+      },
+      "execution": {
+        "status": "passed",
+        "exitCode": 0,
+        "stdoutSha256": "95a15f5a951d1a42640bff468d86011fb62d0d1d8c8a4257e2ff581a88556d8b",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "runtimeMs": 131
+      },
+      "matrixEntrySha256": "38a2b2ae31fd6e1edba0cdbfc333590c4d984d6016eddcb6c441a0f893b32d1f",
+      "derivation": "copied from generated capabilities.json record verify:certificate-run-keying only after its unchanged alias executed successfully in this run"
+    },
+    {
+      "id": "certificate-run-retention",
+      "status": "runnable",
+      "classes": [
+        "certificate"
+      ],
+      "default": true,
+      "command": "pnpm run verify:certificate-run-retention",
+      "script": "verify:certificate-run-retention",
+      "summary": "Confirms every published certificate run and proof fixture argument is still byte-identical to the digest pinned for it, so a superseded artifact cannot be quietly swapped for a newer one.",
+      "establishes": [
+        "twelve inputs, twelve stage records, every one VM-accepted",
+        "EVERY input's locking is P2SH32 of the redeem script carried in its own unlocking, and each body's length equals the reported `redeemBytes`",
+        "the gate redeem script bakes exactly five 32-byte constants, and numbers two, three and four are the instance's wrapper-key digest, public-values digest and PROGRAM VKEY — read out of the script, not out of the label",
+        "the fifth baked constant is the little-endian masked SHA-256 of the instance's public values (the gate's `statementDigest`)",
+        "input 1's unlocking carries that same scalar at offset 2, which is the binding the gate actually enforces at spend time",
+        "`provenance.instance.programVkeyHash` equals the program VKey found in the script, and equals `--expect-vkey` when one is given",
+        "`provenance.lockingGraphHash` recomputes from the emitted lockings"
+      ],
+      "doesNotEstablish": [
+        "The per-pair checks above are a MIXUP DETECTOR, not a forgery detector. They do not re-execute the CashVM transcript: `stageSummary[].accepted` is a REPORTED field that is read, never re-run. A determined party can therefore take the V1-keyed run, substitute the four keying constants in the gate, re-derive input 0's P2SH32 locking, patch input 1's limb, recompute `lockingGraphHash` and rewrite the identity block, and the per-pair checks will pass — because the eleven ARITHMETIC bodies are never looked at. That forgery was constructed and demonstrated during review of task 9.2.",
+        "The two cross-run checks below are what close that class, and they are the reason a run cannot be a relabelled copy of another: --distinct-bodies all twelve stage bodies must differ between the two runs. A relabelled copy shares them. --distinct-profile-identity the runtime-generic topology deriver, run on both runs under ONE fixed public-values template, must yield different profile identities. That deriver reviews and re-emits every arithmetic body, so its output moves only if the ladder really did. Both fail closed: if the deriver module cannot be loaded, that is a FAILURE and not a skip.",
+        "TASK 9.3 UPDATE — the consumption-time gap this file could not close is now closed inside the derivers themselves. `assertAPNTQuotientResidueCertificateRunIsKeyedToProgramVkeyV1` reads the baked program key out of a run's own gate redeem script and REFUSES to emit a topology for a different deployment. Everything below is unchanged; the `--distinct-profile-identity` fingerprint now opts out of that one check explicitly, because comparing two differently-keyed runs under one deriver is its entire purpose.",
+        "NOTE on `--distinct-profile-identity`: the deriver is the V1 runtime-generic one, and it is used here ONLY as a body-sensitive fingerprint under a fixed template. The value it returns for a V4-keyed run is NOT that run's V4 verifier profile identity — deriving that is task 9.3, and nothing here claims a V4 topology exists."
+      ],
+      "evidenceIdentity": {
+        "algorithm": "proofnote-evidence-set/1",
+        "sha256": "c411687060859a3794543f16b17602a5283b16b872ef6ff8b5d9bc17f6e7ccd7",
+        "files": [
+          {
+            "path": "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v1.json",
+            "sha256": "c3128144f372043f5040e833298829d560e668bb34d58d562b0ad0111898919d",
+            "sizeBytes": 4056
+          },
+          {
+            "path": "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json",
+            "sha256": "c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a",
+            "sizeBytes": 5805
+          },
+          {
+            "path": "tools/apnt-import-created-note-sp1/fixtures/canonical-projection-bound-groth16-proof-v4.json",
+            "sha256": "2d4cebee9a2b0e537406fe789965172eeeab634b227379b53583d393eef6636f",
+            "sizeBytes": 5860
+          },
+          {
+            "path": "tools/apnt-import-created-note-sp1/fixtures/v1-keyed-quotient-residue-certificate-run.json",
+            "sha256": "9e2e9e7dba67bd46914adfa7e64b4b82548bbf2393de5c3da0bc3486c214d806",
+            "sizeBytes": 193534
+          },
+          {
+            "path": "tools/apnt-import-created-note-sp1/fixtures/v4-keyed-projection-bound-quotient-residue-certificate-run.json",
+            "sha256": "e9ada3ee32dde272522ed37405f5a61b278803a8e1626fe45e36c8a057bf7505",
+            "sizeBytes": 195132
+          },
+          {
+            "path": "tools/apnt-import-created-note-sp1/fixtures/v4-keyed-quotient-residue-certificate-run.json",
+            "sha256": "f2ea517d29dfc433fae065745d11bf55460ce95195692e417735176f06e8b4ff",
+            "sizeBytes": 195411
+          },
+          {
+            "path": "tools/apnt-import-created-note-sp1/scripts/quotient-residue-regeneration/assert-certificate-run-vkey-binding.mjs",
+            "sha256": "3b8c8be29cd4fc20186bbc0ee2e32846e6ba0462807c3dfff327b23d2c647797",
+            "sizeBytes": 16175
+          }
+        ]
+      },
+      "executionEnvironment": {
+        "required": {
+          "runtime": "Node.js >=20.6.0",
+          "dependencies": "none beyond files in the public checkout",
+          "network": "denied"
+        },
+        "observed": {
+          "runtime": "v26.4.0",
+          "platform": "darwin",
+          "arch": "arm64",
+          "networkGuard": "examples/offline-guard.mjs"
+        }
+      },
+      "execution": {
+        "status": "passed",
+        "exitCode": 0,
+        "stdoutSha256": "2c51aa175de24d0d9404b869590eb9e12a3e0c635f4fef3922683591f597b94e",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "runtimeMs": 111
+      },
+      "matrixEntrySha256": "247806e5bc90553d7f26647bc9971d9d66082527906f913904bb5a64785d090b",
+      "derivation": "copied from generated capabilities.json record verify:certificate-run-retention only after its unchanged alias executed successfully in this run"
+    },
+    {
+      "id": "transition-settlement-projection",
+      "status": "runnable",
+      "classes": [
+        "projection"
+      ],
+      "default": true,
+      "command": "pnpm run verify:transition-settlement-projection-independent",
+      "script": "verify:transition-settlement-projection-independent",
+      "summary": "independent hand-verification of relation public-field derivation (scope: settlementProjection32 derivation, publication and proof binding).",
+      "establishes": [
+        "re-derives statementCommitment32 and settlementProjection32 from wire bytes alone and requires them to match every real proof fixture's committed public values (126/126 checks passed across 4 case(s))",
+        "requires SP1's own masked committed-public-values scalar to match what the Groth16 proof actually verified against, binding the projection to the proof rather than merely recording it beside it"
+      ],
+      "doesNotEstablish": [
+        "nothing about the private witness is established here — no note opening, no owner authority, no signature, no nullifier derivation. Those are the subject of verify-apnt-noncustodial-spend-authority-independently-v0.mjs, which needs the witness and therefore cannot run against published artifacts only."
+      ],
+      "evidenceIdentity": {
+        "algorithm": "proofnote-evidence-set/1",
+        "sha256": "41d7481ca21c1a426085c1f4577cfc3f7c91ed8959defc62b61f0fa7b3d4cd2d",
+        "files": [
+          {
+            "path": "packages/reference-aggregator/tools/verify-apnt-transition-settlement-projection-independently-v0.mjs",
+            "sha256": "fb3cccaa1bc106de57b4ba98570abb4294b87a2dff40cb01eda0222e6fd9649e",
+            "sizeBytes": 26085
+          },
+          {
+            "path": "tools/apnt-private-note-transition-rust-parity/fixtures/typescript-golden-vectors-public-v0.json",
+            "sha256": "423dc83551d7062ddb3deae62b6868af959e6a862e8219605b25fd7da254f434",
+            "sizeBytes": 62922
+          },
+          {
+            "path": "tools/apnt-private-note-transition-sp1/fixtures/canonical-groth16-live-chipnet-26x2000-two-source-v0.json",
+            "sha256": "afab21966f4b76bf02d6a5477d240f0054b98d741aebd9d1067bf9aee78a2e26",
+            "sizeBytes": 3549
+          },
+          {
+            "path": "tools/apnt-private-note-transition-sp1/fixtures/canonical-groth16-live-chipnet-9x2000-v0.json",
+            "sha256": "242edb1bc604597a012e17c35b907c280e6646bedf1c10e4d2e9a65cdf23293a",
+            "sizeBytes": 3537
+          },
+          {
+            "path": "tools/apnt-private-note-transition-sp1/fixtures/canonical-groth16-private-split-flat-aggregator-service-fee-v0.json",
+            "sha256": "ff434cd68c7f075b336c67605c9fad72a9fea08e50a8b440bed620c69ededc94",
+            "sizeBytes": 3546
+          },
+          {
+            "path": "tools/apnt-private-note-transition-sp1/fixtures/canonical-groth16-private-split-v0.json",
+            "sha256": "bdb18184d6befa0eb02ed5df9f385154c3edc509e52de2acedfbdeea7e45421c",
+            "sizeBytes": 3518
+          }
+        ]
+      },
+      "executionEnvironment": {
+        "required": {
+          "runtime": "Node.js >=20.6.0",
+          "dependencies": "none beyond files in the public checkout",
+          "network": "denied"
+        },
+        "observed": {
+          "runtime": "v26.4.0",
+          "platform": "darwin",
+          "arch": "arm64",
+          "networkGuard": "examples/offline-guard.mjs"
+        }
+      },
+      "execution": {
+        "status": "passed",
+        "exitCode": 0,
+        "stdoutSha256": "5dc379950121cd37a3b59c0bffe32adccbd68bc05e492b4d29c0e80f4480a0b4",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "runtimeMs": 118
+      },
+      "matrixEntrySha256": "984f3b9c2436440bf10b41245175767e0c142b4fd97939d41d8da1d36d70d705",
+      "derivation": "copied from generated capabilities.json record verify:transition-settlement-projection-independent only after its unchanged alias executed successfully in this run"
+    },
+    {
+      "id": "settlement-authorization-covenant",
+      "status": "runnable",
+      "classes": [
+        "covenant"
+      ],
+      "default": true,
+      "command": "pnpm run verify:settlement-authorization-covenant-independent",
+      "script": "verify:settlement-authorization-covenant-independent",
+      "summary": "Independent check (apnt-settlement-authorization-covenant-independent-verification-v0): re-derives the settlement-authorization covenant's redeem bytecode from the landed CashAssembly template and requires the pinned L_verdict constant to equal hash256 of those bytes (67 checks).",
+      "establishes": [
+        "re-derives the 110-byte domain-separation prefix and requires the landed redeem script (4058 bytes) to embed it",
+        "re-derives L_verdict as hash256 over the landed redeem bytecode and requires it to equal the pinned deployment constant aa20ec180a864325f5a9db82344476675131b3bc873cb38f222e4a5fb69ebbdc2d2d87",
+        "disassembles the redeem script and the 74-byte aggregate branch and checks their opcode structure against 67 byte-level assertions, all passing"
+      ],
+      "doesNotEstablish": [
+        "no BN254 pairing execution is established here",
+        "no chunked verifier graph property is established here",
+        "no VM acceptance, chain validation, wallet acceptance or note spendability is established here",
+        "the terminal verdict token carrying settlementProjection32 is assumed, not produced, by this tool"
+      ],
+      "evidenceIdentity": {
+        "algorithm": "proofnote-evidence-set/1",
+        "sha256": "406c881ac429134b93d30c1aa89ceb2798211126cc411d7f0e40f94edc0071aa",
+        "files": [
+          {
+            "path": "packages/reference-aggregator/fixtures/apnt-settlement-authorization-covenant-bytecode-v0.json",
+            "sha256": "8d8232bfc97e5dd106a6c46fbeec9355da071e5b5a8e57427d3628941ffc7a65",
+            "sizeBytes": 10322
+          },
+          {
+            "path": "packages/reference-aggregator/tools/verify-apnt-settlement-authorization-covenant-independently-v0.mjs",
+            "sha256": "0690366ce1d117e3a4308b5eed834c1810474d9c20637b22a18e22f922390498",
+            "sizeBytes": 25963
+          },
+          {
+            "path": "tools/apnt-private-note-transition-rust-parity/fixtures/typescript-golden-vectors-public-v0.json",
+            "sha256": "423dc83551d7062ddb3deae62b6868af959e6a862e8219605b25fd7da254f434",
+            "sizeBytes": 62922
+          }
+        ]
+      },
+      "executionEnvironment": {
+        "required": {
+          "runtime": "Node.js >=20.6.0",
+          "dependencies": "none beyond files in the public checkout",
+          "network": "denied"
+        },
+        "observed": {
+          "runtime": "v26.4.0",
+          "platform": "darwin",
+          "arch": "arm64",
+          "networkGuard": "examples/offline-guard.mjs"
+        }
+      },
+      "execution": {
+        "status": "passed",
+        "exitCode": 0,
+        "stdoutSha256": "7ac680e2c801434484cce6fcb3f52446dc771b4a9fbe7b97fb9ee0251d760529",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "runtimeMs": 113
+      },
+      "matrixEntrySha256": "c89097e3a3793ef5699e7f6a1b768d73e629ff1478fa963e4e622990dbda0cf8",
+      "derivation": "copied from generated capabilities.json record verify:settlement-authorization-covenant-independent only after its unchanged alias executed successfully in this run"
+    },
+    {
+      "id": "verify-a-proof",
+      "status": "runnable",
+      "classes": [
+        "proof"
+      ],
+      "default": true,
+      "command": "pnpm run verify:proof",
+      "script": "verify:proof",
+      "summary": "The published V4 SP1 Groth16 proof verified under the pinned wrapper key using a complete dependency-free BN254 pairing calculation.",
+      "establishes": [
+        "the published V4 proof's BN254 Groth16 pairing verifies under the pinned 492-byte SP1 wrapper key",
+        "the pairing uses five independently re-derived public scalars, including masked SHA-256 of the committed public values",
+        "the proof envelope selector matches the separately pinned full verification-key digest"
+      ],
+      "doesNotEstablish": [
+        "that the selected verification key or proved guest implements the intended APNT semantics",
+        "authenticated CashVM execution, BCH consensus validation, chain inclusion, APNT acceptance, wallet acceptance, custody, spendability, or successive transfer"
+      ],
+      "evidenceIdentity": {
+        "algorithm": "proofnote-evidence-set/1",
+        "sha256": "143562a8c42ffe3b8a03fd5b93726a0a034d2c5f574224423a0977eca25f09ae",
+        "files": [
+          {
+            "path": "examples/01-verify-a-proof/run.mjs",
+            "sha256": "06b9a2619203e11cce0c0eb1d6dc7fd915ae95eb325f883d0a38f77f200b62d3",
+            "sizeBytes": 20357
+          },
+          {
+            "path": "examples/01-verify-a-proof/verification-key.json",
+            "sha256": "6f98c23d979a5cb6d69286085bbcc5b14f8fbde3513b291c14609a7c64b3043a",
+            "sizeBytes": 2201
+          },
+          {
+            "path": "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json",
+            "sha256": "c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a",
+            "sizeBytes": 5805
+          }
+        ]
+      },
+      "executionEnvironment": {
+        "required": {
+          "runtime": "Node.js >=20.6.0",
+          "dependencies": "none beyond files in the public checkout",
+          "network": "denied"
+        },
+        "observed": {
+          "runtime": "v26.4.0",
+          "platform": "darwin",
+          "arch": "arm64",
+          "networkGuard": "examples/offline-guard.mjs"
+        }
+      },
+      "execution": {
+        "status": "passed",
+        "exitCode": 0,
+        "stdoutSha256": "465757423d08dbf6f1f200335d2c1af3b092e1968d3af088713425757f639083",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "runtimeMs": 354
+      },
+      "matrixEntrySha256": "9000d2ec68ab63fd8537e535190d9846d310bca86f8b48c84b9a6ff04f312adc",
+      "derivation": "read from the successful runner's own JSON output in this generation run"
+    }
+  ]
+}

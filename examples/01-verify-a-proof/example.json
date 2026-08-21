@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "proofnote-example/1",
+  "id": "01-verify-a-proof",
+  "title": "Verify a real released Groth16 proof",
+  "status": "runnable",
+  "features": [
+    "groth16-proof-verification",
+    "bn254-reduced-tate-pairing",
+    "public-value-binding-tamper",
+    "offline"
+  ],
+  "offline": true,
+  "readme": "README.md",
+  "runner": "examples/01-verify-a-proof/run.mjs",
+  "runnerArgs": [],
+  "expectedOutput": "expected-output.txt",
+  "documentedCommands": [
+    "node examples/01-verify-a-proof/run.mjs",
+    "node examples/01-verify-a-proof/run.mjs --tamper-settlement"
+  ],
+  "inputs": [
+    {
+      "source": "published",
+      "path": "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json",
+      "sha256": "c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a"
+    },
+    {
+      "source": "published",
+      "path": "examples/01-verify-a-proof/verification-key.json",
+      "sha256": "6f98c23d979a5cb6d69286085bbcc5b14f8fbde3513b291c14609a7c64b3043a"
+    }
+  ],
+  "normalization": [],
+  "negativeControls": [
+    {
+      "id": "tamper-settlement-projection-binding",
+      "args": ["--tamper-settlement"],
+      "expectedExit": 3,
+      "failureClass": "PAIRING_REJECTED"
+    }
+  ],
+  "walkthrough": {
+    "status": "omitted"
+  },
+  "establishes": [
+    "the exact published V4 proof verifies under the pinned wrapper key using a complete BN254 pairing calculation",
+    "a one-bit committed public-value tamper reaches pairing arithmetic and is rejected"
+  ],
+  "doesNotEstablish": [
+    "that the wrapper key or proved guest implements the intended APNT semantics",
+    "authenticated CashVM execution, BCH consensus validation, chain inclusion, APNT acceptance, wallet acceptance, custody, spendability, privacy, or successive transfer"
+  ],
+  "authority": {
+    "evidenceIdentity": "fixture sha256:c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a + verification key sha256:4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696",
+    "executionEnvironment": "bare Node.js >=20.6.0, BigInt arithmetic, no dependencies, network denied",
+    "trustAssumptions": [
+      "the separately pinned wrapper key is the intended SP1 v6.1.0 key",
+      "the published relation and program-VKey identities select the intended guest",
+      "SHA-256 collision resistance"
+    ]
+  }
+}

@@ -37,8 +37,8 @@
       "rationale": "The verification surface: the canonical Groth16 proof artifacts, the quotient/residue certificate runs, the frozen trusted verifier descriptors, the Rust note-commitment verifier crate, and THREE independent Node checkers — one grading certificate-run keying, one re-deriving statementCommitment32 and settlementProjection32 from published statement bytes, one re-deriving the settlement-authorization covenant's bytes and L_verdict. All three run on a bare Node with no install, no network and no build, and the export executes all four configured argument sets inside a filesystem-sandboxed copy of the staged tree before this tree may ship. Their two data inputs are derived, not copied: typescript-golden-vectors-public-v0.json is emitted by derive-public-golden-vectors-v0.mjs, which strips the private witness and refuses to write unless six redaction proofs pass; apnt-settlement-authorization-covenant-bytecode-v0.json is emitted by the landed covenant builders and carries only on-chain script bytes. The verify-apnt skill ships here rather than under repo-metadata: it walks a contributor through checking a proof artifact, a settlement, a note commitment and a trust anchor, so it belongs with the artifacts it teaches a reader to check, not with repo identity that ships before any of them exist."
     }
   ],
-  "determinismDigest": "1af506c3dbf33c2f6ea63b16b48a85a7d58e43c6ecb79d30524c87e505f79106",
-  "fileCount": 183,
+  "determinismDigest": "a2c2cb1470d3ed8b00485f4fb50ee79db95a4ae9b576eb2b90b07a187b746fac",
+  "fileCount": 198,
   "files": [
     {
       "category": "verifier-surface",
@@ -172,8 +172,8 @@
       "category": "repo-metadata",
       "expandedFromGlob": null,
       "publicPath": "README.md",
-      "sha256": "d16d5e6faeaa6282b360128f0fc08c5f26452d789a06bdffa710ddd12093e93f",
-      "sizeBytes": 20528,
+      "sha256": "2b50102d25f4735233d96bc05226c7412147f5a7bdfea1605e01b3c98751987d",
+      "sizeBytes": 20907,
       "sourcePath": "scripts/public-export/public-tree/README.md"
     },
     {
@@ -219,6 +219,14 @@
     {
       "category": "repo-metadata",
       "expandedFromGlob": null,
+      "publicPath": "developer-journey.json",
+      "sha256": "af5104779742825822e840397ee251c4c5986fefa78243c516c16c12293e96c5",
+      "sizeBytes": 8988,
+      "sourcePath": "scripts/public-export/public-tree/developer-journey.json"
+    },
+    {
+      "category": "repo-metadata",
+      "expandedFromGlob": null,
       "publicPath": "docs/decisions/0010-versioned-apnt-lanes.md",
       "sha256": "83ea86594da38f3aa1203821fe132d5d62e94f7dd7006c0f0d3bd18bc74962c2",
       "sizeBytes": 4533,
@@ -259,6 +267,14 @@
     {
       "category": "repo-metadata",
       "expandedFromGlob": null,
+      "publicPath": "docs/proof-system-evidence-rubric.md",
+      "sha256": "e5b08b23bc9e49446be8752a3a402b2f66d633cf8513c67ad9bf2e96940f04fb",
+      "sizeBytes": 8660,
+      "sourcePath": "scripts/public-export/public-tree/docs/proof-system-evidence-rubric.md"
+    },
+    {
+      "category": "repo-metadata",
+      "expandedFromGlob": null,
       "publicPath": "docs/relation-v6-import-acceptance.md",
       "sha256": "929f128d87c19a030dcae6b1beb040754fabcaa7bd88619f926a4abac38621bf",
       "sizeBytes": 4712,
@@ -292,9 +308,89 @@
       "category": "repo-metadata",
       "expandedFromGlob": null,
       "publicPath": "docs/why-sp1.md",
-      "sha256": "b14b734b3ddfd5d555a0e6d282565bb67de06faad4dee6a9953a9f681fbb3d9e",
-      "sizeBytes": 6933,
+      "sha256": "a237c9d3d5a91534eb357f7f2e6e26cbef601a6f8bb2c78c5850bfa5d0e86ec7",
+      "sizeBytes": 7427,
       "sourcePath": "scripts/public-export/public-tree/docs/why-sp1.md"
+    },
+    {
+      "category": "verifier-surface",
+      "expandedFromGlob": null,
+      "publicPath": "examples/01-verify-a-proof/README.md",
+      "sha256": "713346b109a7ce6f082773cf19c138c46e53b17f0f6fc2de5a142d3ae6816d91",
+      "sizeBytes": 2800,
+      "sourcePath": "scripts/public-export/public-tree/examples/01-verify-a-proof/README.md"
+    },
+    {
+      "category": "verifier-surface",
+      "expandedFromGlob": null,
+      "publicPath": "examples/01-verify-a-proof/example.json",
+      "sha256": "a8feff2ca65a8143b14c79442032205482e2e75b7fdf3b8ac1ebdf2f1928c9e3",
+      "sizeBytes": 2352,
+      "sourcePath": "scripts/public-export/public-tree/examples/01-verify-a-proof/example.json"
+    },
+    {
+      "category": "verifier-surface",
+      "expandedFromGlob": null,
+      "publicPath": "examples/01-verify-a-proof/expected-output.txt",
+      "sha256": "3085936836c820f9060f7b579f6d52013f431a2850bc6e1ee5e3bfb135402d78",
+      "sizeBytes": 660,
+      "sourcePath": "scripts/public-export/public-tree/examples/01-verify-a-proof/expected-output.txt"
+    },
+    {
+      "category": "verifier-surface",
+      "expandedFromGlob": null,
+      "publicPath": "examples/01-verify-a-proof/run.mjs",
+      "sha256": "06b9a2619203e11cce0c0eb1d6dc7fd915ae95eb325f883d0a38f77f200b62d3",
+      "sizeBytes": 20357,
+      "sourcePath": "scripts/public-export/public-tree/examples/01-verify-a-proof/run.mjs"
+    },
+    {
+      "category": "verifier-surface",
+      "expandedFromGlob": null,
+      "publicPath": "examples/01-verify-a-proof/verification-key.json",
+      "sha256": "6f98c23d979a5cb6d69286085bbcc5b14f8fbde3513b291c14609a7c64b3043a",
+      "sizeBytes": 2201,
+      "sourcePath": "scripts/public-export/public-tree/examples/01-verify-a-proof/verification-key.json"
+    },
+    {
+      "category": "repo-metadata",
+      "expandedFromGlob": null,
+      "publicPath": "examples/05-successive-owner-transfer/README.md",
+      "sha256": "2fbc17248d5cb2c2282874ee19c875f84f13f84e28d43288fa19b51067e36f98",
+      "sizeBytes": 1318,
+      "sourcePath": "scripts/public-export/public-tree/examples/05-successive-owner-transfer/README.md"
+    },
+    {
+      "category": "repo-metadata",
+      "expandedFromGlob": null,
+      "publicPath": "examples/05-successive-owner-transfer/example.json",
+      "sha256": "6fb8ab7cb9dda1085ba42e79a8abde3bed573bc16471d6da689f2320f95a70c4",
+      "sizeBytes": 1605,
+      "sourcePath": "scripts/public-export/public-tree/examples/05-successive-owner-transfer/example.json"
+    },
+    {
+      "category": "repo-metadata",
+      "expandedFromGlob": null,
+      "publicPath": "examples/README.md",
+      "sha256": "115538227272c8e51283fdb0ea78f3fd17c66a41430b836c9b7a9d0daedf4d9f",
+      "sizeBytes": 1975,
+      "sourcePath": "scripts/public-export/public-tree/examples/README.md"
+    },
+    {
+      "category": "repo-metadata",
+      "expandedFromGlob": null,
+      "publicPath": "examples/conformance.mjs",
+      "sha256": "90f7c37afd51530695f44922637a7ced217bfd3804624b5c5d1935d699eff949",
+      "sizeBytes": 20040,
+      "sourcePath": "scripts/public-export/public-tree/examples/conformance.mjs"
+    },
+    {
+      "category": "repo-metadata",
+      "expandedFromGlob": null,
+      "publicPath": "examples/offline-guard.mjs",
+      "sha256": "80ea066a90a0ce582fed11b9eea0c1501272a01d7fe91e5458fcebdaeeca3958",
+      "sizeBytes": 1122,
+      "sourcePath": "scripts/public-export/public-tree/examples/offline-guard.mjs"
     },
     {
       "category": "repo-metadata",
@@ -308,8 +404,8 @@
       "category": "repo-metadata",
       "expandedFromGlob": null,
       "publicPath": "package.json",
-      "sha256": "34385e1a548b95c296c2b3abeedff3886c95c403a2bf30ae0d6506353dccc0e6",
-      "sizeBytes": 9970,
+      "sha256": "d1b726972f07b75b01d4a9f446901ecb98d1e107d18632c5d48bdcf0bd1a889e",
+      "sizeBytes": 9934,
       "sourcePath": "scripts/public-export/public-tree/package.json"
     },
     {
@@ -1503,13 +1599,37 @@
       "sha256": "24da66f939553c4781d2163bc5842480a3b93332bee82c3edb41087f727d106d",
       "sizeBytes": 308,
       "sourcePath": "tsconfig.base.json"
+    },
+    {
+      "category": "repo-metadata",
+      "expandedFromGlob": null,
+      "publicPath": "verification-capabilities.json",
+      "sha256": "f41e8eb296a08dda783ca1fbdaa594b09bab75b45f12d72c8ca685d5f7ec800f",
+      "sizeBytes": 23468,
+      "sourcePath": "scripts/public-export/public-tree/verification-capabilities.json"
+    },
+    {
+      "category": "repo-metadata",
+      "expandedFromGlob": null,
+      "publicPath": "verification-matrix.json",
+      "sha256": "e5f79f6f0bbef464cf4b6448c36736faa3c04cd9bbfd3d3ffa08a6e4d6ca1a3d",
+      "sizeBytes": 9712,
+      "sourcePath": "scripts/public-export/public-tree/verification-matrix.json"
+    },
+    {
+      "category": "repo-metadata",
+      "expandedFromGlob": null,
+      "publicPath": "verify.mjs",
+      "sha256": "709bb6e86de2fe66dc01a47d83eb320cb7f7707e0b171adec0b6b14998157d70",
+      "sizeBytes": 13894,
+      "sourcePath": "scripts/public-export/public-tree/verify.mjs"
     }
   ],
   "generation": {
     "buildGate": {
       "generatedLockfile": {
         "publicPath": "pnpm-lock.yaml",
-        "sha256": "6ac6c295a1f107f5ef0825b02e27c6c994918b63e4d70291955cb240ceaa4646",
+        "sha256": "408e9fc39f371de755b81fe2dc3190ec2c2d0946971496f9e02b7e5612525f74",
         "sizeBytes": 28311
       },
       "generator": "scripts/public-export/build-gate@1",
@@ -1543,7 +1663,7 @@
             "--fetch-retry-maxtimeout=5000",
             "--store-dir=<isolated-tmp>/pnpm-store"
           ],
-          "durationMs": 2003,
+          "durationMs": 1706,
           "exitCode": 0,
           "name": "install-generate-lockfile",
           "ok": true,
@@ -1560,7 +1680,7 @@
             "--fetch-retry-maxtimeout=5000",
             "--store-dir=<isolated-tmp>/pnpm-store"
           ],
-          "durationMs": 281,
+          "durationMs": 285,
           "exitCode": 0,
           "name": "install-frozen-lockfile",
           "ok": true,
@@ -1573,7 +1693,7 @@
             "-r",
             "build"
           ],
-          "durationMs": 756,
+          "durationMs": 824,
           "exitCode": 0,
           "name": "build",
           "ok": true,
@@ -1586,7 +1706,7 @@
             "-r",
             "typecheck"
           ],
-          "durationMs": 498,
+          "durationMs": 597,
           "exitCode": 0,
           "name": "typecheck",
           "ok": true,
@@ -1600,7 +1720,7 @@
             "-p",
             "packages/protocol-runtime/tsconfig.json"
           ],
-          "durationMs": 478,
+          "durationMs": 668,
           "exitCode": 0,
           "name": "typecheck-protocol-runtime-standalone",
           "ok": true,
@@ -1615,7 +1735,7 @@
             "--",
             "--passWithNoTests"
           ],
-          "durationMs": 1480,
+          "durationMs": 1327,
           "exitCode": 0,
           "name": "test",
           "ok": true,
@@ -1629,7 +1749,7 @@
             "run",
             "verify"
           ],
-          "durationMs": 685,
+          "durationMs": 1207,
           "exitCode": 0,
           "name": "verify",
           "ok": true,
@@ -1640,12 +1760,12 @@
       "summary": "PASSED: 7 step(s) all exited 0",
       "toolchain": {
         "@types/node": "25.9.5",
-        "node": "v26.4.0",
+        "node": "v20.19.4",
         "typescript": "5.9.3",
         "vitest": "2.1.9"
       }
     },
-    "generatedAt": "2026-08-20T01:51:47.566Z",
+    "generatedAt": "2026-08-21T14:57:02.551Z",
     "generator": "scripts/public-export@1",
     "note": "This block is EXCLUDED from determinismDigest. Pass --now=<iso> to pin generatedAt and make a run byte-reproducible."
   },
@@ -2084,6 +2204,10 @@
       "to": "capabilities.mjs"
     },
     {
+      "from": "scripts/public-export/public-tree/developer-journey.json",
+      "to": "developer-journey.json"
+    },
+    {
       "from": "scripts/public-export/public-tree/docs/decisions/0010-versioned-apnt-lanes.md",
       "to": "docs/decisions/0010-versioned-apnt-lanes.md"
     },
@@ -2102,6 +2226,10 @@
     {
       "from": "scripts/public-export/public-tree/docs/live-settlement-evidence.md",
       "to": "docs/live-settlement-evidence.md"
+    },
+    {
+      "from": "scripts/public-export/public-tree/docs/proof-system-evidence-rubric.md",
+      "to": "docs/proof-system-evidence-rubric.md"
     },
     {
       "from": "scripts/public-export/public-tree/docs/relation-v6-import-acceptance.md",
@@ -2124,6 +2252,46 @@
       "to": "docs/why-sp1.md"
     },
     {
+      "from": "scripts/public-export/public-tree/examples/01-verify-a-proof/README.md",
+      "to": "examples/01-verify-a-proof/README.md"
+    },
+    {
+      "from": "scripts/public-export/public-tree/examples/01-verify-a-proof/example.json",
+      "to": "examples/01-verify-a-proof/example.json"
+    },
+    {
+      "from": "scripts/public-export/public-tree/examples/01-verify-a-proof/expected-output.txt",
+      "to": "examples/01-verify-a-proof/expected-output.txt"
+    },
+    {
+      "from": "scripts/public-export/public-tree/examples/01-verify-a-proof/run.mjs",
+      "to": "examples/01-verify-a-proof/run.mjs"
+    },
+    {
+      "from": "scripts/public-export/public-tree/examples/01-verify-a-proof/verification-key.json",
+      "to": "examples/01-verify-a-proof/verification-key.json"
+    },
+    {
+      "from": "scripts/public-export/public-tree/examples/05-successive-owner-transfer/README.md",
+      "to": "examples/05-successive-owner-transfer/README.md"
+    },
+    {
+      "from": "scripts/public-export/public-tree/examples/05-successive-owner-transfer/example.json",
+      "to": "examples/05-successive-owner-transfer/example.json"
+    },
+    {
+      "from": "scripts/public-export/public-tree/examples/README.md",
+      "to": "examples/README.md"
+    },
+    {
+      "from": "scripts/public-export/public-tree/examples/conformance.mjs",
+      "to": "examples/conformance.mjs"
+    },
+    {
+      "from": "scripts/public-export/public-tree/examples/offline-guard.mjs",
+      "to": "examples/offline-guard.mjs"
+    },
+    {
       "from": "scripts/public-export/public-tree/gitignore",
       "to": ".gitignore"
     },
@@ -2138,6 +2306,18 @@
     {
       "from": "scripts/public-export/public-tree/pnpm-workspace.yaml",
       "to": "pnpm-workspace.yaml"
+    },
+    {
+      "from": "scripts/public-export/public-tree/verification-capabilities.json",
+      "to": "verification-capabilities.json"
+    },
+    {
+      "from": "scripts/public-export/public-tree/verification-matrix.json",
+      "to": "verification-matrix.json"
+    },
+    {
+      "from": "scripts/public-export/public-tree/verify.mjs",
+      "to": "verify.mjs"
     },
     {
       "from": "tools/apnt-import-created-note-rust-parity/Cargo.toml",
@@ -2388,10 +2568,10 @@
   "source": {
     "allowlist": {
       "path": "scripts/public-export/allowlist.json",
-      "sha256": "80ecac7fbcc10744b3c3761b49caedba0b5219a0f0d5e5b595434e10876e534a"
+      "sha256": "9d9385a765a66728eff064c479f7f03071e7544ed3617cf49c9d664e19cd0569"
     },
-    "branch": "codex/publication-promote-v0",
-    "commit": "1d2db18a1fdd8d50d1e5cf065d9af16a8de50658",
+    "branch": "publish/proofnote-v0-4-5-activation",
+    "commit": "5922c7e5ce6307daafdfd23d80e2108e58b6daa7",
     "repository": "bch-cloak (private)",
     "workingTreeDirty": false
   },
@@ -2447,6 +2627,13 @@
       ],
       "entrypoint": "packages/reference-aggregator/tools/verify-apnt-settlement-authorization-covenant-independently-v0.mjs",
       "name": "settlement-authorization-covenant-independent"
+    },
+    {
+      "args": [
+        "--json"
+      ],
+      "entrypoint": "examples/01-verify-a-proof/run.mjs",
+      "name": "groth16-proof-verification"
     }
   ]
 }

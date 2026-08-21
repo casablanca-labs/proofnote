@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "proofnote-verification-matrix/1",
+  "classes": [
+    "proof",
+    "chain",
+    "certificate",
+    "covenant",
+    "projection",
+    "wallet",
+    "transfer",
+    "browser"
+  ],
+  "entries": [
+    {
+      "id": "certificate-run-keying",
+      "status": "runnable",
+      "classes": ["certificate"],
+      "default": true,
+      "script": "verify:certificate-run-keying",
+      "implementation": "node tools/apnt-import-created-note-sp1/scripts/quotient-residue-regeneration/assert-certificate-run-vkey-binding.mjs --distinct-bodies tools/apnt-import-created-note-sp1/fixtures/v4-keyed-quotient-residue-certificate-run.json=tools/apnt-import-created-note-sp1/fixtures/v1-keyed-quotient-residue-certificate-run.json tools/apnt-import-created-note-sp1/fixtures/v4-keyed-quotient-residue-certificate-run.json=tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json=accept tools/apnt-import-created-note-sp1/fixtures/v1-keyed-quotient-residue-certificate-run.json=tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v1.json=accept tools/apnt-import-created-note-sp1/fixtures/v1-keyed-quotient-residue-certificate-run.json=tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json=reject tools/apnt-import-created-note-sp1/fixtures/v4-keyed-quotient-residue-certificate-run.json=tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v1.json=reject",
+      "legacyCapabilityId": "verify:certificate-run-keying",
+      "evidencePaths": [
+        "tools/apnt-import-created-note-sp1/scripts/quotient-residue-regeneration/assert-certificate-run-vkey-binding.mjs",
+        "tools/apnt-import-created-note-sp1/fixtures/v1-keyed-quotient-residue-certificate-run.json",
+        "tools/apnt-import-created-note-sp1/fixtures/v4-keyed-quotient-residue-certificate-run.json",
+        "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v1.json",
+        "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json"
+      ]
+    },
+    {
+      "id": "certificate-run-retention",
+      "status": "runnable",
+      "classes": ["certificate"],
+      "default": true,
+      "script": "verify:certificate-run-retention",
+      "implementation": "node tools/apnt-import-created-note-sp1/scripts/quotient-residue-regeneration/assert-certificate-run-vkey-binding.mjs --retained tools/apnt-import-created-note-sp1/fixtures/v1-keyed-quotient-residue-certificate-run.json=9e2e9e7dba67bd46914adfa7e64b4b82548bbf2393de5c3da0bc3486c214d806 --retained tools/apnt-import-created-note-sp1/fixtures/v4-keyed-quotient-residue-certificate-run.json=f2ea517d29dfc433fae065745d11bf55460ce95195692e417735176f06e8b4ff --retained tools/apnt-import-created-note-sp1/fixtures/v4-keyed-projection-bound-quotient-residue-certificate-run.json=e9ada3ee32dde272522ed37405f5a61b278803a8e1626fe45e36c8a057bf7505 --retained tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v1.json=c3128144f372043f5040e833298829d560e668bb34d58d562b0ad0111898919d --retained tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json=c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a --retained tools/apnt-import-created-note-sp1/fixtures/canonical-projection-bound-groth16-proof-v4.json=2d4cebee9a2b0e537406fe789965172eeeab634b227379b53583d393eef6636f tools/apnt-import-created-note-sp1/fixtures/v4-keyed-projection-bound-quotient-residue-certificate-run.json=tools/apnt-import-created-note-sp1/fixtures/canonical-projection-bound-groth16-proof-v4.json=accept tools/apnt-import-created-note-sp1/fixtures/v4-keyed-projection-bound-quotient-residue-certificate-run.json=tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json=reject",
+      "legacyCapabilityId": "verify:certificate-run-retention",
+      "evidencePaths": [
+        "tools/apnt-import-created-note-sp1/scripts/quotient-residue-regeneration/assert-certificate-run-vkey-binding.mjs",
+        "tools/apnt-import-created-note-sp1/fixtures/v1-keyed-quotient-residue-certificate-run.json",
+        "tools/apnt-import-created-note-sp1/fixtures/v4-keyed-quotient-residue-certificate-run.json",
+        "tools/apnt-import-created-note-sp1/fixtures/v4-keyed-projection-bound-quotient-residue-certificate-run.json",
+        "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v1.json",
+        "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json",
+        "tools/apnt-import-created-note-sp1/fixtures/canonical-projection-bound-groth16-proof-v4.json"
+      ]
+    },
+    {
+      "id": "transition-settlement-projection",
+      "status": "runnable",
+      "classes": ["projection"],
+      "default": true,
+      "script": "verify:transition-settlement-projection-independent",
+      "implementation": "node packages/reference-aggregator/tools/verify-apnt-transition-settlement-projection-independently-v0.mjs --golden-vectors tools/apnt-private-note-transition-rust-parity/fixtures/typescript-golden-vectors-public-v0.json --fixture-dir tools/apnt-private-note-transition-sp1/fixtures",
+      "legacyCapabilityId": "verify:transition-settlement-projection-independent",
+      "evidencePaths": [
+        "packages/reference-aggregator/tools/verify-apnt-transition-settlement-projection-independently-v0.mjs",
+        "tools/apnt-private-note-transition-rust-parity/fixtures/typescript-golden-vectors-public-v0.json",
+        "tools/apnt-private-note-transition-sp1/fixtures/canonical-groth16-live-chipnet-26x2000-two-source-v0.json",
+        "tools/apnt-private-note-transition-sp1/fixtures/canonical-groth16-live-chipnet-9x2000-v0.json",
+        "tools/apnt-private-note-transition-sp1/fixtures/canonical-groth16-private-split-flat-aggregator-service-fee-v0.json",
+        "tools/apnt-private-note-transition-sp1/fixtures/canonical-groth16-private-split-v0.json"
+      ]
+    },
+    {
+      "id": "settlement-authorization-covenant",
+      "status": "runnable",
+      "classes": ["covenant"],
+      "default": true,
+      "script": "verify:settlement-authorization-covenant-independent",
+      "implementation": "node packages/reference-aggregator/tools/verify-apnt-settlement-authorization-covenant-independently-v0.mjs --golden-vectors tools/apnt-private-note-transition-rust-parity/fixtures/typescript-golden-vectors-public-v0.json --bytecode packages/reference-aggregator/fixtures/apnt-settlement-authorization-covenant-bytecode-v0.json",
+      "legacyCapabilityId": "verify:settlement-authorization-covenant-independent",
+      "evidencePaths": [
+        "packages/reference-aggregator/tools/verify-apnt-settlement-authorization-covenant-independently-v0.mjs",
+        "tools/apnt-private-note-transition-rust-parity/fixtures/typescript-golden-vectors-public-v0.json",
+        "packages/reference-aggregator/fixtures/apnt-settlement-authorization-covenant-bytecode-v0.json"
+      ]
+    },
+    {
+      "id": "verify-a-proof",
+      "status": "runnable",
+      "classes": ["proof"],
+      "default": true,
+      "script": "verify:proof",
+      "implementation": "node examples/01-verify-a-proof/run.mjs --json",
+      "legacyCapabilityId": null,
+      "capabilityOutput": "json",
+      "evidencePaths": [
+        "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json",
+        "examples/01-verify-a-proof/verification-key.json",
+        "examples/01-verify-a-proof/run.mjs"
+      ]
+    },
+    {
+      "id": "inspect-reference-transaction",
+      "status": "blocked",
+      "classes": ["chain"],
+      "default": false,
+      "script": null,
+      "implementation": null,
+      "legacyCapabilityId": null,
+      "evidencePaths": [],
+      "blockers": ["tasks 5.2 and 5.3 require a reviewed public transaction-artifact boundary and direct Chipnet inspector"],
+      "doesNotEstablish": ["transaction structure, chain inclusion, proof-to-transaction equivalence, or wallet acceptance"]
+    },
+    {
+      "id": "accept-note-wallet",
+      "status": "blocked",
+      "classes": ["wallet"],
+      "default": false,
+      "script": null,
+      "implementation": null,
+      "legacyCapabilityId": null,
+      "evidencePaths": [],
+      "blockers": ["task 5.4 requires a reviewed point-in-time wallet-acceptance corpus"],
+      "doesNotEstablish": ["wallet acceptance, recording, persistence, spendability, or successive transfer"]
+    },
+    {
+      "id": "successive-owner-transfer",
+      "status": "blocked",
+      "classes": ["transfer", "wallet"],
+      "default": false,
+      "script": null,
+      "implementation": null,
+      "legacyCapabilityId": null,
+      "evidencePaths": [],
+      "blockers": [
+        "P0 host successive-owner transition evidence",
+        "P0 Rust parity evidence",
+        "P0 SP1 execution parity evidence",
+        "P0 successive-owner proof evidence",
+        "P0 authenticated CashVM verifier evidence",
+        "P0 settlement evidence",
+        "fresh authenticated chain evidence",
+        "reviewed recipient-acceptance evidence"
+      ],
+      "doesNotEstablish": ["host transition, Rust parity, SP1 execution, proof verification, authenticated CashVM verification, settlement, chain inclusion, recipient acceptance, wallet custody, spendability, privacy, or successive-owner transfer"]
+    },
+    {
+      "id": "verify-in-browser",
+      "status": "operator-gated",
+      "classes": ["browser", "proof"],
+      "default": false,
+      "script": null,
+      "implementation": null,
+      "legacyCapabilityId": null,
+      "evidencePaths": [],
+      "blockers": ["task 4.1 dependency approval and tasks 4.2-4.5 remain unexecuted"],
+      "doesNotEstablish": ["offline browser verification or support for any browser engine"]
+    }
+  ]
+}

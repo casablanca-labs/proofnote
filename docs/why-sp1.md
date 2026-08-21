@@ -84,6 +84,14 @@ backend id, verifier method, assumption profile) specifically so a future
 entry, not a protocol rewrite. That envelope is a design intent recorded in
 2026-07-09, not something implemented in this repository today.
 
+This choice is not justified by comparing one proof blob with another
+system's complete transaction. Proof bytes, verifier material, BCH locking and
+unlocking bytes, setup transactions, state hand-offs, standardness, and the
+application acceptance path are different measurements. The reusable checklist
+in [`docs/proof-system-evidence-rubric.md`](./proof-system-evidence-rubric.md)
+defines the evidence required for an apples-to-apples comparison, and applies
+the same standard to Proofnote.
+
 BCH consensus itself is unaffected either way: it remains responsible for
 transaction validity, scripts, outpoints and spent/unspent chain truth.
 Proof acceptance, note-commitment verification, nullifier and transition

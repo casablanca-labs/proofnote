@@ -1,0 +1,11 @@
+PROOFNOTE_PROOF_VERIFICATION: PASS
+artifact: tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json
+fixture sha256: c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a
+proof sha256: 92ebd58fe4b8e39dc5655b442e2dcf6968d08c612c88b1223f338c30d44391cd
+public values sha256: 817a73ecb25d27f62d804a8b463b49cdfa366112869e191a7a66d0a73e737f6f
+verification key sha256: 4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696
+selector: 4388a21c
+relation: apnt-import-created-note-relation-v4
+pairing executed: true
+pairing verified: true
+non-claim: no CashVM, chain, wallet, custody, spendability, or successive-transfer result
