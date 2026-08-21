@@ -357,6 +357,35 @@ function groth16Verifies(key, points, scalars) {
   return f12Eq(f12Pow(product, FINAL_EXPONENT), F12_ONE);
 }
 
+/**
+ * Verify any released SP1 v6.1.0 Groth16 envelope using the same pinned
+ * 492-byte wrapper key as this example. This public helper keeps the pairing
+ * implementation in one auditable place; callers still own relation-specific
+ * decoding and artifact identity checks.
+ */
+export function verifyGroth16Envelope({
+  proofBytesHex,
+  publicValuesBytesHex,
+  programVkeyHash,
+  keyDocument,
+}) {
+  const proofBytes = fromHex(proofBytesHex);
+  const publicValues = fromHex(publicValuesBytesHex);
+  const key = loadKey(keyDocument);
+  if (toHex(proofBytes.subarray(0, 4)) !== EXPECTED_SELECTOR) {
+    throw new Error("proof selector does not match the pinned key digest");
+  }
+  const points = loadProofPoints(proofBytes);
+  const scalars = [
+    readBigEndian(fromHex(programVkeyHash)),
+    maskedPublicValuesScalar(publicValues),
+    readBigEndian(proofBytes.subarray(4, 36)),
+    readBigEndian(proofBytes.subarray(36, 68)),
+    readBigEndian(proofBytes.subarray(68, 100)),
+  ];
+  return groth16Verifies(key, points, scalars);
+}
+
 function maskedPublicValuesScalar(bytes) {
   const digest = Uint8Array.from(sha256(bytes));
   digest[0] &= 0x1f;
@@ -468,9 +497,11 @@ function main(argv) {
   process.stdout.write(json ? `${JSON.stringify(report, null, 2)}\n` : reportText(report));
 }
 
-try {
-  main(process.argv.slice(2));
-} catch (error) {
-  process.stderr.write(`DECODE_REJECTED: ${error instanceof Error ? error.message : String(error)}\n`);
-  process.exit(2);
+if (process.argv[1] !== undefined && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
+  try {
+    main(process.argv.slice(2));
+  } catch (error) {
+    process.stderr.write(`DECODE_REJECTED: ${error instanceof Error ? error.message : String(error)}\n`);
+    process.exit(2);
+  }
 }

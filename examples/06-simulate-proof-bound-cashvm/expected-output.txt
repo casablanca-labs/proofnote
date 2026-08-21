@@ -1,0 +1,15 @@
+PROOF_BOUND_CASHVM_LAB: PASS
+proof: tools/apnt-private-note-transition-sp1/fixtures/canonical-groth16-private-split-v0.json
+proof sha256: 9d2a775a10e6ceb11197e7f223466cbad1468904cfacb762d7fd03e197684d76
+proof bytes: 356
+BN254 pairing verified: true
+statement commitment: 100091ec7e772297498610191658d56e94279988d9fdff3fd00af4350fe67f65
+settlement projection: fe9b606ee1cda9e495ef4fc657e78799774cd142ea6e72513a8aab2f1a60709f
+proof and transaction projection match: true
+verdict authentication: synthetic stand-in (production verifier graph not executed here)
+VM: @bitauth/libauth 3.1.0-next.8 / BCH_2026_05 consensus
+transaction bytes: 5057
+settlement covenant accepted: true
+recorded proof generation: 511154 ms (one artifact, not a benchmark)
+recorded native verification: 146171 microseconds (artifact metadata)
+non-claim: no authenticated-verifier re-execution, funding, signing, relay, mining, wallet acceptance, or spendability

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "proofnote-example/1",
+  "id": "06-simulate-proof-bound-cashvm",
+  "title": "Follow a real proof into a CashVM-authorized spend",
+  "status": "runnable",
+  "features": [
+    "groth16-proof-verification",
+    "proof-bound-public-statement",
+    "settlement-projection-binding",
+    "libauth-cashvm",
+    "settlement-authorization-covenant",
+    "offline"
+  ],
+  "offline": true,
+  "readme": "README.md",
+  "runner": "examples/06-simulate-proof-bound-cashvm/run.mjs",
+  "runnerArgs": [],
+  "expectedOutput": "expected-output.txt",
+  "documentedCommands": [
+    "node examples/06-simulate-proof-bound-cashvm/run.mjs",
+    "node examples/06-simulate-proof-bound-cashvm/run.mjs --tamper-proof",
+    "node examples/06-simulate-proof-bound-cashvm/run.mjs --tamper-verdict",
+    "node examples/06-simulate-proof-bound-cashvm/run.mjs --tamper-source",
+    "node examples/06-simulate-proof-bound-cashvm/run.mjs --tamper-locking",
+    "node examples/06-simulate-proof-bound-cashvm/run.mjs --mismatch-fixture"
+  ],
+  "inputs": [
+    {
+      "source": "published",
+      "path": "tools/apnt-private-note-transition-sp1/fixtures/canonical-groth16-private-split-v0.json",
+      "sha256": "bdb18184d6befa0eb02ed5df9f385154c3edc509e52de2acedfbdeea7e45421c"
+    },
+    {
+      "source": "published",
+      "path": "tools/apnt-private-note-transition-rust-parity/fixtures/typescript-golden-vectors-public-v0.json",
+      "sha256": "423dc83551d7062ddb3deae62b6868af959e6a862e8219605b25fd7da254f434"
+    },
+    {
+      "source": "published",
+      "path": "packages/reference-aggregator/fixtures/apnt-settlement-authorization-covenant-bytecode-v0.json",
+      "sha256": "8d8232bfc97e5dd106a6c46fbeec9355da071e5b5a8e57427d3628941ffc7a65"
+    },
+    {
+      "source": "published",
+      "path": "examples/01-verify-a-proof/verification-key.json",
+      "sha256": "6f98c23d979a5cb6d69286085bbcc5b14f8fbde3513b291c14609a7c64b3043a"
+    }
+  ],
+  "normalization": [],
+  "negativeControls": [
+    { "id": "proof-public-values", "args": ["--tamper-proof"], "expectedExit": 3, "failureClass": "PROOF_BINDING_REJECTED" },
+    { "id": "terminal-verdict", "args": ["--tamper-verdict"], "expectedExit": 4, "failureClass": "VERDICT_COMMITMENT_REJECTED" },
+    { "id": "covered-source-output", "args": ["--tamper-source"], "expectedExit": 5, "failureClass": "SOURCE_OUTPUT_REJECTED" },
+    { "id": "p2sh32-locking-bytecode", "args": ["--tamper-locking"], "expectedExit": 6, "failureClass": "LOCKING_BYTECODE_REJECTED" },
+    { "id": "mismatched-public-fixture", "args": ["--mismatch-fixture"], "expectedExit": 7, "failureClass": "MISMATCHED_PUBLIC_FIXTURE" }
+  ],
+  "walkthrough": { "status": "omitted" },
+  "establishes": [
+    "the released transition proof verifies under the pinned BN254 wrapper key",
+    "the proof-bound public statement and reconstructed transaction derive the same settlement projection",
+    "a synthetic terminal-verdict token carrying that projection lets the released SAC authorize the transaction in Libauth CashVM",
+    "five isolated tamper controls reject at the proof, public-fixture, verdict, transaction-projection, and P2SH32 boundaries"
+  ],
+  "doesNotEstablish": [
+    "that this lab executes the production authenticated-verifier graph or produces its terminal verdict token",
+    "funding, signing, relay, mining, chain inclusion, wallet acceptance, custody, spendability, or production privacy"
+  ],
+  "authority": {
+    "evidenceIdentity": "proof fixture sha256:bdb18184d6befa0eb02ed5df9f385154c3edc509e52de2acedfbdeea7e45421c + public vectors sha256:423dc83551d7062ddb3deae62b6868af959e6a862e8219605b25fd7da254f434 + SAC fixture sha256:8d8232bfc97e5dd106a6c46fbeec9355da071e5b5a8e57427d3628941ffc7a65",
+    "executionEnvironment": "Node.js >=20.6.0, @bitauth/libauth 3.1.0-next.8, createVirtualMachineBch2026(false), network denied",
+    "trustAssumptions": [
+      "the pinned SP1 wrapper key selects the intended proof system",
+      "the published witness-redacted statement was correctly derived from private source",
+      "the synthetic verdict commitment represents, but is not produced by, the authenticated verifier graph",
+      "SHA-256 collision resistance"
+    ]
+  }
+}
