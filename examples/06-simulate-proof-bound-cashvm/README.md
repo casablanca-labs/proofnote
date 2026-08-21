@@ -44,9 +44,9 @@ Each command prints the original-to-changed boundary or a precise mismatch class
 
 ## Agent workflow
 
-Give a coding agent this bounded prompt after replacing `<IMMUTABLE-PUBLIC-COMMIT>` with the commit linked by the release:
+Give a coding agent this bounded prompt:
 
-> Start from the casablanca-labs Proofnote repository at commit `<IMMUTABLE-PUBLIC-COMMIT>`. Do not edit files. Inventory `examples/06-simulate-proof-bound-cashvm/example.json` and verify every pinned input digest. Install with the frozen lockfile, disable network access for execution, run the positive command and all five negative controls, then explain the four stages—prove, verify, authenticate verdict, authorize spend—in plain language. Distinguish proof generation time, proof size, verification cost, covenant cost, and transaction size. Stop before any private witness, wallet key, funding, signing, broadcast, chain, or unsupported end-to-end claim. Return exact commands, exit codes, derived commitments, VM profile, and non-claims.
+> Start from the casablanca-labs Proofnote repository at commit `21117d0927bb7f4f3c0d8f64a80f04e8a6596b69`. Do not edit files. Inventory `examples/06-simulate-proof-bound-cashvm/example.json` and verify every pinned input digest. Install with the frozen lockfile, disable network access for execution, run the positive command and all five negative controls, then explain the four stages—prove, verify, authenticate verdict, authorize spend—in plain language. Distinguish proof generation time, proof size, verification cost, covenant cost, and transaction size. Stop before any private witness, wallet key, funding, signing, broadcast, chain, or unsupported end-to-end claim. Return exact commands, exit codes, derived commitments, VM profile, and non-claims.
 
 ## Verifier lineage
 
