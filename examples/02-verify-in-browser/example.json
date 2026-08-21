@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "proofnote-example/1",
+  "id": "02-verify-in-browser",
+  "title": "Verify a real released proof in a browser",
+  "status": "runnable",
+  "features": [
+    "browser",
+    "groth16-proof-verification",
+    "tamper-controls",
+    "offline",
+    "zero-install"
+  ],
+  "offline": true,
+  "readme": "README.md",
+  "runner": "examples/02-verify-in-browser/run.mjs",
+  "runnerArgs": [],
+  "expectedOutput": "expected-output.txt",
+  "documentedCommands": [
+    "node examples/02-verify-in-browser/run.mjs",
+    "node examples/02-verify-in-browser/run.mjs --tamper-artifact"
+  ],
+  "inputs": [
+    {
+      "source": "published",
+      "path": "browser-verifier/proofnote-browser-verifier.html",
+      "sha256": "22ad37979c666e39f9f0ee6567b00901b315e155918ae46fc5cf059e45b8a95a"
+    }
+  ],
+  "normalization": [],
+  "negativeControls": [
+    {
+      "id": "tamper-artifact",
+      "args": [
+        "--tamper-artifact"
+      ],
+      "expectedExit": 3,
+      "failureClass": "BROWSER_ARTIFACT_IDENTITY_REJECTED"
+    }
+  ],
+  "walkthrough": {
+    "status": "omitted"
+  },
+  "establishes": [
+    "the generated browser artifact has the reviewed immutable identity",
+    "measured Chromium acceptance executes the complete published proof check and all declared tamper controls offline"
+  ],
+  "doesNotEstablish": [
+    "correct guest semantics, authenticated CashVM execution, BCH validation or inclusion, APNT or wallet acceptance, custody, spendability, privacy, successive transfer, or unmeasured browser support"
+  ],
+  "authority": {
+    "evidenceIdentity": "browser artifact sha256:22ad37979c666e39f9f0ee6567b00901b315e155918ae46fc5cf059e45b8a95a",
+    "executionEnvironment": "Chromium under file:// with BigInt and Web Crypto; zero resource requests",
+    "trustAssumptions": [
+      "the pinned wrapper key is the intended SP1 v6.1.0 key",
+      "the published relation and program-VKey identities select the intended guest",
+      "SHA-256 collision resistance"
+    ]
+  }
+}

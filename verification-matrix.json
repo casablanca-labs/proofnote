@@ -138,15 +138,19 @@
     },
     {
       "id": "verify-in-browser",
-      "status": "operator-gated",
+      "status": "runnable",
       "classes": ["browser", "proof"],
       "default": false,
-      "script": null,
-      "implementation": null,
+      "script": "browser:verify",
+      "implementation": "node browser-verifier/chromium-acceptance.mjs --json",
       "legacyCapabilityId": null,
-      "evidencePaths": [],
-      "blockers": ["task 4.1 dependency approval and tasks 4.2-4.5 remain unexecuted"],
-      "doesNotEstablish": ["offline browser verification or support for any browser engine"]
+      "capabilityOutput": "json",
+      "evidencePaths": [
+        "browser-verifier/proofnote-browser-verifier.html",
+        "browser-verifier/artifact.json",
+        "browser-verifier/chromium-acceptance.mjs",
+        "examples/02-verify-in-browser/example.json"
+      ]
     }
   ]
 }

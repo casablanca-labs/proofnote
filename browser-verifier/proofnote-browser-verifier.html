@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en" data-verifier-ready="false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YeuFuib0z0SeG1W8WQG+bH0jkLSYPNzh+pRuA2S6XbY='; style-src 'sha256-CDnLtDpL3PeNzBvxODGbtzOi4LEWN3q9urwM57aT3Eo='; connect-src 'none'; img-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="color-scheme" content="light">
+  <title>Proofnote browser verification bench</title>
+  <style>
+:root{color-scheme:light;--ink:#111923;--muted:#607080;--paper:#f4f8fb;--surface:#fff;--line:#cfdae3;--wire:#2864dc;--pass:#08776a;--fail:#b8442f;--warn:#9a6510;--shadow:0 18px 55px rgba(23,45,67,.12);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#edf4f8 0,#f8fbfd 48%,#eaf1f6 100%);color:var(--ink);min-height:100vh}.bench{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:32px 0 48px}.mast{display:grid;grid-template-columns:1.3fr .7fr;gap:32px;align-items:end;margin-bottom:24px}.eyebrow,.label{font:700 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--wire)}h1{font-size:clamp(38px,7vw,76px);line-height:.93;letter-spacing:-.065em;margin:12px 0 14px;max-width:780px}p{line-height:1.55}.lede{font-size:17px;color:#43576a;max-width:700px}.identity{border-left:1px solid var(--line);padding-left:22px;font:12px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;color:#44586a;overflow-wrap:anywhere}.identity strong{display:block;color:var(--ink);font-size:13px}.panel{background:rgba(255,255,255,.93);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:18px;overflow:hidden}.rail{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line);background:#eaf1f6}.rail-node{position:relative;padding:17px 18px 15px;border-right:1px solid var(--line);font:700 12px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace}.rail-node:last-child{border:0}.rail-node::before{content:"";display:inline-block;width:9px;height:9px;border:2px solid #8fa2b2;border-radius:50%;margin-right:9px;vertical-align:-1px}.rail-node[data-state=working]::before{border-color:var(--wire);background:var(--wire)}.rail-node[data-state=pass]::before{border-color:var(--pass);background:var(--pass)}.rail-node[data-state=broken]::before{border-color:var(--fail);background:var(--fail)}.workspace{display:grid;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr)}.controls{padding:26px;border-right:1px solid var(--line);background:#fbfdfe}.case-list{display:grid;gap:9px;margin:16px 0 24px}.case{appearance:none;width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);padding:12px 14px;text-align:left;cursor:pointer;font:650 14px/1.3 inherit;transition:border-color .15s,transform .15s,box-shadow .15s}.case small{display:block;margin-top:4px;color:var(--muted);font:11px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace}.case:hover{transform:translateY(-1px);box-shadow:0 5px 15px rgba(35,62,83,.08)}.case[aria-pressed=true]{border-color:var(--wire);box-shadow:0 0 0 2px rgba(40,100,220,.15)}button:focus-visible,a:focus-visible{outline:3px solid #f1b64a;outline-offset:3px}.run{width:100%;border:0;border-radius:10px;background:var(--ink);color:#fff;padding:14px 17px;font:750 14px/1 inherit;cursor:pointer}.run:disabled{opacity:.66;cursor:wait}.result{min-height:500px;padding:32px;display:flex;flex-direction:column;background:var(--surface)}.verdict{display:inline-flex;align-items:center;align-self:flex-start;gap:9px;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font:800 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}.verdict::before{content:"";width:8px;height:8px;border-radius:50%;background:#8fa2b2}.result[data-status=running] .verdict::before{background:var(--wire)}.result[data-status=pass] .verdict{color:var(--pass);border-color:#9bc9c2}.result[data-status=pass] .verdict::before{background:var(--pass)}.result[data-status=fail] .verdict{color:var(--fail);border-color:#e0b0a7}.result[data-status=fail] .verdict::before{background:var(--fail)}.result h2{font-size:clamp(30px,5vw,54px);letter-spacing:-.045em;line-height:1;margin:34px 0 12px}.detail{font-size:16px;color:#43576a;max-width:670px}.result-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0}.datum{border-top:1px solid var(--line);padding-top:12px}.datum span{display:block;color:var(--muted);font:11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.08em}.datum strong{display:block;margin-top:6px;font:650 13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}.limits{margin-top:auto;border-top:1px solid var(--line);padding-top:20px;color:#506273;font-size:13px}.limits strong{color:var(--ink)}.noscript{margin:20px auto;padding:18px;width:min(900px,calc(100% - 32px));background:#fff4d9;border:1px solid #d9a642;color:#593d08}.footer-note{text-align:center;color:#607080;font-size:12px;margin-top:18px}@media(max-width:780px){.mast,.workspace{grid-template-columns:1fr}.identity{border-left:0;border-top:1px solid var(--line);padding:16px 0 0}.controls{border-right:0;border-bottom:1px solid var(--line)}.rail{grid-template-columns:1fr 1fr}.rail-node:nth-child(2){border-right:0}.rail-node:nth-child(-n+2){border-bottom:1px solid var(--line)}.result{min-height:440px;padding:26px}.result-meta{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+  <noscript><div class="noscript"><strong>JavaScript is off.</strong> This file is self-contained, but the BN254 calculation needs JavaScript. Enable it for this local file; no network request is made.</div></noscript>
+  <main class="bench">
+    <header class="mast">
+      <div>
+        <div class="eyebrow">Proofnote · offline verification bench</div>
+        <h1>Break the binding. Watch it fail.</h1>
+        <p class="lede">Run the complete BN254 Groth16 check in this page. Then alter one reviewed input while the others stay fixed. Everything needed is embedded here.</p>
+      </div>
+      <div class="identity" aria-label="Pinned artifact identity">
+        <span class="label">Pinned released artifact</span>
+        <strong>APNT import-created-note relation V4</strong>
+        fixture c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a<br>
+        key 4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696<br>
+        selector 4388a21c
+      </div>
+    </header>
+    <section class="panel" aria-label="Interactive verifier">
+      <div class="rail" aria-label="Verification binding path">
+        <div class="rail-node" data-stage="proof" data-state="idle">Proof bytes</div>
+        <div class="rail-node" data-stage="selector" data-state="idle">Selector</div>
+        <div class="rail-node" data-stage="key" data-state="idle">Pinned key</div>
+        <div class="rail-node" data-stage="pairing" data-state="idle">Pairing</div>
+      </div>
+      <div class="workspace">
+        <div class="controls">
+          <div class="label">Choose a case · keys 1–5</div>
+          <div class="case-list">
+            <button class="case" data-case="known-good" aria-pressed="true">Published proof<small>Expected: complete pairing PASS</small></button>
+            <button class="case" data-case="tamper-public-values" aria-pressed="false">Change public values<small>Expected: PAIRING_REJECTED</small></button>
+            <button class="case" data-case="tamper-proof-bytes" aria-pressed="false">Change proof bytes<small>Expected: PROOF_BYTES_REJECTED</small></button>
+            <button class="case" data-case="tamper-key-bytes" aria-pressed="false">Change pinned key<small>Expected: KEY_BYTES_REJECTED</small></button>
+            <button class="case" data-case="tamper-selector" aria-pressed="false">Change selector-bound bytes<small>Expected: SELECTOR_REJECTED</small></button>
+          </div>
+          <button class="run" id="run-check">Verify published proof</button>
+        </div>
+        <div class="result" id="result" data-status="ready" aria-live="polite">
+          <div class="verdict" id="result-class">READY</div>
+          <h2 id="result-title">Published proof</h2>
+          <p class="detail" id="result-detail">Ready to execute the full pairing.</p>
+          <div class="result-meta">
+            <div class="datum"><span>Measured here</span><strong id="result-time">not run</strong></div>
+            <div class="datum"><span>Delivery</span><strong>one file · zero requests</strong></div>
+          </div>
+          <div class="limits"><strong>A PASS establishes:</strong> this published proof verifies under this pinned key and these public values. <strong>It does not establish:</strong> guest semantic correctness, authenticated CashVM execution, BCH validation or inclusion, APNT or wallet acceptance, custody, spendability, privacy, or successive transfer.</div>
+        </div>
+      </div>
+    </section>
+    <p class="footer-note">Measured in Chromium under file:// · no cross-browser claim · no server verifier</p>
+  </main>
+  <script>const EXPECTED_FIXTURE_SHA256 = "c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a";
+const EXPECTED_PROOF_SHA256 = "92ebd58fe4b8e39dc5655b442e2dcf6968d08c612c88b1223f338c30d44391cd";
+const EXPECTED_PUBLIC_VALUES_SHA256 = "817a73ecb25d27f62d804a8b463b49cdfa366112869e191a7a66d0a73e737f6f";
+const EXPECTED_KEY_SHA256 = "4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696";
+const EXPECTED_SELECTOR = "4388a21c";
+const EXPECTED_RELATION = "apnt-import-created-note-relation-v4";
+const EXPECTED_DOMAIN = "bch-cloak-apnt-v0:import-created-note-relation-v4";
+const EXPECTED_PROGRAM_VKEY = "007de2035d65f1dd58a3cf0c930fde5c7c7c99443b26fc30c2cd7f26014a74b1";
+const PROOF_BYTES = 356;
+
+// alt_bn128 / BN254 base and scalar fields.
+const P = 21888242871839275222246405745257275088696311157297823662689037894645226208583n;
+const R = 21888242871839275222246405745257275088548364400416034343698204186575808495617n;
+const FINAL_EXPONENT = (P ** 12n - 1n) / R;
+
+const mod = (value) => {
+  const result = value % P;
+  return result < 0n ? result + P : result;
+};
+const fAdd = (a, b) => {
+  const value = a + b;
+  return value >= P ? value - P : value;
+};
+const fSub = (a, b) => (a >= b ? a - b : P - (b - a));
+const fNeg = (a) => (a === 0n ? 0n : P - a);
+const fMul = (a, b) => (a * b) % P;
+const fSqr = (a) => (a * a) % P;
+function fPow(base, exponent) {
+  let result = 1n;
+  let factor = base;
+  let power = exponent;
+  while (power > 0n) {
+    if (power & 1n) result = fMul(result, factor);
+    factor = fSqr(factor);
+    power >>= 1n;
+  }
+  return result;
+}
+const fInv = (value) => {
+  if (value === 0n) throw new Error("division by zero");
+  return fPow(value, P - 2n);
+};
+function fSqrt(value) {
+  const root = fPow(value, (P + 1n) >> 2n);
+  return fSqr(root) === value ? root : null;
+}
+
+// Fp2 = Fp[u]/(u^2 + 1), represented [c0, c1].
+const F2_ZERO = [0n, 0n];
+const F2_ONE = [1n, 0n];
+const f2 = (a = 0n, b = 0n) => [a, b];
+const f2Add = (x, y) => [fAdd(x[0], y[0]), fAdd(x[1], y[1])];
+const f2Sub = (x, y) => [fSub(x[0], y[0]), fSub(x[1], y[1])];
+const f2Neg = (x) => [fNeg(x[0]), fNeg(x[1])];
+const f2Eq = (x, y) => x[0] === y[0] && x[1] === y[1];
+const f2IsZero = (x) => x[0] === 0n && x[1] === 0n;
+const f2Mul = (x, y) => [
+  fSub(fMul(x[0], y[0]), fMul(x[1], y[1])),
+  fAdd(fMul(x[0], y[1]), fMul(x[1], y[0])),
+];
+const f2Sqr = (x) => f2Mul(x, x);
+const f2MulFp = (x, scalar) => [fMul(x[0], scalar), fMul(x[1], scalar)];
+function f2Inv(x) {
+  const denominator = fInv(fAdd(fSqr(x[0]), fSqr(x[1])));
+  return [fMul(x[0], denominator), fNeg(fMul(x[1], denominator))];
+}
+const f2Div = (x, y) => f2Mul(x, f2Inv(y));
+function f2Sqrt(value) {
+  if (f2IsZero(value)) return F2_ZERO;
+  if (value[1] === 0n) {
+    const real = fSqrt(value[0]);
+    if (real !== null) return [real, 0n];
+    const imaginary = fSqrt(fNeg(value[0]));
+    return imaginary === null ? null : [0n, imaginary];
+  }
+  const norm = fSqrt(fAdd(fSqr(value[0]), fSqr(value[1])));
+  if (norm === null) return null;
+  const inv2 = (P + 1n) >> 1n;
+  let real = fSqrt(fMul(fAdd(value[0], norm), inv2));
+  if (real === null) real = fSqrt(fMul(fSub(value[0], norm), inv2));
+  if (real === null || real === 0n) return null;
+  const root = [real, fMul(value[1], fInv(fAdd(real, real)))];
+  return f2Eq(f2Sqr(root), value) ? root : null;
+}
+
+// Fp6 = Fp2[v]/(v^3 - (9 + u)), represented [c0, c1, c2].
+const XI = f2(9n, 1n);
+const F6_ZERO = [F2_ZERO, F2_ZERO, F2_ZERO];
+const F6_ONE = [F2_ONE, F2_ZERO, F2_ZERO];
+const f6 = (a = F2_ZERO, b = F2_ZERO, c = F2_ZERO) => [a, b, c];
+const f6Add = (x, y) => [f2Add(x[0], y[0]), f2Add(x[1], y[1]), f2Add(x[2], y[2])];
+const f6Sub = (x, y) => [f2Sub(x[0], y[0]), f2Sub(x[1], y[1]), f2Sub(x[2], y[2])];
+const f6Neg = (x) => [f2Neg(x[0]), f2Neg(x[1]), f2Neg(x[2])];
+const f6Eq = (x, y) => f2Eq(x[0], y[0]) && f2Eq(x[1], y[1]) && f2Eq(x[2], y[2]);
+function f6Mul(x, y) {
+  return [
+    f2Add(f2Mul(x[0], y[0]), f2Mul(XI, f2Add(f2Mul(x[1], y[2]), f2Mul(x[2], y[1])))),
+    f2Add(f2Add(f2Mul(x[0], y[1]), f2Mul(x[1], y[0])), f2Mul(XI, f2Mul(x[2], y[2]))),
+    f2Add(f2Add(f2Mul(x[0], y[2]), f2Mul(x[1], y[1])), f2Mul(x[2], y[0])),
+  ];
+}
+const f6Sqr = (x) => f6Mul(x, x);
+const f6MulByV = (x) => [f2Mul(XI, x[2]), x[0], x[1]];
+function f6Inv(x) {
+  const t0 = f2Sub(f2Sqr(x[0]), f2Mul(XI, f2Mul(x[1], x[2])));
+  const t1 = f2Sub(f2Mul(XI, f2Sqr(x[2])), f2Mul(x[0], x[1]));
+  const t2 = f2Sub(f2Sqr(x[1]), f2Mul(x[0], x[2]));
+  const denominator = f2Inv(f2Add(f2Mul(x[0], t0), f2Mul(XI, f2Add(f2Mul(x[2], t1), f2Mul(x[1], t2)))));
+  return [f2Mul(t0, denominator), f2Mul(t1, denominator), f2Mul(t2, denominator)];
+}
+
+// Fp12 = Fp6[w]/(w^2 - v), represented [c0, c1].
+const F12_ONE = [F6_ONE, F6_ZERO];
+const f12Add = (x, y) => [f6Add(x[0], y[0]), f6Add(x[1], y[1])];
+const f12Mul = (x, y) => [
+  f6Add(f6Mul(x[0], y[0]), f6MulByV(f6Mul(x[1], y[1]))),
+  f6Add(f6Mul(x[0], y[1]), f6Mul(x[1], y[0])),
+];
+const f12Sqr = (x) => f12Mul(x, x);
+const f12Eq = (x, y) => f6Eq(x[0], y[0]) && f6Eq(x[1], y[1]);
+function f12Pow(base, exponent) {
+  let result = F12_ONE;
+  let factor = base;
+  let power = exponent;
+  while (power > 0n) {
+    if (power & 1n) result = f12Mul(result, factor);
+    factor = f12Sqr(factor);
+    power >>= 1n;
+  }
+  return result;
+}
+
+const readBigEndian = (bytes) => {
+  let value = 0n;
+  for (const byte of bytes) value = (value << 8n) | BigInt(byte);
+  return value;
+};
+const fromHex = (hex) => {
+  if (typeof hex !== "string" || hex.length % 2 !== 0 || /[^0-9a-f]/iu.test(hex)) throw new Error("invalid hex");
+  return Uint8Array.from({ length: hex.length / 2 }, (_unused, index) => Number.parseInt(hex.slice(index * 2, index * 2 + 2), 16));
+};
+const toHex = (bytes) => Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+const sha256 = async (bytes) => new Uint8Array(await crypto.subtle.digest("SHA-256", bytes));
+const sha256Hex = async (bytes) => toHex(await sha256(bytes));
+const requireField = (value, label) => {
+  if (value >= P) throw new Error(`${label} is outside Fp`);
+  return value;
+};
+
+function decompressG1(bytes, label) {
+  const mask = bytes[0] & 0xc0;
+  if (mask === 0x40) throw new Error(`${label} is infinity`);
+  const unmasked = Uint8Array.from(bytes);
+  unmasked[0] &= 0x3f;
+  const x = requireField(readBigEndian(unmasked), `${label}.x`);
+  const root = fSqrt(fAdd(fMul(fSqr(x), x), 3n));
+  if (root === null) throw new Error(`${label} has no curve y`);
+  const negated = fNeg(root);
+  const y = mask === 0xc0 ? (root > negated ? root : negated) : (root < negated ? root : negated);
+  return assertG1({ x, y }, label);
+}
+
+function decompressG2(bytes, label) {
+  const mask = bytes[0] & 0xc0;
+  if (mask === 0x40) throw new Error(`${label} is infinity`);
+  const first = Uint8Array.from(bytes.subarray(0, 32));
+  first[0] &= 0x3f;
+  const x = [
+    requireField(readBigEndian(bytes.subarray(32, 64)), `${label}.x.c0`),
+    requireField(readBigEndian(first), `${label}.x.c1`),
+  ];
+  const twistB = f2Div(f2(3n, 0n), XI);
+  const root = f2Sqrt(f2Add(f2Mul(f2Sqr(x), x), twistB));
+  if (root === null) throw new Error(`${label} has no twist y`);
+  const negated = f2Neg(root);
+  const larger = (left, right) => left[1] === right[1] ? left[0] > right[0] : left[1] > right[1];
+  const y = mask === 0xc0
+    ? (larger(root, negated) ? root : negated)
+    : (larger(root, negated) ? negated : root);
+  return assertG2({ x, y }, label);
+}
+
+function assertG1(point, label) {
+  if (fSqr(point.y) !== fAdd(fMul(fSqr(point.x), point.x), 3n)) throw new Error(`${label} is not on G1`);
+  return point;
+}
+
+function assertG2(point, label) {
+  const twistB = f2Div(f2(3n, 0n), XI);
+  if (!f2Eq(f2Sqr(point.y), f2Add(f2Mul(f2Sqr(point.x), point.x), twistB))) throw new Error(`${label} is not on G2`);
+  return point;
+}
+
+// Jacobian G1 arithmetic, used for the full six-point IC MSM.
+const G1_INFINITY = { x: 0n, y: 1n, z: 0n };
+const g1Jacobian = (point) => ({ x: point.x, y: point.y, z: 1n });
+function g1Double(point) {
+  if (point.z === 0n || point.y === 0n) return G1_INFINITY;
+  const a = fSqr(point.x);
+  const b = fSqr(point.y);
+  const c = fSqr(b);
+  const d = fMul(2n, fSub(fSub(fSqr(fAdd(point.x, b)), a), c));
+  const e = fMul(3n, a);
+  const f = fSqr(e);
+  const x = fSub(f, fMul(2n, d));
+  const y = fSub(fMul(e, fSub(d, x)), fMul(8n, c));
+  const z = fMul(2n, fMul(point.y, point.z));
+  return { x, y, z };
+}
+function g1Add(left, right) {
+  if (left.z === 0n) return right;
+  if (right.z === 0n) return left;
+  const z1z1 = fSqr(left.z);
+  const z2z2 = fSqr(right.z);
+  const u1 = fMul(left.x, z2z2);
+  const u2 = fMul(right.x, z1z1);
+  const s1 = fMul(left.y, fMul(right.z, z2z2));
+  const s2 = fMul(right.y, fMul(left.z, z1z1));
+  if (u1 === u2) return s1 === s2 ? g1Double(left) : G1_INFINITY;
+  const h = fSub(u2, u1);
+  const i = fSqr(fMul(2n, h));
+  const j = fMul(h, i);
+  const rr = fMul(2n, fSub(s2, s1));
+  const v = fMul(u1, i);
+  return {
+    x: fSub(fSub(fSqr(rr), j), fMul(2n, v)),
+    y: fSub(fMul(rr, fSub(v, fSub(fSub(fSqr(rr), j), fMul(2n, v)))), fMul(2n, fMul(s1, j))),
+    z: fMul(fSub(fSub(fSqr(fAdd(left.z, right.z)), z1z1), z2z2), h),
+  };
+}
+function g1Multiply(point, scalar) {
+  let result = G1_INFINITY;
+  let addend = g1Jacobian(point);
+  let value = scalar;
+  while (value > 0n) {
+    if (value & 1n) result = g1Add(result, addend);
+    addend = g1Double(addend);
+    value >>= 1n;
+  }
+  return result;
+}
+function g1Affine(point) {
+  if (point.z === 0n) throw new Error("unexpected G1 infinity");
+  const inverse = fInv(point.z);
+  const inverse2 = fSqr(inverse);
+  return { x: fMul(point.x, inverse2), y: fMul(point.y, fMul(inverse2, inverse)) };
+}
+
+async function loadKey(document, expectedDigest = EXPECTED_KEY_SHA256, expectedSelector = EXPECTED_SELECTOR) {
+  const bytes = fromHex(document.verificationKeyHex);
+  if (bytes.length !== 492 || document.verificationKeyBytes !== 492) throw new Error("verification key length mismatch");
+  if (await sha256Hex(bytes) !== expectedDigest || document.verificationKeySha256 !== expectedDigest) throw new Error("verification key digest mismatch");
+  if (document.selector !== expectedSelector) throw new Error("verification key selector mismatch");
+  const icCount = Number(readBigEndian(bytes.subarray(288, 292)));
+  if (icCount !== 6) throw new Error(`unexpected IC point count ${String(icCount)}`);
+  return {
+    alpha: decompressG1(bytes.subarray(0, 32), "alpha"),
+    beta: decompressG2(bytes.subarray(64, 128), "beta"),
+    gamma: decompressG2(bytes.subarray(128, 192), "gamma"),
+    delta: decompressG2(bytes.subarray(224, 288), "delta"),
+    ic: Array.from({ length: icCount }, (_unused, index) => decompressG1(bytes.subarray(292 + index * 32, 324 + index * 32), `ic${String(index)}`)),
+  };
+}
+
+function loadProofPoints(bytes) {
+  if (bytes.length !== PROOF_BYTES) throw new Error(`proof length is ${String(bytes.length)}, expected ${String(PROOF_BYTES)}`);
+  const coordinates = bytes.subarray(100);
+  const at = (index) => requireField(readBigEndian(coordinates.subarray(index * 32, (index + 1) * 32)), `proof coordinate ${String(index)}`);
+  return {
+    a: assertG1({ x: at(0), y: at(1) }, "proof A"),
+    b: assertG2({ x: [at(3), at(2)], y: [at(5), at(4)] }, "proof B"),
+    c: assertG1({ x: at(6), y: at(7) }, "proof C"),
+  };
+}
+
+function fullVkx(key, scalars) {
+  let result = g1Jacobian(key.ic[0]);
+  scalars.forEach((scalar, index) => {
+    if (scalar !== 0n) result = g1Add(result, g1Multiply(key.ic[index + 1], scalar));
+  });
+  return g1Affine(result);
+}
+
+function sparseLine(yP, xP, slope, xR, yR) {
+  return [
+    f6(f2(yP, 0n), F2_ZERO, F2_ZERO),
+    f6(f2MulFp(f2Neg(slope), xP), f2Sub(f2Mul(slope, xR), yR), F2_ZERO),
+  ];
+}
+
+function doubleLine(point, p) {
+  const slope = f2Div(f2MulFp(f2Sqr(point.x), 3n), f2MulFp(point.y, 2n));
+  const x = f2Sub(f2Sqr(slope), f2MulFp(point.x, 2n));
+  const y = f2Sub(f2Mul(slope, f2Sub(point.x, x)), point.y);
+  return { point: { x, y }, line: sparseLine(p.y, p.x, slope, point.x, point.y) };
+}
+
+function addLine(point, addend, p) {
+  if (f2Eq(point.x, addend.x)) {
+    if (f2Eq(point.y, addend.y)) return doubleLine(point, p);
+    // The last bit of the r-loop adds Q to -Q. Its vertical line is in Fp6,
+    // so reduced-pairing denominator elimination permits replacing it by one.
+    return { point: null, line: F12_ONE };
+  }
+  const slope = f2Div(f2Sub(addend.y, point.y), f2Sub(addend.x, point.x));
+  const x = f2Sub(f2Sub(f2Sqr(slope), point.x), addend.x);
+  const y = f2Sub(f2Mul(slope, f2Sub(point.x, x)), point.y);
+  return { point: { x, y }, line: sparseLine(p.y, p.x, slope, point.x, point.y) };
+}
+
+function miller(g1, g2) {
+  const bits = R.toString(2);
+  let value = F12_ONE;
+  let point = g2;
+  for (let index = 1; index < bits.length; index += 1) {
+    const doubled = doubleLine(point, g1);
+    value = f12Mul(f12Sqr(value), doubled.line);
+    point = doubled.point;
+    if (bits[index] === "1") {
+      const added = addLine(point, g2, g1);
+      value = f12Mul(value, added.line);
+      point = added.point;
+    }
+  }
+  if (point !== null) throw new Error("Miller loop did not terminate at infinity");
+  return value;
+}
+
+function groth16Verifies(key, points, scalars) {
+  const vkx = fullVkx(key, scalars);
+  const pairings = [
+    [{ x: points.a.x, y: fNeg(points.a.y) }, points.b],
+    [key.alpha, key.beta],
+    [vkx, key.gamma],
+    [points.c, key.delta],
+  ];
+  let product = F12_ONE;
+  for (const [g1, g2] of pairings) product = f12Mul(product, miller(g1, g2));
+  return f12Eq(f12Pow(product, FINAL_EXPONENT), F12_ONE);
+}
+
+async function maskedPublicValuesScalar(bytes) {
+  const digest = Uint8Array.from(await sha256(bytes));
+  digest[0] &= 0x1f;
+  return readBigEndian(digest);
+}
+
+function decodePublicValues(bytes) {
+  const ascii = (start, length) => new TextDecoder("ascii", { fatal: true }).decode(bytes.subarray(start, start + length));
+  const u16le = (offset) => bytes[offset] | (bytes[offset + 1] << 8);
+  if (bytes.length !== 235 || ascii(0, 8) !== "APNTIRV4" || bytes[8] !== 4) throw new Error("public values are not canonical APNTIRV4 bytes");
+  const domainLength = u16le(9);
+  const domain = ascii(11, domainLength);
+  let cursor = 11 + domainLength;
+  const relationLength = u16le(cursor);
+  const relation = ascii(cursor + 2, relationLength);
+  cursor += 2 + relationLength;
+  const semanticContractOffset = cursor;
+  const statementOffset = semanticContractOffset + 33;
+  const settlementProjectionOffset = semanticContractOffset + 65;
+  if (domain !== EXPECTED_DOMAIN || relation !== EXPECTED_RELATION || settlementProjectionOffset + 32 > bytes.length) throw new Error("public values relation or layout mismatch");
+  return { relation, domain, semanticContractOffset, statementOffset, settlementProjectionOffset };
+}
+
+const ESTABLISHES = [
+  "the published V4 proof's BN254 Groth16 pairing verifies under the pinned 492-byte SP1 wrapper key",
+  "the pairing uses five independently re-derived public scalars, including masked SHA-256 of the committed public values",
+  "the proof envelope selector matches the separately pinned full verification-key digest",
+];
+const DOES_NOT_ESTABLISH = [
+  "that the selected verification key or proved guest implements the intended APNT semantics",
+  "authenticated CashVM execution, BCH consensus validation, chain inclusion, APNT acceptance, wallet acceptance, custody, spendability, or successive transfer",
+];
+
+
+const INPUTS = Object.freeze({
+  fixtureText: "{\n  \"preflight\": {\n    \"version\": 4,\n    \"classification\": \"public-safe canonical frozen V4 local Groth16 proving preflight\",\n    \"caseId\": \"accepted\",\n    \"relationIdentity\": \"apnt-import-created-note-relation-v4\",\n    \"relationDomain\": \"bch-cloak-apnt-v0:import-created-note-relation-v4\",\n    \"semanticContractCommitment\": \"5745166c8ec24a8bd07ca47629271092a17304be38e2dc54d8986dc684e3f234\",\n    \"statementCommitment\": \"6ecb7d4927be447eb8534377fd176ff26a03c45e6f2c1ec63bd24e437bfcb747\",\n    \"settlementProjectionCommitment\": \"808d03efd14c65e2779068b4db6cf388b4fa142a00a7f30f64ce4ef11bb05c3a\",\n    \"proofSystem\": \"sp1\",\n    \"proofProfile\": \"sp1-v6.1.0-groth16-bn254-v4\",\n    \"proofMode\": \"groth16\",\n    \"prover\": \"local-cpu\",\n    \"networkProvingConfigured\": false,\n    \"networkCredentialsRequired\": false,\n    \"sp1CrateVersion\": \"6.3.1\",\n    \"sp1CircuitVersion\": \"v6.1.0\",\n    \"programVkeyHash\": \"007de2035d65f1dd58a3cf0c930fde5c7c7c99443b26fc30c2cd7f26014a74b1\",\n    \"guestElfSha256\": \"97d6ada8066ba09ef2ef8a50653ac38340a143da0c70cb508c04a7362b2fa355\",\n    \"guestElfBytes\": 1099664,\n    \"canonicalInputCodec\": \"APNTPIV4\",\n    \"canonicalInputSha256\": \"d6589e3c5dc638f6412d0dd234b07544e3674eb264b408dff144c8bf4da1cbe3\",\n    \"canonicalInputBytes\": 23531,\n    \"publicValuesCodec\": \"APNTIRV4\",\n    \"publicValuesLayout\": \"raw-APNTIRV4-235-bytes\",\n    \"publicValuesSha256\": \"817a73ecb25d27f62d804a8b463b49cdfa366112869e191a7a66d0a73e737f6f\",\n    \"publicValuesLength\": 235,\n    \"cashVmVerifierAvailable\": false,\n    \"privateProvingInputPersisted\": false\n  },\n  \"proof\": {\n    \"version\": 4,\n    \"classification\": \"public-safe canonical V4 SP1 Groth16 proof artifact\",\n    \"caseId\": \"accepted\",\n    \"relationIdentity\": \"apnt-import-created-note-relation-v4\",\n    \"relationDomain\": \"bch-cloak-apnt-v0:import-created-note-relation-v4\",\n    \"semanticContractCommitment\": \"5745166c8ec24a8bd07ca47629271092a17304be38e2dc54d8986dc684e3f234\",\n    \"statementCommitment\": \"6ecb7d4927be447eb8534377fd176ff26a03c45e6f2c1ec63bd24e437bfcb747\",\n    \"settlementProjectionCommitment\": \"808d03efd14c65e2779068b4db6cf388b4fa142a00a7f30f64ce4ef11bb05c3a\",\n    \"proofSystem\": \"sp1\",\n    \"proofProfile\": \"sp1-v6.1.0-groth16-bn254-v4\",\n    \"proofMode\": \"groth16\",\n    \"prover\": \"local-cpu\",\n    \"sp1CrateVersion\": \"6.3.1\",\n    \"sp1CircuitVersion\": \"v6.1.0\",\n    \"programVkeyHash\": \"007de2035d65f1dd58a3cf0c930fde5c7c7c99443b26fc30c2cd7f26014a74b1\",\n    \"guestElfSha256\": \"97d6ada8066ba09ef2ef8a50653ac38340a143da0c70cb508c04a7362b2fa355\",\n    \"guestElfBytes\": 1099664,\n    \"groth16VerificationKeySha256\": \"4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696\",\n    \"groth16VerificationKeyBytes\": 492,\n    \"groth16PublicInputLabels\": [\n      \"program-vkey\",\n      \"masked-sha256-public-values\",\n      \"exit-code\",\n      \"recursion-vkey-root\",\n      \"proof-nonce\"\n    ],\n    \"groth16PublicInputsDecimal\": [\n      \"222415768487493486795564065136532017683584458128510723541774616628839478449\",\n      \"668668272647433752796367916061335396573248914621718748862383398065173397359\",\n      \"0\",\n      \"83960146348496814183195590144795274058764451818716359375255161226434597714\",\n      \"0\"\n    ],\n    \"groth16PublicInputsBigEndian32\": [\n      \"007de2035d65f1dd58a3cf0c930fde5c7c7c99443b26fc30c2cd7f26014a74b1\",\n      \"017a73ecb25d27f62d804a8b463b49cdfa366112869e191a7a66d0a73e737f6f\",\n      \"0000000000000000000000000000000000000000000000000000000000000000\",\n      \"002f850ee998974d6cc00e50cd0814b098c05bfade466d28573240d057f25352\",\n      \"0000000000000000000000000000000000000000000000000000000000000000\"\n    ],\n    \"publicValuesCodec\": \"APNTIRV4\",\n    \"publicValuesLayout\": \"raw-APNTIRV4-235-bytes\",\n    \"publicValuesBytes\": \"41504e54495256340431006263682d636c6f616b2d61706e742d76303a696d706f72742d637265617465642d6e6f74652d72656c6174696f6e2d7634240061706e742d696d706f72742d637265617465642d6e6f74652d72656c6174696f6e2d76345745166c8ec24a8bd07ca47629271092a17304be38e2dc54d8986dc684e3f234016ecb7d4927be447eb8534377fd176ff26a03c45e6f2c1ec63bd24e437bfcb747808d03efd14c65e2779068b4db6cf388b4fa142a00a7f30f64ce4ef11bb05c3a0d470200000004000000020000000200000001010101010101010101010101000000000000000001\",\n    \"publicValuesSha256\": \"817a73ecb25d27f62d804a8b463b49cdfa366112869e191a7a66d0a73e737f6f\",\n    \"publicValuesLength\": 235,\n    \"proofBytes\": \"4388a21c0000000000000000000000000000000000000000000000000000000000000000002f850ee998974d6cc00e50cd0814b098c05bfade466d28573240d057f25352000000000000000000000000000000000000000000000000000000000000000028466c02f2df2cda719135a48b3deb3a0eefdebc053b7b6351053897e13b0191244f967b12dda24d4b3c20c32e376b0cc1f68ce2770a9b6bec6745d7fa0efd892a93b2837e9dd3e41fbc124ae42c0c23546b6bc9b2d97215c2c4620f28cbc1091d4d7005cf020fbc7039b389e6e3ef2e39515cebc2853af4efcaf9ce27ffee32178178c0c868c6aebf84342f8b325e15f97e5b50f9b59b339842c1262fb371e1125c118f1604206dce8651e86f75cecd97f53b84313f7bdbc1b9e1ba87ac14ca1953753b39d4d1e8c131abd7fb1ce4103fa39457f227601efab8951b4253d69325509366a36265bef4aa4f88da2b1f835c56ac532b9fce5aa8a9077d30d6bca4\",\n    \"proofSha256\": \"92ebd58fe4b8e39dc5655b442e2dcf6968d08c612c88b1223f338c30d44391cd\",\n    \"proofBytesLength\": 356,\n    \"encodedProofBytesLength\": 352,\n    \"rawProofBytesLength\": 324,\n    \"proofNonce\": \"00000000\",\n    \"nativeVerificationSucceeded\": true,\n    \"cashVmVerifierAvailable\": false,\n    \"chainValidated\": false,\n    \"privateMaterialPublished\": false,\n    \"privateProvingInputPersisted\": false\n  },\n  \"measurement\": {\n    \"version\": 4,\n    \"proofProfile\": \"sp1-v6.1.0-groth16-bn254-v4\",\n    \"endToEndProofGenerationDurationMs\": 480133,\n    \"nativeVerificationDurationMicros\": 147601,\n    \"groth16WrappingIsIncluded\": true,\n    \"isolatedGroth16WrappingDurationAvailable\": false,\n    \"deterministicProofNonce\": true,\n    \"deterministicProofBytesClaimed\": false\n  }\n}\n",
+  keyDocument: {"schemaVersion":"proofnote-groth16-verification-key/1","classification":"public-safe SP1 v6.1.0 BN254 Groth16 wrapper verification key","proofProfile":"sp1-v6.1.0-groth16-bn254-v4","verificationKeyBytes":492,"verificationKeySha256":"4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696","selector":"4388a21c","publicInputLabels":["program-vkey","masked-sha256-public-values","exit-code","recursion-vkey-root","proof-nonce"],"verificationKeyHex":"e1c7d728a5fd961fc179ec5eab938f564deba5b271e1c90c2c29a79648418fc182e78e216b27cb2b30abd22d17fb65b747ad8050d18e543498522d01a2c3fe79dc3c9339849225980c7d3f824f80d19e2a9c2554b6ab2160fa9635528f693fc00d964538da2653f2e62499571e6c78afb8909d3ea8107f306bd6928253680a3a998e9393920d483a7260bfb731fb5d25f1aa493335a9e71297e485b7aef312c21800deef121f1e76426a00665e5c4479674322d4f75edadd46debd5cd992f6edd7e00b2ca4f62668135017ed8a68894e104ac26dfd9bf376634b42af9e5ae50e91b7e9276171bb0efd647fc63e38bbfba3076f20daca8cd52bcc7284d9b1c6eb1723616533dd6ae53502c9c506a81f23f543d68750b5133ebfbe1f4746b3b01100000006acd6bf7f164af0b6b0bbbe0fdcb06ee0c1ba07f8e6eb2f9f3943a90cb1d402908f5460f3b7221705435e745da21e276536379c0113c13c4255e7ae101f1e90bf8b0ae6e491bc04c544da9e8cd4857d201b4cfa0222dbe96aac97f044fdf1c922c97c875a6ebd0999b06e7267ff3d8a6bf859bb9635abae07cb6b3534ba409a839807204ddcd27506ba72e17b55227b0bf310136ecb40c74acd52f3ccfbcba9f7808c7b7c98d78c07a2c4be5f6be7082ba41021611f9a2dfc016f8bbb37d36bee0000000000000000","authority":{"contentIdentity":"sha256:4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696","selectionBinding":"the proof envelope begins with the first four bytes of this SHA-256 digest","trustAssumptions":["the public repository selected the intended SP1 v6.1.0 wrapper key","SHA-256 collision resistance binds the full key to the four-byte envelope selector only in combination with this separately pinned full digest"],"doesNotEstablish":["that this wrapper key represents the intended APNT guest semantics","CashVM execution, BCH consensus validation, chain inclusion, wallet acceptance, or spendability"]}},
+});
+const MODES = Object.freeze({
+  "known-good": { title: "Published proof", expected: "PASS", stage: "pairing" },
+  "tamper-public-values": { title: "Public-value bit flip", expected: "PAIRING_REJECTED", stage: "pairing" },
+  "tamper-proof-bytes": { title: "Proof-byte bit flip", expected: "PROOF_BYTES_REJECTED", stage: "proof" },
+  "tamper-key-bytes": { title: "Pinned-key bit flip", expected: "KEY_BYTES_REJECTED", stage: "key" },
+  "tamper-selector": { title: "Selector-bound padding flip", expected: "SELECTOR_REJECTED", stage: "selector" },
+});
+const ARTIFACT_PATH = "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json";
+
+async function verifyCase(mode = "known-good") {
+  if (!Object.hasOwn(MODES, mode)) throw new Error(`UNKNOWN_CASE: ${mode}`);
+  const started = performance.now();
+  let pairingExecuted = false;
+  let keyDocument = structuredClone(INPUTS.keyDocument);
+  try {
+    const fixtureBytes = new TextEncoder().encode(INPUTS.fixtureText);
+    if (await sha256Hex(fixtureBytes) !== EXPECTED_FIXTURE_SHA256) throw new Error("FIXTURE_IDENTITY_REJECTED");
+    const fixture = JSON.parse(INPUTS.fixtureText).proof;
+    if (fixture.relationIdentity !== EXPECTED_RELATION || fixture.relationDomain !== EXPECTED_DOMAIN || fixture.programVkeyHash !== EXPECTED_PROGRAM_VKEY) throw new Error("RELATION_IDENTITY_REJECTED");
+    const proofBytes = fromHex(fixture.proofBytes);
+    const publicValues = fromHex(fixture.publicValuesBytes);
+    if (await sha256Hex(proofBytes) !== EXPECTED_PROOF_SHA256 || fixture.proofSha256 !== EXPECTED_PROOF_SHA256) throw new Error("PROOF_IDENTITY_REJECTED");
+    if (await sha256Hex(publicValues) !== EXPECTED_PUBLIC_VALUES_SHA256 || fixture.publicValuesSha256 !== EXPECTED_PUBLIC_VALUES_SHA256) throw new Error("PUBLIC_VALUES_IDENTITY_REJECTED");
+    const decoded = decodePublicValues(publicValues);
+
+    if (mode === "tamper-proof-bytes") proofBytes[100] ^= 1;
+    if (mode === "tamper-key-bytes") {
+      const bytes = fromHex(keyDocument.verificationKeyHex);
+      bytes[0] ^= 1;
+      keyDocument.verificationKeyHex = toHex(bytes);
+    }
+    let expectedKeyDigest = EXPECTED_KEY_SHA256;
+    let expectedSelector = EXPECTED_SELECTOR;
+    if (mode === "tamper-selector") {
+      const bytes = fromHex(keyDocument.verificationKeyHex);
+      bytes[32] ^= 1;
+      keyDocument.verificationKeyHex = toHex(bytes);
+      expectedKeyDigest = await sha256Hex(bytes);
+      expectedSelector = expectedKeyDigest.slice(0, 8);
+      keyDocument.verificationKeySha256 = expectedKeyDigest;
+      keyDocument.selector = expectedSelector;
+    }
+
+    let key;
+    try {
+      key = await loadKey(keyDocument, expectedKeyDigest, expectedSelector);
+    } catch (error) {
+      if (mode === "tamper-key-bytes") return verdict(mode, "FAIL", "KEY_BYTES_REJECTED", false, started, String(error.message));
+      throw error;
+    }
+    if (toHex(proofBytes.subarray(0, 4)) !== keyDocument.selector) {
+      if (mode === "tamper-selector") return verdict(mode, "FAIL", "SELECTOR_REJECTED", false, started, "The proof envelope selector no longer names the supplied key digest.");
+      throw new Error("SELECTOR_REJECTED");
+    }
+
+    let points;
+    try {
+      points = loadProofPoints(proofBytes);
+    } catch (error) {
+      if (mode === "tamper-proof-bytes") return verdict(mode, "FAIL", "PROOF_BYTES_REJECTED", false, started, String(error.message));
+      throw error;
+    }
+    const effectivePublicValues = Uint8Array.from(publicValues);
+    if (mode === "tamper-public-values") effectivePublicValues[decoded.settlementProjectionOffset] ^= 1;
+    const scalars = [
+      readBigEndian(fromHex(EXPECTED_PROGRAM_VKEY)),
+      await maskedPublicValuesScalar(effectivePublicValues),
+      readBigEndian(proofBytes.subarray(4, 36)),
+      readBigEndian(proofBytes.subarray(36, 68)),
+      readBigEndian(proofBytes.subarray(68, 100)),
+    ];
+    pairingExecuted = true;
+    const pairingVerified = groth16Verifies(key, points, scalars);
+    if (mode === "tamper-public-values") {
+      return pairingVerified
+        ? verdict(mode, "ERROR", "PAIRING_UNEXPECTED_ACCEPTANCE", true, started, "The mutated commitment unexpectedly verified.")
+        : verdict(mode, "FAIL", "PAIRING_REJECTED", true, started, "The proof points stayed valid; the changed public commitment failed the pairing equation.");
+    }
+    if (!pairingVerified) return verdict(mode, "ERROR", "PAIRING_UNEXPECTED_REJECTION", true, started, "The published proof did not verify.");
+    return verdict(mode, "PASS", "PROOF_VERIFIED", true, started, "The complete BN254 pairing verified the released proof under the pinned key.");
+  } catch (error) {
+    return verdict(mode, "ERROR", String(error.message).split(":")[0], pairingExecuted, started, String(error.message));
+  }
+}
+
+function verdict(mode, status, classification, pairingExecuted, started, detail) {
+  return {
+    schemaVersion: "proofnote-browser-verdict/1",
+    mode,
+    title: MODES[mode].title,
+    status,
+    classification,
+    detail,
+    pairingExecuted,
+    pairingVerified: status === "PASS",
+    durationMs: Math.round(performance.now() - started),
+    artifact: ARTIFACT_PATH,
+    fixtureSha256: EXPECTED_FIXTURE_SHA256,
+    proofSha256: EXPECTED_PROOF_SHA256,
+    publicValuesSha256: EXPECTED_PUBLIC_VALUES_SHA256,
+    verificationKeySha256: EXPECTED_KEY_SHA256,
+    selector: EXPECTED_SELECTOR,
+    relation: EXPECTED_RELATION,
+    establishes: ESTABLISHES,
+    doesNotEstablish: DOES_NOT_ESTABLISH,
+  };
+}
+
+const state = { mode: "known-good", running: false };
+const controls = Array.from(document.querySelectorAll("[data-case]"));
+const runButton = document.querySelector("#run-check");
+const result = document.querySelector("#result");
+const resultTitle = document.querySelector("#result-title");
+const resultDetail = document.querySelector("#result-detail");
+const resultClass = document.querySelector("#result-class");
+const resultTime = document.querySelector("#result-time");
+const rail = Array.from(document.querySelectorAll("[data-stage]"));
+
+function selectMode(mode) {
+  state.mode = mode;
+  for (const control of controls) control.setAttribute("aria-pressed", String(control.dataset.case === mode));
+  runButton.textContent = mode === "known-good" ? "Verify published proof" : "Run tamper check";
+  result.dataset.status = "ready";
+  resultTitle.textContent = MODES[mode].title;
+  resultDetail.textContent = mode === "known-good" ? "Ready to execute the full pairing." : "Ready to alter one reviewed binding and check the refusal.";
+  resultClass.textContent = "READY";
+  resultTime.textContent = "not run";
+  for (const node of rail) node.dataset.state = "idle";
+}
+
+async function runSelected() {
+  if (state.running) return null;
+  state.running = true;
+  runButton.disabled = true;
+  runButton.textContent = "Calculating pairing…";
+  result.dataset.status = "running";
+  resultTitle.textContent = "Checking every binding";
+  resultDetail.textContent = "The BN254 pairing uses BigInt arithmetic in this page. No request leaves the browser.";
+  resultClass.textContent = "RUNNING";
+  for (const node of rail) node.dataset.state = "working";
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  const report = await verifyCase(state.mode);
+  const expected = MODES[state.mode].expected;
+  const controlledFailure = report.status === "FAIL" && report.classification === expected;
+  const success = report.status === "PASS" && expected === "PASS";
+  result.dataset.status = success ? "pass" : controlledFailure ? "fail" : "error";
+  resultTitle.textContent = success ? "Proof verified" : controlledFailure ? "Tamper rejected" : "Unexpected result";
+  resultDetail.textContent = report.detail;
+  resultClass.textContent = report.classification;
+  resultTime.textContent = `${report.durationMs} ms · pairing ${report.pairingExecuted ? "executed" : "not reached"}`;
+  for (const node of rail) {
+    const stage = node.dataset.stage;
+    const reached = report.pairingExecuted || ["proof", "key", "selector"].includes(stage);
+    node.dataset.state = stage === MODES[state.mode].stage && controlledFailure ? "broken" : reached ? "pass" : "idle";
+  }
+  runButton.disabled = false;
+  runButton.textContent = state.mode === "known-good" ? "Verify again" : "Run again";
+  state.running = false;
+  window.dispatchEvent(new CustomEvent("proofnote:verdict", { detail: report }));
+  return report;
+}
+
+for (const control of controls) control.addEventListener("click", () => selectMode(control.dataset.case));
+runButton.addEventListener("click", runSelected);
+document.addEventListener("keydown", (event) => {
+  if (event.altKey || event.ctrlKey || event.metaKey) return;
+  const index = Number(event.key) - 1;
+  if (index >= 0 && index < controls.length) { controls[index].focus(); controls[index].click(); }
+  if (event.key === "Enter" && document.activeElement === runButton) runSelected();
+});
+
+window.proofnoteBrowserVerifier = Object.freeze({ modes: MODES, verifyCase, selectMode, runSelected });
+document.documentElement.dataset.verifierReady = "true";
+selectMode("known-good");
+
+async function runAcceptance() {
+  const reports = [];
+  for (const mode of Object.keys(MODES)) reports.push(await verifyCase(mode));
+  const expected = ["PROOF_VERIFIED", "PAIRING_REJECTED", "PROOF_BYTES_REJECTED", "KEY_BYTES_REJECTED", "SELECTOR_REJECTED"];
+  const payload = {
+    schemaVersion: "proofnote-browser-acceptance/1",
+    reports: reports.map(({ mode, status, classification, pairingExecuted }) => ({ mode, status, classification, pairingExecuted })),
+    expectedMatched: reports.every((report, index) => report.classification === expected[index]),
+    resourceRequests: performance.getEntriesByType("resource").map((entry) => entry.name),
+    nativeButtons: controls.length === 5 && controls.every((node) => node.tagName === "BUTTON") && runButton.tagName === "BUTTON",
+    reducedMotion: matchMedia("(prefers-reduced-motion: reduce)").matches,
+  };
+  document.documentElement.dataset.acceptance = btoa(JSON.stringify(payload));
+}
+if (new URLSearchParams(location.search).has("acceptance")) runAcceptance();
+</script>
+</body>
+</html>

@@ -59,7 +59,7 @@
 # USAGE
 #   canonical-guest-build.sh <checkout-root> <guest-key> <output-dir>
 #
-#   guest-key ∈ transition | transition-v1 | import-v1 | import-v2 | import-v4 | import-v6
+#   guest-key ∈ transition | transition-v1 | transition-v2 | import-v1 | import-v2 | import-v4 | import-v6
 #
 set -euo pipefail
 
@@ -70,7 +70,7 @@ SP1_CANONICAL_IMAGE="ghcr.io/succinctlabs/sp1@${SP1_CANONICAL_IMAGE_DIGEST}"
 
 usage() {
   echo "usage: $0 <checkout-root> <guest-key> <output-dir>" >&2
-  echo "  guest-key ∈ transition | transition-v1 | import-v1 | import-v2 | import-v4 | import-v6" >&2
+  echo "  guest-key ∈ transition | transition-v1 | transition-v2 | import-v1 | import-v2 | import-v4 | import-v6" >&2
   exit 2
 }
 
@@ -91,6 +91,11 @@ case "$GUEST_KEY" in
     SP1_WS="tools/apnt-private-note-transition-v1-sp1"
     PROGRAM_SUBDIR="program"
     PACKAGE="apnt-private-note-transition-v1-sp1-program"
+    ;;
+  transition-v2)
+    SP1_WS="tools/apnt-private-note-transition-v2-sp1"
+    PROGRAM_SUBDIR="program"
+    PACKAGE="apnt-private-note-transition-v2-sp1-program"
     ;;
   import-v1)
     SP1_WS="tools/apnt-import-created-note-sp1"

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "proofnote-browser-verifier-artifact/1",
+  "generatedBy": "scripts/public-export/browser-verifier/generate.mjs",
+  "htmlPath": "browser-verifier/proofnote-browser-verifier.html",
+  "htmlSha256": "22ad37979c666e39f9f0ee6567b00901b315e155918ae46fc5cf059e45b8a95a",
+  "htmlBytes": 43342,
+  "sourceVerifier": "examples/01-verify-a-proof/run.mjs",
+  "sourceVerifierSha256": "06b9a2619203e11cce0c0eb1d6dc7fd915ae95eb325f883d0a38f77f200b62d3",
+  "inputs": {
+    "fixture": {
+      "path": "tools/apnt-import-created-note-sp1/fixtures/canonical-groth16-proof-v4.json",
+      "sha256": "c23e9166b85d4ebe34ba5b820c06a674c4fecaed4b0db0ec375fa35e8c06613a"
+    },
+    "verificationKey": {
+      "path": "examples/01-verify-a-proof/verification-key.json",
+      "documentSha256": "6f98c23d979a5cb6d69286085bbcc5b14f8fbde3513b291c14609a7c64b3043a",
+      "keyBytesSha256": "4388a21c687fdd5f218d7e3d13190cac4c5355818d3605fd5fb811df468ee696"
+    }
+  },
+  "runtimeDependencies": [],
+  "networkLoadedModules": [],
+  "nodeBuiltinsInArtifact": [],
+  "deliveryModes": [
+    "file://",
+    "same-origin static hosting"
+  ],
+  "measuredBrowserEngines": [
+    "Chromium"
+  ],
+  "nonClaims": [
+    "no unmeasured browser support",
+    "no guest semantic, CashVM, BCH, chain, wallet, custody, spendability, privacy, or successive-transfer result"
+  ]
+}
