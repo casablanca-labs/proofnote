@@ -115,21 +115,16 @@ resolved here.
 
 ## Credits
 
-The CashVM Groth16 verification lane this repository's trust anchors
-ultimately feed into builds on work by
-[Kallisti (`@kzKallisti`)](https://github.com/kzKallisti), who authored the
-major BN254 quotient-verifier optimizations, and
-[Mathieu Geukens (`@mr-zwets`)](https://github.com/mr-zwets), who created the
-residue-optimized intra-transaction verifier and maintains
-`groth16_cashscript`, the `cashscript` compiler-optimizations fork, and
-`zk-verifier-bench`. Pinned commits and licences are in
+Proofnote’s BN254 CashVM verifier work builds on the pinned
+[mr-zwets/groth16_cashscript](https://github.com/mr-zwets/groth16_cashscript),
+CashScript compiler fork, and
+[mr-zwets/zk-verifier-bench](https://github.com/mr-zwets/zk-verifier-bench)
+projects and their contributors. Proofnote adopts the intra-transaction
+quotient/residue verifier pipeline from this collaborative upstream work.
+Pinned commits and licences are in
 [`THIRD-PARTY-NOTICES.md`](../THIRD-PARTY-NOTICES.md). The CashScript compiler
 itself is MIT, © 2019 Rosco Kalis. No upstream bytes are redistributed in
 this repository; it publishes pins and a reproduction path instead.
-
-Separately, **verifier.cash**'s BN254-on-CashVM benchmark and leaderboard
-work directly informed this repository's own verifier evaluation, and is
-credited here by name for that contribution.
 
 ## Standing non-claims
 

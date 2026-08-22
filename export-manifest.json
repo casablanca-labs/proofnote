@@ -37,7 +37,7 @@
       "rationale": "The verification surface: the canonical Groth16 proof artifacts, the quotient/residue certificate runs, the frozen trusted verifier descriptors, the Rust note-commitment verifier crate, and THREE independent Node checkers — one grading certificate-run keying, one re-deriving statementCommitment32 and settlementProjection32 from published statement bytes, one re-deriving the settlement-authorization covenant's bytes and L_verdict. All three run on a bare Node with no install, no network and no build, and the export executes all four configured argument sets inside a filesystem-sandboxed copy of the staged tree before this tree may ship. Their two data inputs are derived, not copied: typescript-golden-vectors-public-v0.json is emitted by derive-public-golden-vectors-v0.mjs, which strips the private witness and refuses to write unless six redaction proofs pass; apnt-settlement-authorization-covenant-bytecode-v0.json is emitted by the landed covenant builders and carries only on-chain script bytes. The verify-apnt skill ships here rather than under repo-metadata: it walks a contributor through checking a proof artifact, a settlement, a note commitment and a trust anchor, so it belongs with the artifacts it teaches a reader to check, not with repo identity that ships before any of them exist."
     }
   ],
-  "determinismDigest": "77e2785c5dc868728141ac630c8da3d1005bc9c719b4781e8a85dd603f351422",
+  "determinismDigest": "3dfbc525becdb897ba1e8404ce6806939f7871a62ff178ee9208fb36812c4edb",
   "fileCount": 209,
   "files": [
     {
@@ -172,8 +172,8 @@
       "category": "repo-metadata",
       "expandedFromGlob": null,
       "publicPath": "README.md",
-      "sha256": "a37831229ca662632b796d8357ff2723d85aece6a51a48aadd3346376d998611",
-      "sizeBytes": 21155,
+      "sha256": "8ee0b71a9f9ebe8d168a544acabefdfb9d5d71f43b9593a187d4a0764d1a0f7c",
+      "sizeBytes": 21138,
       "sourcePath": "scripts/public-export/public-tree/README.md"
     },
     {
@@ -196,15 +196,15 @@
       "category": "repo-metadata",
       "expandedFromGlob": null,
       "publicPath": "THIRD-PARTY-NOTICES.md",
-      "sha256": "ffa7684996ae9f977de5f82914946107b50245a5bd7633dfd8b88ef2dc93204c",
-      "sizeBytes": 1991,
+      "sha256": "75a97301180ff8d23028119c99fbfbc9444c67dbc27afa34e7fbe6aca1e747b6",
+      "sizeBytes": 1870,
       "sourcePath": "scripts/public-export/public-tree/THIRD-PARTY-NOTICES.md"
     },
     {
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "browser-verifier/artifact.json",
-      "sha256": "a08b5917f19c46c1f57e68b872896a43258eb9ba0e4c729061535f0d2e88752e",
+      "sha256": "95f6d4480a374782a77941262cb656f2e8edf1e00ff935b5a5deff68e41c89b5",
       "sizeBytes": 1347,
       "sourcePath": "scripts/public-export/public-tree/browser-verifier/artifact.json"
     },
@@ -220,8 +220,8 @@
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "browser-verifier/proofnote-browser-verifier.html",
-      "sha256": "c47c3b7cf8906d55e6e4e116d9d29b1e4515de8313aa5ad9d272c3f9f4ddb3f7",
-      "sizeBytes": 74521,
+      "sha256": "92183ef4b52193d3df62db8025195e78dac1c634c0fbeda721edae91af9acfcf",
+      "sizeBytes": 74335,
       "sourcePath": "scripts/public-export/public-tree/browser-verifier/proofnote-browser-verifier.html"
     },
     {
@@ -316,8 +316,8 @@
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "docs/trust-anchors.md",
-      "sha256": "a01bd0fd4bffa31183414058920cf8666bd1b39b875707a066577cd26aabd80c",
-      "sizeBytes": 9684,
+      "sha256": "633203ce9d6d9f63bfd5e42ec74e332052f490932b6adb1a4d01e11317cd56a5",
+      "sizeBytes": 9421,
       "sourcePath": "scripts/public-export/public-tree/docs/trust-anchors.md"
     },
     {
@@ -388,7 +388,7 @@
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "examples/02-verify-in-browser/example.json",
-      "sha256": "b1afc22aa51da8c916015f6453294f0f2ae14a19aabf3bfc91244bafd86d6213",
+      "sha256": "0d0f576084ad25cb6e2cdbe9ea00c28902fe39731dbaa46a1c02d38c46d18d51",
       "sizeBytes": 2208,
       "sourcePath": "scripts/public-export/public-tree/examples/02-verify-in-browser/example.json"
     },
@@ -396,7 +396,7 @@
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "examples/02-verify-in-browser/expected-output.txt",
-      "sha256": "3b39ee698d59666d9053c58f8255e23e9be4093bc81855670d0d76fcc925057d",
+      "sha256": "0241dc0bf350a86b522488af89af4866af89d1f01ee731d806d2e903d8869b6a",
       "sizeBytes": 229,
       "sourcePath": "scripts/public-export/public-tree/examples/02-verify-in-browser/expected-output.txt"
     },
@@ -404,7 +404,7 @@
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "examples/02-verify-in-browser/run.mjs",
-      "sha256": "b43de6f0438da51370ac9967cc35f49fa2380fff1b1d0bd157a39a64cd398d1b",
+      "sha256": "1d56c780116bc1e785e346c6946bbeedcfc269d250c0f8156532e1b9c53b6f4a",
       "sizeBytes": 1245,
       "sourcePath": "scripts/public-export/public-tree/examples/02-verify-in-browser/run.mjs"
     },
@@ -428,8 +428,8 @@
       "category": "verifier-surface",
       "expandedFromGlob": null,
       "publicPath": "examples/06-simulate-proof-bound-cashvm/README.md",
-      "sha256": "d0a66bb4883a95e427e610ad0f2782f3a1f3af97cb44ae151bb29ab8c1bf6958",
-      "sizeBytes": 5890,
+      "sha256": "e0a1253da9caab8bf6879d8305c47423479eca72a6cd8fdb69220a693b5c26f0",
+      "sizeBytes": 5883,
       "sourcePath": "scripts/public-export/public-tree/examples/06-simulate-proof-bound-cashvm/README.md"
     },
     {
@@ -1751,7 +1751,7 @@
             "--fetch-retry-maxtimeout=5000",
             "--store-dir=<isolated-tmp>/pnpm-store"
           ],
-          "durationMs": 2537,
+          "durationMs": 2312,
           "exitCode": 0,
           "name": "install-generate-lockfile",
           "ok": true,
@@ -1768,7 +1768,7 @@
             "--fetch-retry-maxtimeout=5000",
             "--store-dir=<isolated-tmp>/pnpm-store"
           ],
-          "durationMs": 283,
+          "durationMs": 311,
           "exitCode": 0,
           "name": "install-frozen-lockfile",
           "ok": true,
@@ -1781,7 +1781,7 @@
             "-r",
             "build"
           ],
-          "durationMs": 742,
+          "durationMs": 797,
           "exitCode": 0,
           "name": "build",
           "ok": true,
@@ -1794,7 +1794,7 @@
             "-r",
             "typecheck"
           ],
-          "durationMs": 488,
+          "durationMs": 511,
           "exitCode": 0,
           "name": "typecheck",
           "ok": true,
@@ -1808,7 +1808,7 @@
             "-p",
             "packages/protocol-runtime/tsconfig.json"
           ],
-          "durationMs": 486,
+          "durationMs": 507,
           "exitCode": 0,
           "name": "typecheck-protocol-runtime-standalone",
           "ok": true,
@@ -1823,7 +1823,7 @@
             "--",
             "--passWithNoTests"
           ],
-          "durationMs": 1453,
+          "durationMs": 1549,
           "exitCode": 0,
           "name": "test",
           "ok": true,
@@ -1837,7 +1837,7 @@
             "run",
             "verify"
           ],
-          "durationMs": 1259,
+          "durationMs": 1249,
           "exitCode": 0,
           "name": "verify",
           "ok": true,
@@ -1853,7 +1853,7 @@
         "vitest": "2.1.9"
       }
     },
-    "generatedAt": "2026-08-22T04:46:50.367Z",
+    "generatedAt": "2026-08-22T14:28:12.185Z",
     "generator": "scripts/public-export@1",
     "note": "This block is EXCLUDED from determinismDigest. Pass --now=<iso> to pin generatedAt and make a run byte-reproducible."
   },
@@ -2703,7 +2703,7 @@
       "sha256": "17f55f07cde5da6c3c58128429b2366c51742b0ee766d741457ec5b72e879e0b"
     },
     "branch": "HEAD",
-    "commit": "fddb5a392ea6a7002bf4be1d7d280e5ef25b0a77",
+    "commit": "938ab9399ac1adcb255446c275dd4b0918b231f1",
     "repository": "bch-cloak (private)",
     "workingTreeDirty": false
   },

@@ -50,11 +50,13 @@ Give a coding agent this bounded prompt:
 
 ## Verifier lineage
 
-Proofnote's released CashVM verifier evidence credits the specific contributors
-alongside the pinned upstream repositories:
-
-- [Kallisti (`@kzKallisti`)](https://github.com/kzKallisti) authored the major BN254 quotient-verifier optimizations.
-- [Mathieu Geukens (`@mr-zwets`)](https://github.com/mr-zwets) created the residue-optimized intra-transaction verifier and maintains the upstream projects.
+Proofnote’s BN254 CashVM verifier work builds on the pinned
+[mr-zwets/groth16_cashscript](https://github.com/mr-zwets/groth16_cashscript),
+CashScript compiler fork, and
+[mr-zwets/zk-verifier-bench](https://github.com/mr-zwets/zk-verifier-bench)
+projects and their contributors. Proofnote adopts
+the intra-transaction quotient/residue verifier pipeline from this
+collaborative upstream work.
 
 - [Mr-Zwets' Groth16 CashScript repository](https://github.com/mr-zwets/groth16_cashscript) at `6a309f506f87ef584165b9d3ae4c0ec6d66ad56f`
 - [Mr-Zwets' ZK verifier benchmark](https://github.com/mr-zwets/zk-verifier-bench) at `227ddf58110a2e21d75cef9cf897132244fd0f47`
