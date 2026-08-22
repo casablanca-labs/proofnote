@@ -25,7 +25,7 @@
     {
       "source": "published",
       "path": "browser-verifier/proofnote-browser-verifier.html",
-      "sha256": "928aa666060dd9b138d2719bcb245d2194e6e7bec3ef9d5cc4dfdbaa404b4da0"
+      "sha256": "c47c3b7cf8906d55e6e4e116d9d29b1e4515de8313aa5ad9d272c3f9f4ddb3f7"
     }
   ],
   "normalization": [],
@@ -51,7 +51,7 @@
     "correct guest semantics, authenticated CashVM execution, BCH validation or inclusion, APNT or wallet acceptance, custody, spendability, privacy, successive transfer, or unmeasured browser support"
   ],
   "authority": {
-    "evidenceIdentity": "browser artifact sha256:928aa666060dd9b138d2719bcb245d2194e6e7bec3ef9d5cc4dfdbaa404b4da0",
+    "evidenceIdentity": "browser artifact sha256:c47c3b7cf8906d55e6e4e116d9d29b1e4515de8313aa5ad9d272c3f9f4ddb3f7",
     "executionEnvironment": "Chromium under file:// with BigInt and Web Crypto; zero resource requests",
     "trustAssumptions": [
       "the pinned wrapper key is the intended SP1 v6.1.0 key",

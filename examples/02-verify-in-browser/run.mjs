@@ -5,7 +5,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 const HERE=dirname(fileURLToPath(import.meta.url));
 const path=resolve(HERE,"..","..","browser-verifier","proofnote-browser-verifier.html");
-const expected="928aa666060dd9b138d2719bcb245d2194e6e7bec3ef9d5cc4dfdbaa404b4da0";
+const expected="c47c3b7cf8906d55e6e4e116d9d29b1e4515de8313aa5ad9d272c3f9f4ddb3f7";
 const bytes=readFileSync(path);
 if(process.argv.includes("--tamper-artifact")){const changed=Buffer.from(bytes);changed[changed.length-2]^=1;if(createHash("sha256").update(changed).digest("hex")===expected)throw new Error("mutation was ineffective");console.error("BROWSER_ARTIFACT_IDENTITY_REJECTED: mutated generated HTML differs from the reviewed digest");process.exit(3)}
 const observed=createHash("sha256").update(bytes).digest("hex");

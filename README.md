@@ -360,10 +360,15 @@ only the byte construction and arithmetic that claim rests on.
 
 ## Credits
 
-The CashVM Groth16 verification lane builds on work by **mr-zwets**:
+The CashVM Groth16 verification lane builds on work by
+[Kallisti (`@kzKallisti`)](https://github.com/kzKallisti), who authored the
+major BN254 quotient-verifier optimizations, and
+[Mathieu Geukens (`@mr-zwets`)](https://github.com/mr-zwets), who created the
+residue-optimized intra-transaction verifier and maintains
 `groth16_cashscript`, the `cashscript` compiler-optimizations fork, and
-`zk-verifier-bench`. See [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md). The CashScript compiler is
-MIT, © 2019 Rosco Kalis.
+`zk-verifier-bench`. See
+[`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md). The CashScript compiler
+is MIT, © 2019 Rosco Kalis.
 
 ---
 

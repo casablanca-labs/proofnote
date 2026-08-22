@@ -15,8 +15,12 @@ notes, and reproduced here so a reader can fetch exactly what was used.
 | `mr-zwets/cashscript`, branch `compiler-optimizations` | `1c707c1dbf87396b30ba5e0704b1db44475ce893` | MIT, © 2019 Rosco Kalis |
 | `mr-zwets/zk-verifier-bench` | `227ddf58110a2e21d75cef9cf897132244fd0f47` | ISC (declared in [`package.json`](./package.json)) |
 
-**Credit.** These three upstreams are a real contribution to this work, and
-`mr-zwets` is named here deliberately rather than folded into a generic
+**Credit.** These three upstreams are a real contribution to this work.
+[Kallisti (`@kzKallisti`)](https://github.com/kzKallisti) authored the major
+BN254 quotient-verifier optimizations, and
+[Mathieu Geukens (`@mr-zwets`)](https://github.com/mr-zwets) created the
+residue-optimized intra-transaction verifier and maintains the upstream
+projects. They are named here deliberately rather than folded into a generic
 acknowledgement.
 
 **No upstream bytes are redistributed here.** This tree publishes *our*

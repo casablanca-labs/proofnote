@@ -1,4 +1,4 @@
 PROOFNOTE_BROWSER_ARTIFACT: PASS
-sha256: 928aa666060dd9b138d2719bcb245d2194e6e7bec3ef9d5cc4dfdbaa404b4da0
+sha256: c47c3b7cf8906d55e6e4e116d9d29b1e4515de8313aa5ad9d272c3f9f4ddb3f7
 delivery: self-contained HTML, zero runtime dependencies
 browser acceptance: measured separately in Chromium under file://

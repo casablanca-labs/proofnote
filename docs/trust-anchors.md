@@ -116,9 +116,14 @@ resolved here.
 ## Credits
 
 The CashVM Groth16 verification lane this repository's trust anchors
-ultimately feed into builds on work by **`mr-zwets`**: `groth16_cashscript`,
-the `cashscript` compiler-optimizations fork, and `zk-verifier-bench`. Pinned
-commits and licences are in [`THIRD-PARTY-NOTICES.md`](../THIRD-PARTY-NOTICES.md). The CashScript compiler
+ultimately feed into builds on work by
+[Kallisti (`@kzKallisti`)](https://github.com/kzKallisti), who authored the
+major BN254 quotient-verifier optimizations, and
+[Mathieu Geukens (`@mr-zwets`)](https://github.com/mr-zwets), who created the
+residue-optimized intra-transaction verifier and maintains
+`groth16_cashscript`, the `cashscript` compiler-optimizations fork, and
+`zk-verifier-bench`. Pinned commits and licences are in
+[`THIRD-PARTY-NOTICES.md`](../THIRD-PARTY-NOTICES.md). The CashScript compiler
 itself is MIT, © 2019 Rosco Kalis. No upstream bytes are redistributed in
 this repository; it publishes pins and a reproduction path instead.
 
